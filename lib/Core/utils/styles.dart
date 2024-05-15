@@ -31,8 +31,8 @@ abstract class StylesData {
     ),
   );
   static TextStyle font25 = GoogleFonts.montserrat(
-    textStyle: const TextStyle(
-      color: Color(0xff2369FC),
+    textStyle: TextStyle(
+      color: ConstColor.kMainColor,
       fontWeight: FontWeight.w600,
     ),
   );
@@ -133,8 +133,8 @@ abstract class StylesData {
     ),
   );
   static TextStyle font11 = GoogleFonts.poppins(
-    textStyle: const TextStyle(
-      color: Color(0xff2369FC),
+    textStyle: TextStyle(
+      color: ConstColor.kMainColor,
       fontSize: 11,
       fontWeight: FontWeight.w400,
     ),
@@ -153,8 +153,8 @@ abstract class StylesData {
   );
 
   static TextStyle font20 = GoogleFonts.poppins(
-    textStyle: const TextStyle(
-      color: Color(0xff2369FC),
+    textStyle: TextStyle(
+      color: ConstColor.kMainColor,
       fontSize: 20.7,
       fontWeight: FontWeight.w500,
     ),

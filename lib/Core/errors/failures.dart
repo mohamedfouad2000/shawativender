@@ -42,12 +42,18 @@ class ServerFailure extends Failure {
     }
   }
   factory ServerFailure.fromRespo(int statusCode, dynamic respo) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+    if (statusCode == 400 ||
+        statusCode == 401 ||
+        statusCode == 403 ||
+        statusCode == 422) {
       return ServerFailure(msq: 'opps There Was An Eroor try Again Later !');
     } else if (statusCode == 404) {
       return ServerFailure(msq: 'Your Request Not Found , Try Later !');
     } else if (statusCode == 500) {
       return ServerFailure(msq: 'Internet Server Error , Try Later !');
+    } else if (statusCode == 403) {
+      return ServerFailure(
+          msq: "You don't have permission to access this resource.");
     } else {
       return ServerFailure(msq: 'opps There Was An Eroor try Again Later !');
     }

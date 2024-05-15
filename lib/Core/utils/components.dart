@@ -1,10 +1,18 @@
 // import 'package:country_picker/country_picker.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
-// import 'package:shawativender/Feature/home/presentation/views/screens/notification_screen.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/screens/notification_screen.dart';
+import 'package:location/location.dart';
+import 'package:shawativender/generated/l10n.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget defaultButton({
   required VoidCallback fun,
@@ -57,19 +65,16 @@ Widget customTextFiled(
       maxLines: maxLines,
       onChanged: onChanged,
       keyboardType: type,
-      autocorrect: false,
       style: StylesData.font14.copyWith(color: ConstColor.kMainColor),
-      textAlign: TextAlign.start,
       decoration: InputDecoration(
-        prefixIcon: Flexible(child: prefixIcon ?? const SizedBox()),
-        isDense: false,
-
+        prefixIcon: prefixIcon,
         hintText: hintText,
         hintStyle: StylesData.font14.copyWith(color: const Color(0x330D223F)),
 
         contentPadding:
             const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-
+        filled: true,
+        fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: ConstColor.kMainColor),
           borderRadius: BorderRadius.all(
@@ -115,6 +120,8 @@ Widget customTextFormedFiled({
       obscureText: obscureText,
       keyboardType: type,
       validator: (value) {
+        print("object is $value");
+
         if (value != null && value.isEmpty) {
           return '';
         } else {
@@ -124,8 +131,10 @@ Widget customTextFormedFiled({
       maxLines: maxLines,
       style: StylesData.font14.copyWith(color: ConstColor.kMainColor),
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         hintText: hintText,
         prefixIcon: preicon,
         suffixIcon: sufficon ?? const SizedBox(),
@@ -276,10 +285,12 @@ AppBar customAppBarWithNotification(context) {
     actions: [
       InkWell(
         onTap: () {
-          // NavegatorPush(context, const NotificationScreen());
+          NavegatorPush(context, const NotificationScreen());
         },
         child: Padding(
-          padding: const EdgeInsets.only(right: 8.0),
+          padding: LocalizationCubit.get(context).isArabic()
+              ? const EdgeInsets.only(left: 14.0)
+              : const EdgeInsets.only(right: 14.0),
           child: Container(
             height: 50,
             width: 50,
@@ -329,7 +340,9 @@ AppBar customAppBarInNotification(context) {
       InkWell(
         onTap: () {},
         child: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(
+                right: LocalizationCubit.get(context).isArabic() ? 0 : 8.0,
+                left: LocalizationCubit.get(context).isArabic() ? 8.0 : 0),
             child: Row(
               children: [
                 const Stack(
@@ -354,7 +367,7 @@ AppBar customAppBarInNotification(context) {
                   width: 6,
                 ),
                 Text(
-                  "Mask all read",
+                  S.of(context).MakeAllRead,
                   style: StylesData.font12,
                 )
               ],
@@ -362,6 +375,15 @@ AppBar customAppBarInNotification(context) {
       ),
     ],
   );
+}
+
+openDialPad(String phoneNumber) async {
+  Uri url = Uri(scheme: "tel", path: phoneNumber);
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    print("Can't open dial pad.");
+  }
 }
 
 AppBar customAppBarWithCallender(context) {
@@ -429,15 +451,97 @@ AppBar customAppBarWithCallender(context) {
   );
 }
 
-Widget customDropDownList({
-  required List<String> list,
-  required String hintText,
-  Widget prefixIcon = const SizedBox(),
-}) =>
+showToast({required String msq}) => Fluttertoast.showToast(
+    msg: msq,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Colors.black,
+    textColor: Colors.white,
+    fontSize: 18.0);
+
+Widget CachedImage(String url, {double? height, double? width}) =>
+    InstaImageViewer(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: CachedNetworkImage(
+          imageUrl: url,
+          height: height,
+          fit: BoxFit.cover,
+          width: width,
+          placeholder: (context, url) => LoadingAnimationWidget.newtonCradle(
+            size: 50,
+            color: Colors.grey,
+          ),
+          errorWidget: (context, url, er) => Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: const Icon(Icons.info_outline),
+          ),
+        ),
+      ),
+    );
+
+Future<LocationData> getloction() async {
+  Location location = Location();
+  bool? servesenable;
+  PermissionStatus? permison;
+  LocationData? locationdata;
+  servesenable = await location.serviceEnabled();
+  if (!servesenable) {
+    servesenable = await location.requestService();
+    if (!servesenable) {
+      // return;
+    }
+  }
+  permison = await location.hasPermission();
+  if (permison == PermissionStatus.denied) {
+    permison = await location.requestPermission();
+    if (permison != PermissionStatus.granted) {
+      // return;
+    }
+  }
+
+  locationdata = await location.getLocation();
+  return locationdata;
+  // lat = locationdata.latitude;
+  // long = locationdata.longitude;
+}
+
+textNumber({required String number}) async {
+  // Android
+  var uri = 'sms:$number?body=hello%20there';
+  if (await canLaunch(uri)) {
+    await launch(uri);
+  } else {
+    // iOS
+    uri = 'sms:$number?body=hello%20there';
+    if (await canLaunch(uri)) {
+      await launch(uri);
+    } else {
+      throw 'Could not launch $uri';
+    }
+  }
+}
+
+Widget customDropDownList(
+        {required List<String> list,
+        String? item,
+        required String hintText,
+        required void Function(String?)? onChanged,
+        Widget prefixIcon = const SizedBox(),
+        String Function(String)? itemAsString}) =>
     DropdownSearch<String>(
       dropdownDecoratorProps: DropDownDecoratorProps(
+        baseStyle: StylesData.font14.copyWith(color: ConstColor.kMainColor),
         dropdownSearchDecoration: InputDecoration(
           prefixIcon: prefixIcon,
+          labelStyle: StylesData.font14.copyWith(color: Colors.red),
+          filled: true,
+          fillColor: Colors.white,
+          // labelText: hintText,
           hintText: hintText,
           hintStyle: StylesData.font14.copyWith(color: const Color(0x330D223F)),
           contentPadding:
@@ -465,7 +569,9 @@ Widget customDropDownList({
       ),
       popupProps: PopupProps.menu(
           showSearchBox: true,
+          fit: FlexFit.loose,
           searchFieldProps: TextFieldProps(
+            style: StylesData.font14.copyWith(color: ConstColor.kMainColor),
             decoration: InputDecoration(
               hoverColor: Colors.black,
               hintText: hintText,
@@ -493,5 +599,9 @@ Widget customDropDownList({
             ),
           )),
       items: list,
+      itemAsString: itemAsString,
+      dropdownButtonProps: const DropdownButtonProps(),
+      onChanged: onChanged,
       enabled: true,
+      selectedItem: item,
     );

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shawativender/Core/utils/styles.dart';
+import 'package:shawativender/Core/widgets/custom_loading_widget.dart';
+import 'package:shawativender/Core/widgets/loading/clock_in_out_loading.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Home%20Cubit/home_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Home%20Cubit/home_state.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class TotalRange extends StatefulWidget {
   const TotalRange({super.key});
@@ -9,11 +15,6 @@ class TotalRange extends StatefulWidget {
 }
 
 class _TotalRangeState extends State<TotalRange> {
-  List<String> titles = [
-    'Earnings',
-    'Bookings',
-    'services',
-  ];
   List<double> numbers = [
     46.939,
     71,
@@ -22,20 +23,54 @@ class _TotalRangeState extends State<TotalRange> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          return totalItem(title: titles[index], number: numbers[index]);
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(
-            width: 10,
+    List<String> titles = [
+      S.of(context).Earnings,
+      S.of(context).Bookings,
+      S.of(context).services,
+    ];
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        if (state is HomeSucc) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+                height: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    totalItem(
+                        title: titles[0],
+                        number: state.model.data?.report?.totalEarnings
+                                ?.toDouble() ??
+                            0.0),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    totalItem(
+                        title: titles[1],
+                        number: state.model.data?.report?.totalBooking
+                                ?.toDouble() ??
+                            0.0),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    totalItem(
+                        title: titles[2],
+                        number: state.model.data?.report?.totlaServices
+                                ?.toDouble() ??
+                            0.0),
+                  ],
+                )),
           );
-        },
-        itemCount: 3,
-      ),
+        } else if (state is HomeError) {
+          return const Text("Error");
+        } else {
+          return const CustomLoadingWidget(child: ClockInOutLoading());
+        }
+      },
     );
   }
 
@@ -51,7 +86,7 @@ class _TotalRangeState extends State<TotalRange> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Total",
+            S.of(context).Total,
             style: StylesData.font15,
           ),
           Text(title, style: StylesData.font15),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shawativender/Core/constans/const.dart';
+import 'package:shawativender/Core/local/cache_Helper.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
@@ -8,6 +10,7 @@ import 'package:shawativender/Feature/home/presentation/views/screens/support_sc
 import 'package:shawativender/Feature/home/presentation/views/screens/terms_screen.dart';
 import 'package:shawativender/Feature/lang/presentation/views/lang_page_view.dart';
 import 'package:shawativender/Feature/login/presentation/views/login_view.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class ListTitleMenu extends StatefulWidget {
   const ListTitleMenu({super.key});
@@ -17,15 +20,6 @@ class ListTitleMenu extends StatefulWidget {
 }
 
 class _ListTitleMenuState extends State<ListTitleMenu> {
-  List<String> titles = [
-    'My Services',
-    'Reviews',
-    'Notifications',
-    'Language',
-    'support',
-    'terms & conditions',
-    'logout',
-  ];
   List<String> images = [
     AssetsData.note,
     AssetsData.like,
@@ -52,6 +46,15 @@ class _ListTitleMenuState extends State<ListTitleMenu> {
   ];
   @override
   Widget build(BuildContext context) {
+    List<String> titles = [
+      S.of(context).MyServecs,
+      S.of(context).Reviews,
+      S.of(context).Notifications,
+      S.of(context).Language,
+      S.of(context).support,
+      S.of(context).termsconditions,
+      S.of(context).logout,
+    ];
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -81,6 +84,7 @@ class _ListTitleMenuState extends State<ListTitleMenu> {
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.grey.shade300),
         ),
@@ -118,6 +122,10 @@ class _ListTitleMenuState extends State<ListTitleMenu> {
             IconButton(
                 onPressed: () {
                   if (index == 0 || index == 6) {
+                    if (index == 6) {
+                      CacheHelper.removeData(key: 'Token');
+                      TOKEN = '';
+                    }
                     Nav(context, widget);
                   } else {
                     NavegatorPush(context, widget);

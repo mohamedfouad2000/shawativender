@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
+import 'package:shawativender/Feature/home/data/model/home_model/contact_details.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/clock_in_out_with_time.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/owner_product.dart';
 
@@ -38,11 +39,16 @@ class ServiceProductItemInfo extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const ClockInOutWithTime(),
+          const ClockInOutWithTime(
+            clockin: '',
+            clockout: '',
+          ),
           const SizedBox(
             height: 10,
           ),
-          const OwnerProduct(),
+          OwnerProduct(
+            owner: ContactDetails(ownerName: 'Hamada', phone: '010203040'),
+          ),
           const SizedBox(
             height: 10,
           ),

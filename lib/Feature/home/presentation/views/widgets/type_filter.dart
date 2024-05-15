@@ -1,45 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
+import 'package:shawativender/Feature/home/data/repo/home_repo_imp.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Getcategory%20Cubit/get_category_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Getcategory%20Cubit/get_category_state.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Search%20Cubit/search_cubit.dart';
+import 'package:shawativender/generated/l10n.dart';
 
-class TypeReview extends StatefulWidget {
-  const TypeReview({
+class TypeFIltter extends StatefulWidget {
+  const TypeFIltter({
     super.key,
   });
 
   @override
-  State<TypeReview> createState() => _TypeReviewState();
+  State<TypeFIltter> createState() => _TypeFIltterState();
 }
 
-class _TypeReviewState extends State<TypeReview> {
-  int currentIndex = 2;
+class _TypeFIltterState extends State<TypeFIltter> {
+  // int currentIndex = 2;
 
-  List<String> titles = [
-    'All',
-    'Avalibility',
-    'featured',
-  ];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 50,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context, int index) {
-              return typeItem(name: titles[index], index: index);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                width: 10,
-              );
-            },
-            itemCount: 3,
-          ),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => GetCategoryCubit(HomeRepoImpl())..getCategory(),
+      child: BlocConsumer<GetCategoryCubit, GetCategoryState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          if (state is GetCategorySucc) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  S.of(context).Type,
+                  style: StylesData.font16,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 50,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      return typeItem(
+                          name: state.list[index].brandName ?? '',
+                          index: state.list[index].id ?? 0);
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(
+                        width: 10,
+                      );
+                    },
+                    itemCount: state.list.length,
+                  ),
+                ),
+              ],
+            );
+          } else if (state is GetCategoryError) {
+            return Text(state.msg);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -48,15 +76,17 @@ class _TypeReviewState extends State<TypeReview> {
       onTap: () {
         setState(() {
           print(index);
-
-          currentIndex = index;
-          print(currentIndex);
+          SearchCubit.get(context).categoryId = index;
+          // currentIndex = index;
+          // print(currentIndex);
         });
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
-            color: currentIndex == index ? ConstColor.kMainColor : Colors.white,
+            color: SearchCubit.get(context).categoryId == index
+                ? ConstColor.kMainColor
+                : Colors.white,
             borderRadius: BorderRadius.circular(25),
             border: Border.all(color: Colors.grey.shade300)),
         child: Center(
@@ -64,7 +94,9 @@ class _TypeReviewState extends State<TypeReview> {
             name,
             style: StylesData.font17.copyWith(
                 fontSize: 15,
-                color: currentIndex == index ? Colors.white : Colors.black),
+                color: SearchCubit.get(context).categoryId == index
+                    ? Colors.white
+                    : Colors.black),
           ),
         ),
       ),

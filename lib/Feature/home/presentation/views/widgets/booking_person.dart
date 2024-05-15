@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:shawativender/Core/utils/assets_data.dart';
+import 'package:shawativender/Core/constans/const.dart';
 import 'package:shawativender/Core/utils/colors.dart';
+import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 
 class BookingPerson extends StatelessWidget {
   const BookingPerson({
     super.key,
+    required this.rate,
+    required this.username,
+    required this.image,
+    required this.msq,
   });
+  final double rate;
+  final String username;
+  final String image;
+  final String msq;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +24,15 @@ class BookingPerson extends StatelessWidget {
         Container(
           height: 70,
           width: 70,
-          decoration: BoxDecoration(
-            image: const DecorationImage(
-                image: AssetImage(
-                  AssetsData.testimage2,
-                ),
-                fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(14),
-          ),
+          decoration: const BoxDecoration(
+              // image: const DecorationImage(
+              //     image: AssetImage(
+              //       AssetsData.testimage2,
+              //     ),
+              //     fit: BoxFit.cover),
+              // borderRadius: BorderRadius.circular(14),
+              ),
+          child: CachedImage('$xURLIMAGE$image'),
         ),
         const SizedBox(
           width: 10,
@@ -32,14 +42,14 @@ class BookingPerson extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Mohamed Elmohandes",
+                username,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: StylesData.font12
                     .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
               ),
               Text(
-                "Dolor optio, error e",
+                msq,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: StylesData.font10
@@ -62,7 +72,7 @@ class BookingPerson extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "5.4 ",
+                "$rate ",
                 style: StylesData.font12Montserrat,
               ),
               const Icon(

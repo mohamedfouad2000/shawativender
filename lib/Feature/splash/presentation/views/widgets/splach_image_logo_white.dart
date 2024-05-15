@@ -10,7 +10,7 @@ class SplachViewImageWhite extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Image(
-        image: AssetImage(AssetsData.splachwhite),
+        image: AssetImage(AssetsData.splachback),
         width: 170,
       ),
     );

@@ -3,6 +3,7 @@ import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/register/presentation/views/register_view.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class SignUpHere extends StatelessWidget {
   const SignUpHere({
@@ -15,7 +16,7 @@ class SignUpHere extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don’t have an account? ",
+          S.of(context).Donthaveanaccount,
           style: StylesData.font14,
         ),
         InkWell(
@@ -23,7 +24,7 @@ class SignUpHere extends StatelessWidget {
             NavegatorPush(context, const RegisterView());
           },
           child: Text(
-            "sign up here",
+            S.of(context).SignuPHere,
             style: StylesData.font14.copyWith(
                 color: ConstColor.kMainColor, fontWeight: FontWeight.w700),
           ),

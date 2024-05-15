@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shawativender/Core/constans/const.dart';
+import 'package:shawativender/Core/local/cache_Helper.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/components.dart';
+import 'package:shawativender/Feature/home/presentation/views/home_view.dart';
 import 'package:shawativender/Feature/login/presentation/views/login_view.dart';
 import 'package:shawativender/Feature/splash/presentation/views/widgets/splach_image_logo.dart';
 import 'package:shawativender/Feature/splash/presentation/views/widgets/splach_image_logo_white.dart';
@@ -27,7 +30,14 @@ class _SplachViewBodyState extends State<SplachViewBody> {
     });
 
     await Future.delayed(const Duration(seconds: 2));
-    Nav(context, const LoginView());
+    String x = CacheHelper.getData(key: 'Token') ?? '';
+    print(x);
+    if (x != '') {
+      TOKEN = x;
+      Nav(context, const HomeView(currentidex: 0));
+    } else {
+      Nav(context, const LoginView());
+    }
   }
 
   @override

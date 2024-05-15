@@ -11,7 +11,7 @@ class AssetsData {
   static const suadLogo = 'assets/images/Vector.png';
   static const vectorLogo = 'assets/images/Vector 1.png';
   static const calling = 'assets/images/Calling.png';
-  static const lock = 'assets/images/pass.png';
+  static const lock = 'assets/images/Lock.png';
   static const profile = 'assets/images/Profile.png';
   static const eye = 'assets/images/eye-slash.png';
   static const forgetPassword = 'assets/images/foget.png';

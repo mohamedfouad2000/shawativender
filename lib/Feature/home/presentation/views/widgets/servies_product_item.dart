@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
-import 'package:shawativender/Feature/home/presentation/views/widgets/product_item_info.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/servies_product_item_info.dart';
 
 class ServiesProductItem extends StatelessWidget {
@@ -13,19 +12,22 @@ class ServiesProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
       width: double.infinity,
       decoration: BoxDecoration(
+        color: Colors.white.withOpacity(.9),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-              color: Colors.white.withOpacity(.6),
-              blurRadius: 12.0,
-              spreadRadius: 6.0,
-              offset: const Offset(
-                0,
-                10,
-              )),
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 1,
+
+            offset: const Offset(
+              0,
+              0,
+            ), // changes x,y position of shadow
+          ),
         ],
       ),
       child: Column(

@@ -6,6 +6,8 @@ class ServicesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ServicesScreenBody();
+    TextEditingController searchController = TextEditingController();
+
+    return ServicesScreenBody(searchController: searchController);
   }
 }

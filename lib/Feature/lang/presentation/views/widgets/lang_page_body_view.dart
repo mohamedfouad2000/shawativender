@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shawativender/Core/local/cache_Helper.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
 import 'package:shawativender/Feature/location/presentation/views/enable_location_view.dart';
 import 'package:shawativender/Feature/splash/presentation/views/widgets/tqnia_logo.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class LangPageViewBody extends StatefulWidget {
   const LangPageViewBody({super.key, required this.fromLogin});
@@ -15,7 +19,14 @@ class LangPageViewBody extends StatefulWidget {
 }
 
 class _LangPageViewBodyState extends State<LangPageViewBody> {
-  bool arabicLang = false;
+  late bool arabicLang;
+  @override
+  void initState() {
+    arabicLang = LocalizationCubit.get(context).isArabic();
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +35,7 @@ class _LangPageViewBodyState extends State<LangPageViewBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Languages',
+            S.of(context).Languages,
             style: StylesData.font24Google,
           ),
           const SizedBox(
@@ -33,7 +44,10 @@ class _LangPageViewBodyState extends State<LangPageViewBody> {
           InkWell(
             onTap: () {
               setState(() {
+                BlocProvider.of<LocalizationCubit>(context).changelocale('en');
+
                 arabicLang = false;
+                CacheHelper.saveData(key: 'isarbic', value: false);
               });
             },
             child: Container(
@@ -41,7 +55,10 @@ class _LangPageViewBodyState extends State<LangPageViewBody> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
               decoration: BoxDecoration(
-                border: Border.all(color: ConstColor.kMainColor),
+                border: Border.all(
+                    color: arabicLang
+                        ? Colors.grey.shade300
+                        : ConstColor.kMainColor),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(20),
                 ),
@@ -103,6 +120,8 @@ class _LangPageViewBodyState extends State<LangPageViewBody> {
             onTap: () {
               setState(() {
                 arabicLang = true;
+                BlocProvider.of<LocalizationCubit>(context).changelocale('ar');
+                CacheHelper.saveData(key: 'isarbic', value: true);
               });
             },
             child: Container(
@@ -110,7 +129,10 @@ class _LangPageViewBodyState extends State<LangPageViewBody> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
               decoration: BoxDecoration(
-                border: Border.all(color: ConstColor.kMainColor),
+                border: Border.all(
+                    color: !arabicLang
+                        ? Colors.grey.shade300
+                        : ConstColor.kMainColor),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(20),
                 ),

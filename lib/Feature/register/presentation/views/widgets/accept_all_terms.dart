@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class AcceptAllTerms extends StatefulWidget {
   const AcceptAllTerms({super.key});
@@ -33,11 +34,11 @@ class _AcceptAllTermsState extends State<AcceptAllTerms> {
           width: 10,
         ),
         Text(
-          'I accept all the ',
+          S.of(context).Iacceptallthe,
           style: StylesData.font12,
         ),
         Text(
-          'Terms & Conditions',
+          S.of(context).termsconditions,
           style: StylesData.font12
               .copyWith(color: Colors.black, fontWeight: FontWeight.w800),
         ),

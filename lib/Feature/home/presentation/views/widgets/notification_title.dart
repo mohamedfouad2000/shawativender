@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/styles.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class NotificationTitle extends StatelessWidget {
   const NotificationTitle({super.key});
@@ -11,22 +11,22 @@ class NotificationTitle extends StatelessWidget {
       children: [
         Expanded(
             child: Text(
-          "Notifications",
+          S.of(context).Notifications,
           style: StylesData.font18,
         )),
         InkWell(
           onTap: () {},
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                "Delete all ",
-                style: StylesData.font12.copyWith(color: Colors.red),
-              ),
-              const ImageIcon(
-                AssetImage(AssetsData.delete),
-                color: Colors.red,
-              )
+              // Text(
+              //   "Delete all ",
+              //   style: StylesData.font12.copyWith(color: Colors.red),
+              // ),
+              // const ImageIcon(
+              //   AssetImage(AssetsData.delete),
+              //   color: Colors.red,
+              // )
             ],
           ),
         )
