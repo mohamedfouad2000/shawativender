@@ -408,46 +408,7 @@ AppBar customAppBarWithCallender(context) {
         ),
       ),
     ),
-    actions: [
-      InkWell(
-        onTap: () {
-          // NavegatorPush(context, const NotificationScreen());
-        },
-        child: Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: Container(
-            height: 45,
-            width: 125,
-            decoration: BoxDecoration(
-                border:
-                    Border.all(color: Colors.grey.withOpacity(.5), width: .7),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(12),
-                )),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ImageIcon(
-                  const AssetImage(AssetsData.note),
-                  size: 20,
-                  color: ConstColor.kMainColor,
-                ),
-                Text(
-                  " For Rent ",
-                  style: StylesData.font10.copyWith(
-                      color: const Color(0xff222B45),
-                      fontWeight: FontWeight.w400),
-                ),
-                const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.grey,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    ],
+    actions: const [],
   );
 }
 
@@ -460,26 +421,23 @@ showToast({required String msq}) => Fluttertoast.showToast(
     textColor: Colors.white,
     fontSize: 18.0);
 
-Widget CachedImage(String url, {double? height, double? width}) =>
-    InstaImageViewer(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: CachedNetworkImage(
-          imageUrl: url,
-          height: height,
-          fit: BoxFit.cover,
-          width: width,
-          placeholder: (context, url) => LoadingAnimationWidget.newtonCradle(
-            size: 50,
-            color: Colors.grey,
+Widget CachedImage(String url, {double? height, double? width}) => ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: CachedNetworkImage(
+        imageUrl: url,
+        height: height,
+        fit: BoxFit.cover,
+        width: width,
+        placeholder: (context, url) => LoadingAnimationWidget.newtonCradle(
+          size: 50,
+          color: Colors.grey,
+        ),
+        errorWidget: (context, url, er) => Container(
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
           ),
-          errorWidget: (context, url, er) => Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            child: const Icon(Icons.info_outline),
-          ),
+          child: const Icon(Icons.info_outline),
         ),
       ),
     );

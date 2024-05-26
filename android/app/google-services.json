@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "404573653385",
+    "project_id": "shawati-cb05c",
+    "storage_bucket": "shawati-cb05c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404573653385:android:055f309ae6512291c0b958",
+        "android_client_info": {
+          "package_name": "com.tqniait.shawativender"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-VFNHTgpJcSd3DDQ551eYfHo0lcTfeaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

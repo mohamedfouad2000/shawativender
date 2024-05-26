@@ -87,9 +87,18 @@ class _EditServiceFormState extends State<EditServiceForm> {
     for (int i = 0; i < days.split(',').length; i++) {
       try {
         print('$i is  ${days.split(',')[i]}');
-        var x = DateFormat("MM/dd/yyyy").parse(days.split(',')[i].trim());
+        var x = DateFormat.yMd('en_US')
+            .parseLoose(days.split(',')[i].trim().substring(0, 10));
         // setState(() {
         Times.add(x);
+
+        String formattedDate = DateFormat('MM/dd/yyyy', 'en').format(x);
+
+        print(formattedDate);
+
+        this.days.add(formattedDate);
+
+        setState(() {});
         // });
 
         print('Times.length ${Times.length}');
@@ -597,8 +606,10 @@ class _EditServiceFormState extends State<EditServiceForm> {
                         Times = value;
                         for (var element in value) {
                           String formattedDate =
-                              DateFormat('MM/dd/yyyy  kk:mm').format(element!);
+                              DateFormat('MM/dd/yyyy', 'en').format(element!);
+
                           print(formattedDate);
+
                           days.add(formattedDate);
                         }
                       },
@@ -686,7 +697,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                                 longitude == 0 ||
                                 days.isEmpty) {
                               setState(() {
-                                error = 'Please fill all the fields';
+                                error = S.of(context).error_Msq_add_service;
                               });
                             } else {
                               print("place is ${Propertynamecontroller.text}");

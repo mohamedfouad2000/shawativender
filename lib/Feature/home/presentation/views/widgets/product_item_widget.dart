@@ -6,6 +6,7 @@ import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/home/data/model/home_model/contact_details.dart';
 import 'package:shawativender/Feature/home/data/model/home_model/service.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/screens/booking_screen_serves.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/product_item_info.dart';
 import 'package:shawativender/generated/l10n.dart';
 
@@ -23,73 +24,82 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print('Booking Is  ${model.bookingCount}');
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(.9),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            alignment: LocalizationCubit.get(context).isArabic()
-                ? Alignment.bottomLeft
-                : Alignment.bottomRight,
-            children: [
-              Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  // image: const DecorationImage(
-                  //     image: AssetImage(AssetsData.testimage2),
-                  //     fit: BoxFit.cover)
+    return InkWell(
+      onTap: () {
+        NavegatorPush(
+            context,
+            BookingScreenServes(
+              model: model,
+            ));
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(.9),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              alignment: LocalizationCubit.get(context).isArabic()
+                  ? Alignment.bottomLeft
+                  : Alignment.bottomRight,
+              children: [
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    // image: const DecorationImage(
+                    //     image: AssetImage(AssetsData.testimage2),
+                    //     fit: BoxFit.cover)
+                  ),
+                  child: CachedImage('$xURLIMAGE${model.image}'),
                 ),
-                child: CachedImage('$xURLIMAGE${model.image}'),
-              ),
-              Positioned(
-                right: LocalizationCubit.get(context).isArabic() ? null : 18,
-                left: LocalizationCubit.get(context).isArabic() ? 18 : null,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    const CircleAvatar(
-                      radius: 26,
-                      backgroundColor: Colors.white,
-                    ),
-                    CircleAvatar(
-                      radius: 23,
-                      backgroundColor: ConstColor.kMainColor,
-                      child: Center(
-                          child: FittedBox(
-                        child: Text(
-                          isEdit != null
-                              ? model.bookingCount.toString()
-                              : (model.accept == 1
-                                  ? S.of(context).open
-                                  : S.of(context).colse),
-                          style:
-                              StylesData.font14.copyWith(color: Colors.white),
-                        ),
-                      )),
-                    ),
-                  ],
+                Positioned(
+                  right: LocalizationCubit.get(context).isArabic() ? null : 18,
+                  left: LocalizationCubit.get(context).isArabic() ? 18 : null,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      const CircleAvatar(
+                        radius: 26,
+                        backgroundColor: Colors.white,
+                      ),
+                      CircleAvatar(
+                        radius: 23,
+                        backgroundColor: ConstColor.kMainColor,
+                        child: Center(
+                            child: FittedBox(
+                          child: Text(
+                            isEdit != null
+                                ? model.bookingCount.toString()
+                                : (model.accept == 1
+                                    ? S.of(context).open
+                                    : S.of(context).colse),
+                            style:
+                                StylesData.font14.copyWith(color: Colors.white),
+                          ),
+                        )),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ProductItemInfo(
-            model: model,
-            // contact: contact,
-            isEdit: isEdit,
-          ),
-        ],
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ProductItemInfo(
+              model: model,
+              // contact: contact,
+              isEdit: isEdit,
+            ),
+          ],
+        ),
       ),
     );
   }

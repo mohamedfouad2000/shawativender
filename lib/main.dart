@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shawativender/Core/blocobserve.dart';
@@ -16,6 +17,10 @@ import 'package:shawativender/generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+//   FirebaseAuth auth = FirebaseAuth.instance;
+//   FirebaseApp secondaryApp = Firebase.app('SecondaryApp');
+// FirebaseAuth auth = FirebaseAuth.instanceFor(app: secondaryApp);
   Bloc.observer = MyBlocObserver();
   await DioHelper.init();
   await CacheHelper.init();

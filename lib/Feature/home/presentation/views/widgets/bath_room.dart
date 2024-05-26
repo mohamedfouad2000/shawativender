@@ -4,6 +4,7 @@ import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/Search%20Cubit/search_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/Search%20Cubit/search_state.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class BathRoomFIltter extends StatefulWidget {
   const BathRoomFIltter({
@@ -28,7 +29,7 @@ class _BathRoomFIltterState extends State<BathRoomFIltter> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Bath rooms",
+              S.of(context).bathRooms,
               style: StylesData.font16,
             ),
             const SizedBox(

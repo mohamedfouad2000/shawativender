@@ -153,7 +153,7 @@ class _FilterScreenBodyState extends State<FilterScreenBody> {
                           ));
                     },
                     textWidget: Text(
-                      'Apply filters',
+                      S.of(context).Applyfilters,
                       style: StylesData.font13,
                     ),
                     height: 54,

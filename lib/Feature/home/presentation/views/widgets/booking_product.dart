@@ -7,6 +7,7 @@ import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/location%20cubit/location_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/screens/view_image_screen.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/clock_in_out_with_time.dart';
 import 'package:shawativender/generated/l10n.dart';
 
@@ -46,7 +47,12 @@ class BookingProduct extends StatelessWidget {
             // image: const DecorationImage(
             //     image: AssetImage(AssetsData.testimage2), fit: BoxFit.cover)
           ),
-          child: CachedImage('$xURLIMAGE$image'),
+          child: InkWell(
+              onTap: () {
+                NavegatorPush(context,
+                    ProductImageScreen(imageList: ['$xURLIMAGE$image']));
+              },
+              child: CachedImage('$xURLIMAGE$image')),
         ),
         const SizedBox(
           height: 10,

@@ -81,62 +81,75 @@ class _ListTitleMenuState extends State<ListTitleMenu> {
           required context,
           required Widget widget,
           required int index}) =>
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade300),
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                //
-                color: index == 6
-                    ? const Color(0xffF2E1E1)
-                    : const Color(0xffEEF3FF),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(
-                  child: Image(
-                image: AssetImage(image),
-              )),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: Text(
-                title,
-                style: StylesData.font12.copyWith(
-                  color: index == 6 ? const Color(0xffFC2323) : Colors.black,
+      InkWell(
+        onTap: () {
+          if (index == 0 || index == 6) {
+            if (index == 6) {
+              CacheHelper.removeData(key: 'Token');
+              TOKEN = '';
+            }
+            Nav(context, widget);
+          } else {
+            NavegatorPush(context, widget);
+          }
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey.shade300),
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  //
+                  color: index == 6
+                      ? const Color(0xffF2E1E1)
+                      : const Color(0xffEEF3FF),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                child: Center(
+                    child: Image(
+                  image: AssetImage(image),
+                )),
               ),
-            ),
-            IconButton(
-                onPressed: () {
-                  if (index == 0 || index == 6) {
-                    if (index == 6) {
-                      CacheHelper.removeData(key: 'Token');
-                      TOKEN = '';
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Text(
+                  title,
+                  style: StylesData.font12.copyWith(
+                    color: index == 6 ? const Color(0xffFC2323) : Colors.black,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                    if (index == 0 || index == 6) {
+                      if (index == 6) {
+                        CacheHelper.removeData(key: 'Token');
+                        TOKEN = '';
+                      }
+                      Nav(context, widget);
+                    } else {
+                      NavegatorPush(context, widget);
                     }
-                    Nav(context, widget);
-                  } else {
-                    NavegatorPush(context, widget);
-                  }
-                },
-                icon: Icon(
-                  Icons.arrow_forward_ios_sharp,
-                  size: 16,
-                  color: Colors.grey.shade300,
-                ))
-          ],
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios_sharp,
+                    size: 16,
+                    color: Colors.grey.shade300,
+                  ))
+            ],
+          ),
         ),
       );
 }

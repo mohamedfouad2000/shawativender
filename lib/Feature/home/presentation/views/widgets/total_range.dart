@@ -90,7 +90,7 @@ class _TotalRangeState extends State<TotalRange> {
             style: StylesData.font15,
           ),
           Text(title, style: StylesData.font15),
-          Text("$number", style: StylesData.font25)
+          Text("${number.toInt()}", style: StylesData.font25)
         ],
       ),
     );

@@ -98,87 +98,89 @@ class _EditUserFormState extends State<EditUserForm> {
                                 ),
                                 child: Image.file(file!),
                               ),
-                        InkWell(
-                          onTap: () {
-                            var x = AlertDialog(
-                              surfaceTintColor: Colors.white,
-                              title: Text(
-                                S.of(context).ChooseYourPhoto,
-                              ),
-                              content: SizedBox(
-                                height: 140,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        height: 50,
-                                        width: double.infinity,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background,
-                                        child: TextButton.icon(
-                                            label: Text(
-                                              S.of(context).Gallary,
-                                              style: const TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                            onPressed: () async {
-                                              getuserprofile(
-                                                  i: ImageSource.gallery);
-                                              Navigator.pop(context);
-                                            },
-                                            icon: const Icon(
-                                              Icons.storage_outlined,
-                                              color: Colors.black,
-                                            ))),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                        height: 50,
-                                        width: double.infinity,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background,
-                                        child: TextButton.icon(
-                                            label: Text(
-                                              S.of(context).camera,
-                                              style: const TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                            onPressed: () {
-                                              getuserprofile(
-                                                  i: ImageSource.camera);
-                                              Navigator.pop(context);
-                                            },
-                                            icon: const Icon(
-                                              Icons.camera_alt_outlined,
-                                              color: Colors.black,
-                                            ))),
-                                  ],
+                        if (file == null)
+                          InkWell(
+                            onTap: () {
+                              var x = AlertDialog(
+                                surfaceTintColor: Colors.white,
+                                title: Text(
+                                  S.of(context).ChooseYourPhoto,
                                 ),
-                              ),
-                            );
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return x;
-                                });
-                          },
-                          child: Container(
-                              height: 45,
-                              width: 45,
-                              decoration: BoxDecoration(
-                                color: ConstColor.kMainColor,
-                                borderRadius: BorderRadius.circular(12),
-                                // border: Border.all(color: Colors.white, width: .8),
-                              ),
-                              child: const Image(
-                                image: AssetImage(AssetsData.upload),
-                                fit: BoxFit.cover,
-                              )),
-                        ),
+                                content: SizedBox(
+                                  height: 140,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          height: 50,
+                                          width: double.infinity,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          child: TextButton.icon(
+                                              label: Text(
+                                                S.of(context).Gallary,
+                                                style: const TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              onPressed: () async {
+                                                getuserprofile(
+                                                    i: ImageSource.gallery);
+                                                Navigator.pop(context);
+                                              },
+                                              icon: const Icon(
+                                                Icons.storage_outlined,
+                                                color: Colors.black,
+                                              ))),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Container(
+                                          height: 50,
+                                          width: double.infinity,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          child: TextButton.icon(
+                                              label: Text(
+                                                S.of(context).camera,
+                                                style: const TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              onPressed: () {
+                                                getuserprofile(
+                                                    i: ImageSource.camera);
+                                                Navigator.pop(context);
+                                              },
+                                              icon: const Icon(
+                                                Icons.camera_alt_outlined,
+                                                color: Colors.black,
+                                              ))),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return x;
+                                  });
+                            },
+                            child: Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                  color: ConstColor.kMainColor,
+                                  borderRadius: BorderRadius.circular(12),
+                                  // border: Border.all(color: Colors.white, width: .8),
+                                ),
+                                child: const Image(
+                                  image: AssetImage(AssetsData.upload),
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
                       ],
                     ),
                   ),
@@ -396,7 +398,7 @@ class _EditUserFormState extends State<EditUserForm> {
                       text: TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: S.of(context).profile1,
+                              text: '${S.of(context).profile1}  ',
                               style: StylesData.font11.copyWith(
                                 color: Colors.grey,
                               )),

@@ -65,7 +65,7 @@ class _SupportScreenBodyState extends State<SupportScreenBody> {
                   customTextFormedFiled(
                       controller: callusController,
                       type: TextInputType.number,
-                      hintText: 'call us',
+                      hintText: S.of(context).callus,
                       sufficon: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Image(
@@ -110,7 +110,7 @@ class _SupportScreenBodyState extends State<SupportScreenBody> {
                   ),
                   customTextFormedFiled(
                     controller: note1controller,
-                    hintText: 'write here',
+                    hintText: 'select subject',
                     maxLines: maxline1,
                     sufficon: InkWell(
                       onTap: () {
@@ -133,7 +133,7 @@ class _SupportScreenBodyState extends State<SupportScreenBody> {
                     height: 20,
                   ),
                   customTextFormedFiled(
-                    hintText: 'write here',
+                    hintText: S.of(context).writeus,
                     controller: note2controller,
                     maxLines: maxline2,
                     sufficon: InkWell(
@@ -159,8 +159,10 @@ class _SupportScreenBodyState extends State<SupportScreenBody> {
                   defaultButton(
                       fun: () {
                         BlocProvider.of<SupportCubit>(context).addSupport(
-                            subject: '$callusController $emailusController',
-                            message: '$note1controller $note2controller');
+                            subject:
+                                '${callusController.text} ${emailusController.text}',
+                            message:
+                                '${note1controller.text} ${note2controller.text}');
                         // NavegatorPush(context, const LangPageView());
                       },
                       textWidget: state is SupportLoading

@@ -76,8 +76,9 @@ class ProductItemInfo extends StatelessWidget {
               Expanded(
                 child: Text(
                   LocalizationCubit.get(context).isArabic()
-                      ? "${model.priceWithCommission} ${S.of(context).SAR}  "
-                      : "${S.of(context).SAR} ${model.priceWithCommission} ",
+                      ? "${model.price} ${S.of(context).SAR}  "
+                      : "${S.of(context).SAR} ${model.price} ",
+                  maxLines: 1,
                   style:
                       StylesData.font18.copyWith(color: ConstColor.kMainColor),
                 ),
@@ -106,7 +107,7 @@ class ProductItemInfo extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      model.createdAt.toString() ?? '',
+                      model.createdAt.toString().substring(0, 10) ?? '',
                       style: StylesData.font12,
                     )
                   ],

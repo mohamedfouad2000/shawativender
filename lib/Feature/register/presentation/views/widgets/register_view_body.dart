@@ -12,6 +12,7 @@ import 'package:shawativender/Core/utils/components.dart';
 
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/home/presentation/views/home_view.dart';
+import 'package:shawativender/Feature/home/presentation/views/screens/terms_screen.dart';
 import 'package:shawativender/Feature/location/presentation/views/enable_location_view.dart';
 import 'package:shawativender/Feature/register/data/repo/register_repo_imple.dart';
 import 'package:shawativender/Feature/register/presentation/manager/cubit/register_cubit.dart';
@@ -369,11 +370,16 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                 S.of(context).Iacceptallthe,
                                 style: StylesData.font12,
                               ),
-                              Text(
-                                S.of(context).termsconditions,
-                                style: StylesData.font12.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w800),
+                              InkWell(
+                                onTap: () {
+                                  NavegatorPush(context, const TermsScreen());
+                                },
+                                child: Text(
+                                  S.of(context).termsconditions,
+                                  style: StylesData.font12.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w800),
+                                ),
                               ),
                             ],
                           ),

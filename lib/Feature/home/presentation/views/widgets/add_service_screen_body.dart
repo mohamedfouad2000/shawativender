@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/add_service_form.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class AddServiceScreenBody extends StatelessWidget {
   const AddServiceScreenBody({super.key});
@@ -14,10 +15,10 @@ class AddServiceScreenBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Add service",
+              S.of(context).Addservice,
               style: StylesData.font24Google,
             ),
-            Text("add your service now!", style: StylesData.font12),
+            Text(S.of(context).add_your_service_now, style: StylesData.font12),
             const SizedBox(
               height: 20,
             ),

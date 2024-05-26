@@ -4,6 +4,7 @@ import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/Add%20Serves/add_servce_cubit.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class CustomAddImage extends StatelessWidget {
   const CustomAddImage({
@@ -36,17 +37,17 @@ class CustomAddImage extends StatelessWidget {
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                        text: 'Drop your files here, or ',
+                        text: S.of(context).Drop_your_files_here_or,
                         style: StylesData.font11.copyWith(color: Colors.black)),
                     TextSpan(
-                        text: 'browse',
+                        text: S.of(context).browse,
                         style: StylesData.font11
                             .copyWith(color: ConstColor.kMainColor)),
                   ],
                 ),
               ),
               Text(
-                "JPG, PNG, PDF (Max 800x400px - 2Mo)",
+                S.of(context).imageSize,
                 style: StylesData.font9,
               )
             ],

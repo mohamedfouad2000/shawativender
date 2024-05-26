@@ -41,33 +41,39 @@ class _CalendarDetailsState extends State<CalendarDetails> {
         //05/05/2024 3:52 PM, 05/14/2024 3:52 PM, 05/09/2024 3:52 PM, 05/16/2024 3:52 PM
         // print('ahaa');
         // print(days.split(',')[i]);
-        print('index is $i ${days.split(',')[i].trim()}');
+        DateTime x;
         //15/05/2024
-        var x = DateFormat("MM/dd/yyyy ").parse(days.split(',')[i].trim());
+        // if (LocalizationCubit.get(context).isArabic()) {
+
+        x = DateFormat.yMd('en_US')
+            .parseLoose(days.split(',')[i].trim().substring(0, 10));
+        // } else {
+        //   x = DateFormat("MM/dd/yyyy ").parse(days.split(',')[i].trim());
+        // }
+        print('index is $i ${days.split(',')[i].trim()}');
+
+        // x = DateFormat("MM/dd/yyyy ").parse(days.split(',')[i].trim());
         Times.add(x);
 
-        print(Times[i]);
-      } catch (e) {}
+        print('Ahah is ${Times[i]}');
+      } catch (e) {
+        print('error is $e');
+      }
     }
 
-    return WillPopScope(
-      onWillPop: () async {
-        return Future.value(false);
-      },
-      child: CalendarDatePicker2(
-          config: CalendarDatePicker2Config(
-              calendarType: CalendarDatePicker2Type.multi,
-              centerAlignModePicker: true),
-          onValueChanged: (value) {
-            print(value);
-            print(Times);
-            setState(() {
-              Times.remove(value);
-            });
-          },
-          value: Times
-          // onValueChanged: (dates) => _dates = dates,
-          ),
-    );
+    return CalendarDatePicker2(
+        config: CalendarDatePicker2Config(
+            calendarType: CalendarDatePicker2Type.multi,
+            centerAlignModePicker: true),
+        onValueChanged: (value) {
+          print(value);
+          print(Times);
+          setState(() {
+            Times.remove(value);
+          });
+        },
+        value: Times
+        // onValueChanged: (dates) => _dates = dates,
+        );
   }
 }

@@ -14,6 +14,7 @@ import 'package:shawativender/Feature/location/presentation/views/enable_locatio
 import 'package:shawativender/Feature/login/data/repo/login_repo_imp.dart';
 import 'package:shawativender/Feature/login/presentation/manager/Login/login_cubit.dart';
 import 'package:shawativender/Feature/login/presentation/manager/Login/login_state.dart';
+import 'package:shawativender/Feature/login/presentation/views/widgets/signin_with.dart';
 import 'package:shawativender/Feature/login/presentation/views/widgets/signup_here.dart';
 import 'package:shawativender/Feature/splash/presentation/views/widgets/splach_image_logo.dart';
 import 'package:shawativender/Feature/splash/presentation/views/widgets/tqnia_logo.dart';
@@ -395,10 +396,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           //   'Or Sign In with ',
                           //   style: StylesData.font12.copyWith(fontSize: 14),
                           // ),
-                          // const SizedBox(
-                          //   height: 20,
-                          // ),
-                          // const SigninWithWidget(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const SigninWithWidget(),
                           const SizedBox(
                             height: 40,
                           ),

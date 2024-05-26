@@ -10,6 +10,7 @@ import 'package:shawativender/Feature/home/presentation/views/screens/map_screen
 import 'package:shawativender/Feature/home/presentation/views/widgets/booking_product.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/calendar_details.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/map_widget.dart';
+import 'package:shawativender/generated/l10n.dart';
 
 class BookingDetailsServes extends StatelessWidget {
   const BookingDetailsServes({
@@ -56,7 +57,7 @@ class BookingDetailsServes extends StatelessWidget {
                         .replaceAll("\\", "")
                         .trim() ??
                     '',
-                price: model.priceWithCommission.toString() ?? '',
+                price: model.price.toString() ?? '',
                 image: model.image ?? ''),
             const SizedBox(
               height: 15,
@@ -100,7 +101,7 @@ class BookingDetailsServes extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-
+            // if(model.userId ==)
             InkWell(
               onTap: () {
                 NavegatorPush(context, EditServiceScreen(model: model));
@@ -116,7 +117,7 @@ class BookingDetailsServes extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Center(
                   child: Text(
-                    "Edit Service",
+                    S.of(context).edit_service,
                     style: StylesData.font17
                         .copyWith(color: ConstColor.kMainColor),
                   ),

@@ -93,7 +93,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
               children: [
                 customTextFormedFiled(
                     controller: Propertynamecontroller,
-                    hintText: 'Property Name',
+                    hintText: S.of(context).Property_Name,
                     preicon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -109,7 +109,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                 ),
                 customTextFormedFiled(
                     controller: PropertynameArabiccontroller,
-                    hintText: 'Property Name With Arabic',
+                    hintText: S.of(context).Property_Name_With_Arabic,
                     preicon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -149,7 +149,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                             ...List.generate(state.list.length,
                                 (index) => state.list[index].id.toString()),
                           ],
-                          hintText: 'Category',
+                          hintText: S.of(context).Category,
                           prefixIcon: const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Image(
@@ -178,7 +178,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                 ),
                 customTextFormedFiled(
                     controller: placecontroller,
-                    hintText: 'Place',
+                    hintText: S.of(context).Place,
                     preicon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -194,7 +194,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                 ),
                 customTextFormedFiled(
                     controller: placeArbiccontroller,
-                    hintText: 'Place With Arabic',
+                    hintText: S.of(context).Place_With_Arabic,
                     preicon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -211,7 +211,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                 customTextFormedFiled(
                     controller: Pricecontroller,
                     type: TextInputType.number,
-                    hintText: 'Price',
+                    hintText: S.of(context).price,
                     preicon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -268,7 +268,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                       '19',
                       '20',
                     ],
-                    hintText: 'Bed rooms',
+                    hintText: S.of(context).bedRooms,
                     prefixIcon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -309,7 +309,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                       '19',
                       '20',
                     ],
-                    hintText: 'Bath rooms',
+                    hintText: S.of(context).bathRooms,
                     prefixIcon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -350,7 +350,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                       '19',
                       '20',
                     ],
-                    hintText: 'Floor',
+                    hintText: S.of(context).floor,
                     prefixIcon: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image(
@@ -368,7 +368,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                   children: [
                     customTextFormedFiled(
                       controller: descriptioncontroller,
-                      hintText: 'Description',
+                      hintText: S.of(context).Description,
                       maxLines: 6,
                       preicon: Icon(
                         Icons.add,
@@ -403,7 +403,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                         size: 0.0,
                       ),
                       controller: descriptionArabiccontroller,
-                      hintText: 'Description Arabic',
+                      hintText: S.of(context).Description_Arabic,
                       maxLines: 6,
                     ),
                     const Align(
@@ -516,15 +516,20 @@ class _AddServiceFormState extends State<AddServiceForm> {
                 CalendarDatePicker2(
                   onValueChanged: (value) {
                     Times = value;
+
                     for (var element in value) {
+                      print(element);
+
                       //05/16/2024 3:52 PM
                       String formattedDate =
-                          DateFormat('MM/dd/yyyy  kk:mm').format(element!);
+                          DateFormat('MM/dd/yyyy', 'en').format(element!);
+
                       print(formattedDate);
                       days.add(formattedDate);
                     }
                   },
                   config: CalendarDatePicker2Config(
+
                       // enabled: false,
                       disableModePicker: false,
                       rangeBidirectional: false,
@@ -543,7 +548,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                         ShowModeSheet(context);
                       },
                       textWidget: Text(
-                        'Set Location',
+                        S.of(context).setlocation,
                         style: StylesData.font13.copyWith(color: Colors.black),
                       ),
                       height: 54,
@@ -553,17 +558,18 @@ class _AddServiceFormState extends State<AddServiceForm> {
                     height: 10,
                   ),
                 if (latetude != 0 && longitude != 0)
-                  Center(child: Text("The Place is // $address")),
-                const SizedBox(
-                  height: 15,
-                ),
+
+                  // Center(child: Text("The Place is // $address")),
+                  const SizedBox(
+                    height: 15,
+                  ),
                 if (latetude != 0 && longitude != 0)
                   defaultButton(
                       fun: () async {
                         ShowModeSheet(context);
                       },
                       textWidget: Text(
-                        'change Location',
+                        S.of(context).changeLocation,
                         style: StylesData.font13.copyWith(color: Colors.black),
                       ),
                       height: 54,
@@ -595,7 +601,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                 defaultButton(
                     fun: () {
                       print(
-                          'data is ${PropertynameArabiccontroller.text} and ${Propertynamecontroller.text} and ${descriptionArabiccontroller.text} and ${descriptioncontroller.text} and ${Pricecontroller.text} $bed $bath $days $latetude $longitude $floor $category ${placecontroller.text} ${placeArbiccontroller.text} ${file?.path} ');
+                          'data is ${PropertynameArabiccontroller.text} and ${Propertynamecontroller.text} and ${descriptionArabiccontroller.text} and ${descriptioncontroller.text} and ${Pricecontroller.text} $bed $bath ${days.toList()} $latetude $longitude $floor $category ${placecontroller.text} ${placeArbiccontroller.text} ${file?.path} ');
                       if (formKey.currentState!.validate()) {
                         if (category == '' ||
                             bath == '' ||
@@ -606,7 +612,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                             days.isEmpty ||
                             file == null) {
                           setState(() {
-                            error = 'Please fill all the fields';
+                            error = S.of(context).error_Msq_add_service;
                           });
                         } else {
                           print("list is ${days.toList()}");
@@ -637,7 +643,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
                             color: Colors.white,
                           )
                         : Text(
-                            'Add Service',
+                            S.of(context).Addservice,
                             style: StylesData.font13,
                           ),
                     height: 54,

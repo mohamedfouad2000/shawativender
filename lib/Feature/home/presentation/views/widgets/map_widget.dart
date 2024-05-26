@@ -41,13 +41,14 @@ class _MapFlutterState extends State<MapFlutter> {
       onHorizontalDragUpdate: (details) {},
       child: FlutterMap(
         options: MapOptions(
-            initialCenter: widget.latLng.latitude == 0.0
-                ? const LatLng(30.24298477377279, 20.193709855752914)
-                : widget.latLng,
-            initialZoom: 11,
-            // enableScrollWheel: true,
-            interactionOptions:
-                const InteractionOptions(flags: InteractiveFlag.doubleTapZoom)),
+          initialCenter: widget.latLng.latitude == 0.0
+              ? const LatLng(30.24298477377279, 20.193709855752914)
+              : widget.latLng,
+          initialZoom: 11,
+          // enableScrollWheel: true,
+          // interactionOptions:
+          //     const InteractionOptions(flags: InteractiveFlag.doubleTapZoom)
+        ),
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
