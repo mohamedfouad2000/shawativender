@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:intl/intl.dart';
+import 'package:shawativender/Core/utils/colors.dart';
 
 class CalendarDetails extends StatefulWidget {
   const CalendarDetails({
@@ -38,21 +39,13 @@ class _CalendarDetailsState extends State<CalendarDetails> {
       // print();
 
       try {
-        //05/05/2024 3:52 PM, 05/14/2024 3:52 PM, 05/09/2024 3:52 PM, 05/16/2024 3:52 PM
-        // print('ahaa');
-        // print(days.split(',')[i]);
         DateTime x;
-        //15/05/2024
-        // if (LocalizationCubit.get(context).isArabic()) {
 
         x = DateFormat.yMd('en_US')
             .parseLoose(days.split(',')[i].trim().substring(0, 10));
-        // } else {
-        //   x = DateFormat("MM/dd/yyyy ").parse(days.split(',')[i].trim());
-        // }
+
         print('index is $i ${days.split(',')[i].trim()}');
 
-        // x = DateFormat("MM/dd/yyyy ").parse(days.split(',')[i].trim());
         Times.add(x);
 
         print('Ahah is ${Times[i]}');
@@ -64,6 +57,9 @@ class _CalendarDetailsState extends State<CalendarDetails> {
     return CalendarDatePicker2(
         config: CalendarDatePicker2Config(
             calendarType: CalendarDatePicker2Type.multi,
+            // selectedDayTextStyle: const TextStyle(color: Colors.white),
+            selectedDayHighlightColor: ConstColor.kMainColor,
+            selectedRangeHighlightColor: Colors.red.shade100,
             centerAlignModePicker: true),
         onValueChanged: (value) {
           print(value);

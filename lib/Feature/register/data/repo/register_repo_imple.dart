@@ -11,27 +11,31 @@ class RegisterRepoImpl extends RegisterRepo {
   Future<Either<Failure, RegisterModel>> registerUser(
       {required String name,
       required String phone,
+      required String fcmToken,
+      required String lang,
       required String password,
       required String confirmPassword}) async {
     RegisterModel? model;
     try {
+      String error = '';
+
       Response<dynamic> res =
           await DioHelper.postData(url: xREGISTERURL, data: {}, query: {
         'name': name,
         'phone': phone,
         'password': password,
         'password_confirmation': confirmPassword,
-        'role': 2
+        'role': 2,
+        'fcm_token': fcmToken,
+        'lang': lang,
       });
-      print(res.data);
-      if (res.data['status'] == 201) {
-        model = RegisterModel.fromJson(res.data);
-        return right(model);
-      } else {
-        return left(ServerFailure(msq: res.data['msg'].toString()));
-      }
+      // print(res.data);
+
+      model = RegisterModel.fromJson(res.data);
+      return right(model);
     } catch (e) {
       if (e is DioException) {
+        print('Error fetching data: $e');
         return left(ServerFailure.fromDioError(e));
       }
 

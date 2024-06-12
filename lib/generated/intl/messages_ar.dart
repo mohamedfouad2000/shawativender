@@ -25,18 +25,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutApartment": MessageLookupByLibrary.simpleMessage("عن الشقة"),
         "Accept": MessageLookupByLibrary.simpleMessage("قبول"),
         "Account": MessageLookupByLibrary.simpleMessage("حسابك!"),
+        "AddEventDay": MessageLookupByLibrary.simpleMessage("اضافه يوم مميز"),
+        "AddEventDays": MessageLookupByLibrary.simpleMessage("اضافه يوم مميز"),
+        "AddImages": MessageLookupByLibrary.simpleMessage("اضافه صور"),
         "AddRating": MessageLookupByLibrary.simpleMessage("تعيين التقييم "),
         "Addservice": MessageLookupByLibrary.simpleMessage("إضافة خدمة"),
         "AllowAccess": MessageLookupByLibrary.simpleMessage("السماح بالوصول"),
-        "AlreadyAccept": MessageLookupByLibrary.simpleMessage("الموافقة مسبقة"),
-        "AlreadyReject": MessageLookupByLibrary.simpleMessage("الرفض مسبق"),
+        "AlreadyAccept": MessageLookupByLibrary.simpleMessage("تم الموافقة "),
+        "AlreadyReject": MessageLookupByLibrary.simpleMessage("تم الرفض"),
         "Alreadyhaveanaccount":
             MessageLookupByLibrary.simpleMessage("لديك حساب؟ "),
         "ApplayFilter": MessageLookupByLibrary.simpleMessage("اضافه الخدمة"),
         "Applyfilters": MessageLookupByLibrary.simpleMessage("تطبيق الفلتر"),
+        "Approved": MessageLookupByLibrary.simpleMessage("موافقة"),
         "Area": MessageLookupByLibrary.simpleMessage("المنطقـه"),
         "Areyouready": MessageLookupByLibrary.simpleMessage(
             "هل انت مستعد لتجهيز حساب جديد؟ "),
+        "AvailableDays": MessageLookupByLibrary.simpleMessage("الايام المتاحة"),
         "Booking": MessageLookupByLibrary.simpleMessage("الحجز"),
         "Bookings": MessageLookupByLibrary.simpleMessage("الحجوزات"),
         "CHECKIN": MessageLookupByLibrary.simpleMessage("الحجز من "),
@@ -96,6 +101,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "يرجى تحديد طريقة الدفع ورفع صورة الدفع"),
         "Pleaseprovideyourinformation":
             MessageLookupByLibrary.simpleMessage("يرجى تقديم معلوماتك"),
+        "Powered_By": MessageLookupByLibrary.simpleMessage("تصميم وتطوير "),
+        "Privacypolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "ProfileInfo":
             MessageLookupByLibrary.simpleMessage("معلومات الملف الشخصي"),
         "Property_Name": MessageLookupByLibrary.simpleMessage("اسم العقار"),
@@ -103,12 +110,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اسم العقار باللغة العربية"),
         "RatingDialog": MessageLookupByLibrary.simpleMessage("التقييم "),
         "Recentlysearch": MessageLookupByLibrary.simpleMessage("البحث السابق"),
+        "Refunds": MessageLookupByLibrary.simpleMessage("المستردات"),
         "Reject": MessageLookupByLibrary.simpleMessage("رفض"),
+        "Rejected": MessageLookupByLibrary.simpleMessage("مرفوض"),
         "Rememberme": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "RentalHistory": MessageLookupByLibrary.simpleMessage("تاريخ التأجير"),
         "Reviews": MessageLookupByLibrary.simpleMessage("المراجعات"),
         "SAR": MessageLookupByLibrary.simpleMessage("جنيـه"),
         "Search": MessageLookupByLibrary.simpleMessage("البحث"),
+        "SelectEventDays":
+            MessageLookupByLibrary.simpleMessage("اختيار يوم مميز"),
         "Servecs": MessageLookupByLibrary.simpleMessage("الخدمات"),
         "SetCurrentLocation":
             MessageLookupByLibrary.simpleMessage("تعيين الموقع الحالي"),
@@ -120,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SignuPHere": MessageLookupByLibrary.simpleMessage("سجل الان"),
         "SkipForNow":
             MessageLookupByLibrary.simpleMessage("تخطي الان اذا كنت تريد"),
+        "Successfull": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
         "TandC": MessageLookupByLibrary.simpleMessage(
             "\nهذا النص مستخرج من شركة تقنية وهي مولد نص وهو مثال لنص افتراضي غير حقيقي يمكن استبداله في نفس المساحة. لقد تم توليد هذا النص من مولد نصوص تقنية، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى بالإضافة إلى زيادة عدد الحروف التي يولدها التطبيق.   \nحيث يتوجب على المصمم وضع نصوص مؤقتة وافتراضية وغير حقيقية على التصميم ليظهر للعميل الشكل كاملا وهنا يأتي دور النص الافتراضي مما يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذي يتحدث عنه التصميم فيظهر بشكل غير لائق أو بمحتوى غير صحيح يشتت ذهن العميل .    \nيمكن تثبيت هذا النص على أي تصميم دون مشكلة، وسيظهر التصميم منظماً ومنسقاً وواضحاً لأنه لا يزال نصاً بديلاً ومؤقتاً وليس نصاً حقيقياً.    \nكما سيتم تعديل هذا النص لاحقاً من قبل العميل بعد استلام موقعه والبدء في إضافة محتوياته الحقيقية من خلاله أو من خلال إدخال بياناته أو من خلال مشاركته في خدمات إدارة المحتوى التي تقدمها شركة تقنية بكل سرور لعملائها الكرام."),
         "TandC2": MessageLookupByLibrary.simpleMessage(
@@ -132,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Upload_your_payment_screen_here":
             MessageLookupByLibrary.simpleMessage("رفع صورة الدفع هنا"),
         "Yearly": MessageLookupByLibrary.simpleMessage("سنوي"),
+        "addFeature": MessageLookupByLibrary.simpleMessage("اضافه خاصية"),
         "add_your_service_now":
             MessageLookupByLibrary.simpleMessage("أضف خدمتك الآن!"),
         "allProperties": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
@@ -145,7 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changelocation": MessageLookupByLibrary.simpleMessage("تغيير الموقع"),
         "chooseLocation": MessageLookupByLibrary.simpleMessage(
             "اختر موقعك لبدء البحث عن طلبك"),
-        "colse": MessageLookupByLibrary.simpleMessage("مغلق"),
+        "close": MessageLookupByLibrary.simpleMessage("اغلاق"),
+        "colse": MessageLookupByLibrary.simpleMessage(" مرفوضه"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "day": MessageLookupByLibrary.simpleMessage("يوم"),
@@ -154,17 +168,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "راسلـنا عبر البريد الالكتروني "),
         "enteryourmessage":
             MessageLookupByLibrary.simpleMessage("ادخـل رسالتــلك"),
+        "eroor507": MessageLookupByLibrary.simpleMessage(
+            "كلمه المرور يجب ان يكون علي الاقل 8  حروف"),
         "error_Msq_add_service":
             MessageLookupByLibrary.simpleMessage("يرجى ملء جميع الحقول"),
+        "eventdays": MessageLookupByLibrary.simpleMessage("الايام المميزه"),
         "favorites": MessageLookupByLibrary.simpleMessage("المفضلات"),
         "filter": MessageLookupByLibrary.simpleMessage("فلتر"),
         "floor": MessageLookupByLibrary.simpleMessage("الطابق"),
         "imageSize": MessageLookupByLibrary.simpleMessage(
             "يجب ان يكون الصورة اقل من 5 ميجا"),
+        "inprogress": MessageLookupByLibrary.simpleMessage("قيد التنفيذ"),
+        "lastPayment": MessageLookupByLibrary.simpleMessage("اخر عمليه دفع"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "max": MessageLookupByLibrary.simpleMessage("اكثر"),
         "min": MessageLookupByLibrary.simpleMessage("اقل"),
-        "open": MessageLookupByLibrary.simpleMessage("مفتوح"),
+        "open": MessageLookupByLibrary.simpleMessage("مقبولة"),
+        "oppsMessage": MessageLookupByLibrary.simpleMessage("حدث خطاء ما"),
         "paid": MessageLookupByLibrary.simpleMessage("مدفوع"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "passwordErorr":
@@ -181,8 +201,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "هذا الموقع محمي بواسطة ريكابتشا وجوجل"),
         "profile2": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "profile3": MessageLookupByLibrary.simpleMessage(" و "),
-        "profile4": MessageLookupByLibrary.simpleMessage("الشروط والاحكام"),
-        "profile5": MessageLookupByLibrary.simpleMessage(" تطبيق "),
+        "profile4":
+            MessageLookupByLibrary.simpleMessage("اذا كنت تريد حذف حسابك "),
+        "profile5": MessageLookupByLibrary.simpleMessage(" اضغط هنـا "),
         "rateText": MessageLookupByLibrary.simpleMessage(
             "اضغط على نجمة لتعيين تقييمك. أضف المزيد من الوصف هنا إذا كنت تريد."),
         "ratehint":
@@ -191,13 +212,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "schedule": MessageLookupByLibrary.simpleMessage("جدول الحجز"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "seeAll": MessageLookupByLibrary.simpleMessage("رؤيه الكل"),
+        "selectsubject": MessageLookupByLibrary.simpleMessage("العنوان "),
         "services": MessageLookupByLibrary.simpleMessage("الخدمات"),
         "setlocation": MessageLookupByLibrary.simpleMessage("تحديد الموقع"),
         "signInhere": MessageLookupByLibrary.simpleMessage("تسجيل الدخول هنا"),
         "submit": MessageLookupByLibrary.simpleMessage("ارسال"),
         "support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "supportSubTitle": MessageLookupByLibrary.simpleMessage(
-            "اسمحوا لنا أن نعرف استفساراتك وملاحظاتك"),
+            "اسمحوا لنـا ان نعرف استفساراتكم وملاحظاتكم"),
         "termsconditions":
             MessageLookupByLibrary.simpleMessage("الشروط والاحكام"),
         "unpaid": MessageLookupByLibrary.simpleMessage("غير مدفوع"),

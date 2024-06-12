@@ -38,7 +38,8 @@ class UserWidget extends StatelessWidget {
               .replaceAll(']', "")
               .replaceAll('"', '')
               .replaceAll("\\", '')
-              .trim(),
+              .trim()
+              .substring(0, 10),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: StylesData.font12,

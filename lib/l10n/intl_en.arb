@@ -16,6 +16,7 @@
     "UpcomingBooking": "Upcoming booking",
     "RentalHistory": "Rental history",
     "MyBooking": "My booking",
+    "Powered_By":"Powered By ",
     "NoData": "No Data",
     "viewPofile": "view profile",
     "Language": "Language",
@@ -32,8 +33,8 @@
     "profile1": "This site is protected by reCAPTCHA and the Google ",
     "profile2": "Privacy Policy",
     "profile3": " and ",
-    "profile4": "Terms of Service",
-    "profile5": " apply ",
+    "profile4": "If you want To Delete Your Account ",
+    "profile5": "Click Here",
     "passwordErorr": "password not match",
     "Update": "Update",
     "schedule": "schedule",
@@ -97,8 +98,8 @@
    "services":"services",
    "TotalReview":"Total Review",
    "Owner":"Owner",
-   "open":"open",
-   "colse":"close",
+   "open":"Accepted",
+   "colse":"Rejected",
    "unpaid":"unpaid",
    "pending":"pending",
    "paid":"paid",
@@ -144,7 +145,27 @@
   "Description":"Description",
   "Description_Arabic":"Description Arabic",
   "error_Msq_add_service":"Please fill all the fields",
-  "select subject":"select subject"
+  "selectsubject":"Title",
+  "AddEventDays":"Add Event Days",
+  "addFeature":"Add Feature",
+  "SelectEventDays":"Select Event Days",
+  "AddEventDay":"Add Event Day",
+  "lastPayment" : "Last Payment",
+  "eventdays":"Event Days",
+  "Successfull":"Successfull",
+  "oppsMessage":"Opps! Something went wrong",
+  "eroor507":"The password field must be at least 8 characters",
+  "inprogress":"inprogress",
+  "Approved":"Approved",
+  "Rejected":"Rejected",
+  "close":"close",
+  "AvailableDays":"Available Days",
+  "AddImages":"Add Images",
+  "Privacypolicy":"Privacy policy",
+    "Refunds":"Refunds"
+
+  
+
   
 
 

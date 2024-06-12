@@ -5,6 +5,8 @@ class AssetsData {
   static const tqniaLogo = 'assets/images/Tqnia footer.png';
   static const tqniaLogowhite = 'assets/images/Tqnia wight.png';
 
+  static const pdf = 'assets/images/pdf.png';
+
   static const appleLogo = 'assets/images/apple.png';
   static const facebookLogo = 'assets/images/Facebook.png';
   static const googleLogo = 'assets/images/google.png';

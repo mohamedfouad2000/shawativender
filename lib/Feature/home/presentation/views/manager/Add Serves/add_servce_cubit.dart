@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:shawativender/Feature/home/data/repo/home_repo.dart';
 
@@ -17,7 +18,10 @@ class AddServceCubit extends Cubit<AddServceState> {
     required String price,
     required String bed,
     required String bath,
-    required String days,
+    required List days,
+    required List<int> features,
+    required List eventDays,
+    required List eventprices,
     required String latitude,
     required String longitude,
     required String floor,
@@ -25,10 +29,16 @@ class AddServceCubit extends Cubit<AddServceState> {
     required String placeEn,
     required String place,
     required File image,
+    required List range_days,
+    List<XFile>? files = const [],
   }) async {
     emit(AddServceLoading());
     final result = await repo.addService(
         name: name,
+        range_days: range_days,
+        eventDays: eventDays,
+        eventprices: eventprices,
+        features: features,
         nameEn: nameEn,
         description: description,
         descriptionEn: descriptionEn,
@@ -42,6 +52,7 @@ class AddServceCubit extends Cubit<AddServceState> {
         categoryId: categoryId,
         placeEn: placeEn,
         place: place,
+        files: files,
         image: image);
     result.fold(
       (l) => emit(AddServceError(msg: l.msq.toString())),
@@ -58,12 +69,13 @@ class AddServceCubit extends Cubit<AddServceState> {
     required String price,
     required String bed,
     required String bath,
-    required String days,
+    required List days,
     required String latitude,
     required String longitude,
     required String floor,
     required String categoryId,
     required String placeEn,
+    required List range_days,
     required String place,
     required File image,
   }) async {
@@ -75,6 +87,7 @@ class AddServceCubit extends Cubit<AddServceState> {
         description: description,
         descriptionEn: descriptionEn,
         price: price,
+        range_days: range_days,
         bed: bed,
         bath: bath,
         days: days,

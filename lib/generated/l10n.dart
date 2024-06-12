@@ -220,6 +220,16 @@ class S {
     );
   }
 
+  /// `Powered By `
+  String get Powered_By {
+    return Intl.message(
+      'Powered By ',
+      name: 'Powered_By',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No Data`
   String get NoData {
     return Intl.message(
@@ -380,20 +390,20 @@ class S {
     );
   }
 
-  /// `Terms of Service`
+  /// `If you want To Delete Your Account `
   String get profile4 {
     return Intl.message(
-      'Terms of Service',
+      'If you want To Delete Your Account ',
       name: 'profile4',
       desc: '',
       args: [],
     );
   }
 
-  /// ` apply `
+  /// `Click Here`
   String get profile5 {
     return Intl.message(
-      ' apply ',
+      'Click Here',
       name: 'profile5',
       desc: '',
       args: [],
@@ -1022,20 +1032,20 @@ class S {
     );
   }
 
-  /// `open`
+  /// `Accepted`
   String get open {
     return Intl.message(
-      'open',
+      'Accepted',
       name: 'open',
       desc: '',
       args: [],
     );
   }
 
-  /// `close`
+  /// `Rejected`
   String get colse {
     return Intl.message(
-      'close',
+      'Rejected',
       name: 'colse',
       desc: '',
       args: [],
@@ -1492,7 +1502,185 @@ class S {
     );
   }
 
-  // skipped getter for the 'select subject' key
+  /// `Title`
+  String get selectsubject {
+    return Intl.message(
+      'Title',
+      name: 'selectsubject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Event Days`
+  String get AddEventDays {
+    return Intl.message(
+      'Add Event Days',
+      name: 'AddEventDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Feature`
+  String get addFeature {
+    return Intl.message(
+      'Add Feature',
+      name: 'addFeature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Event Days`
+  String get SelectEventDays {
+    return Intl.message(
+      'Select Event Days',
+      name: 'SelectEventDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Event Day`
+  String get AddEventDay {
+    return Intl.message(
+      'Add Event Day',
+      name: 'AddEventDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Payment`
+  String get lastPayment {
+    return Intl.message(
+      'Last Payment',
+      name: 'lastPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event Days`
+  String get eventdays {
+    return Intl.message(
+      'Event Days',
+      name: 'eventdays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfull`
+  String get Successfull {
+    return Intl.message(
+      'Successfull',
+      name: 'Successfull',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opps! Something went wrong`
+  String get oppsMessage {
+    return Intl.message(
+      'Opps! Something went wrong',
+      name: 'oppsMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password field must be at least 8 characters`
+  String get eroor507 {
+    return Intl.message(
+      'The password field must be at least 8 characters',
+      name: 'eroor507',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `inprogress`
+  String get inprogress {
+    return Intl.message(
+      'inprogress',
+      name: 'inprogress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Approved`
+  String get Approved {
+    return Intl.message(
+      'Approved',
+      name: 'Approved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get Rejected {
+    return Intl.message(
+      'Rejected',
+      name: 'Rejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `close`
+  String get close {
+    return Intl.message(
+      'close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available Days`
+  String get AvailableDays {
+    return Intl.message(
+      'Available Days',
+      name: 'AvailableDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Images`
+  String get AddImages {
+    return Intl.message(
+      'Add Images',
+      name: 'AddImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy policy`
+  String get Privacypolicy {
+    return Intl.message(
+      'Privacy policy',
+      name: 'Privacypolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refunds`
+  String get Refunds {
+    return Intl.message(
+      'Refunds',
+      name: 'Refunds',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

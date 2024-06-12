@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
-import 'package:shawativender/Feature/home/data/model/booking_model/rental.dart';
 import 'package:shawativender/Feature/home/data/model/home_model/service.dart';
 import 'package:shawativender/Feature/home/presentation/views/screens/requests_screen.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/booking_details_screen_body.dart';
@@ -11,9 +10,16 @@ import 'package:shawativender/Feature/home/presentation/views/widgets/booking_de
 import 'package:shawativender/generated/l10n.dart';
 
 class BookingScreenServes extends StatelessWidget {
-  const BookingScreenServes({super.key, required this.model, this.fromData});
+  const BookingScreenServes(
+      {super.key,
+      required this.model,
+      this.fromData,
+      required this.start,
+      required this.end});
   final Service model;
   final bool? fromData;
+  final String start;
+  final String end;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +55,8 @@ class BookingScreenServes extends StatelessWidget {
       ),
       body: BookingDetailsServes(
         model: model,
+        endTime: end,
+        startTime: start,
       ),
     );
   }

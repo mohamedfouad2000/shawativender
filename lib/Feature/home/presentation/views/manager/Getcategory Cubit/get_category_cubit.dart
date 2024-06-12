@@ -16,4 +16,11 @@ class GetCategoryCubit extends Cubit<GetCategoryState> {
       },
     );
   }
+
+  // Future<void> getFeaturesData() async {
+  //   emit(FeaturedLoading());
+  //   final result = await repo.getfeatures();
+  //   result.fold((l) => emit(FeaturedError(error: l.msq)),
+  //       (r) => emit(FeaturedSuccess(model: r)));
+  // }
 }

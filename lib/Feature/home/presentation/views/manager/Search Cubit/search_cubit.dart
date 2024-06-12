@@ -20,6 +20,7 @@ class SearchCubit extends Cubit<SearchState> {
   // SearchModel? model;
   double? lat;
   double? long;
+  int? accept;
   void setallempty() {
     text = '';
     categoryId = -1;
@@ -33,6 +34,8 @@ class SearchCubit extends Cubit<SearchState> {
     maxarea = null;
     lat = null;
     long = null;
+    accept = null;
+
 // category_id: 15, min_price: 164.76022011893136, max_price: 711.3932451520647, bed: 3, floor: 2,
 //  bath: 2, text: , min_area: , max_area: , price_duration: weekly, lat: 0.0, long: 0.0
   }
@@ -50,6 +53,7 @@ class SearchCubit extends Cubit<SearchState> {
     required String maxarea,
     required double lat,
     required double long,
+    required int accept,
   }) async {
     emit(SearchDataLoading());
     final result = await repo.searchData(
@@ -64,7 +68,8 @@ class SearchCubit extends Cubit<SearchState> {
         bath: bath,
         priceDuration: priceDuration,
         minarea: minarea,
-        maxarea: maxarea);
+        maxarea: maxarea,
+        accept: accept);
     result.fold(
       (l) => emit(SearchDataError(msg: l.msq.toString())),
       (r) {

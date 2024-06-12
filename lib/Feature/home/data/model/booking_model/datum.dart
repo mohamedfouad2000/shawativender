@@ -1,8 +1,7 @@
-import 'package:shawativender/Feature/home/data/model/home_model/service.dart';
-
 import 'customer.dart';
+import 'service.dart';
 
-class Rental {
+class Datum {
   int? id;
   int? serviceId;
   int? categoryId;
@@ -11,12 +10,14 @@ class Rental {
   int? insurance;
   int? totalAmount;
   int? taxes;
+  int? vat;
   int? customerId;
   int? providerId;
-  dynamic bookingStatusId;
+  int? bookingStatusId;
   String? startAt;
   String? endAt;
   int? paymentStatusId;
+  int? paymentMethodId;
   String? attachment;
   dynamic description;
   String? lng;
@@ -26,7 +27,7 @@ class Rental {
   Service? service;
   Customer? customer;
 
-  Rental({
+  Datum({
     this.id,
     this.serviceId,
     this.categoryId,
@@ -35,12 +36,14 @@ class Rental {
     this.insurance,
     this.totalAmount,
     this.taxes,
+    this.vat,
     this.customerId,
     this.providerId,
     this.bookingStatusId,
     this.startAt,
     this.endAt,
     this.paymentStatusId,
+    this.paymentMethodId,
     this.attachment,
     this.description,
     this.lng,
@@ -51,7 +54,7 @@ class Rental {
     this.customer,
   });
 
-  factory Rental.fromJson(Map<String, dynamic> json) => Rental(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json['id'] as int?,
         serviceId: json['service_id'] as int?,
         categoryId: json['category_id'] as int?,
@@ -60,12 +63,14 @@ class Rental {
         insurance: json['insurance'] as int?,
         totalAmount: json['total_amount'] as int?,
         taxes: json['taxes'] as int?,
+        vat: json['vat'] as int?,
         customerId: json['customer_id'] as int?,
         providerId: json['provider_id'] as int?,
-        bookingStatusId: json['booking_status_id'] as dynamic,
+        bookingStatusId: json['booking_status_id'] as int?,
         startAt: json['start_at'] as String?,
         endAt: json['end_at'] as String?,
         paymentStatusId: json['payment_status_id'] as int?,
+        paymentMethodId: json['payment_method_id'] as int?,
         attachment: json['attachment'] as String?,
         description: json['description'] as dynamic,
         lng: json['lng'] as String?,
@@ -93,12 +98,14 @@ class Rental {
         'insurance': insurance,
         'total_amount': totalAmount,
         'taxes': taxes,
+        'vat': vat,
         'customer_id': customerId,
         'provider_id': providerId,
         'booking_status_id': bookingStatusId,
         'start_at': startAt,
         'end_at': endAt,
         'payment_status_id': paymentStatusId,
+        'payment_method_id': paymentMethodId,
         'attachment': attachment,
         'description': description,
         'lng': lng,

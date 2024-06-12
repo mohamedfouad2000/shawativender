@@ -15,10 +15,13 @@ import 'package:shawativender/Feature/home/data/model/home_model/service.dart';
 import 'package:shawativender/Feature/home/data/repo/home_repo_imp.dart';
 import 'package:shawativender/Feature/home/presentation/views/home_view.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/Add%20Serves/add_servce_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Features%20Cubit/featured_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/Getcategory%20Cubit/get_category_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/Getcategory%20Cubit/get_category_state.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/custom_add_image.dart';
 import 'package:shawativender/generated/l10n.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class EditServiceForm extends StatefulWidget {
   const EditServiceForm({super.key, required this.model});
@@ -29,6 +32,9 @@ class EditServiceForm extends StatefulWidget {
 }
 
 class _EditServiceFormState extends State<EditServiceForm> {
+  List testMan = [];
+  List<List> dataTimes = [];
+
   List<DateTime?> Times = [];
   var Propertynamecontroller = TextEditingController();
   var PropertynameArabiccontroller = TextEditingController();
@@ -43,6 +49,48 @@ class _EditServiceFormState extends State<EditServiceForm> {
   var descriptioncontroller = TextEditingController();
   var Bathroomscontroller = TextEditingController();
   var Floorcontroller = TextEditingController();
+  Set<String> days = {};
+  Future<void> addListToTimes() async {
+    Times = [];
+
+    _datePickerController.selectedRanges?.forEach((element) {
+      DateTime? x = element.startDate;
+      print(x);
+      print(element.endDate.toString());
+
+      print(DateTime.now().isBefore(x!));
+
+      print("Out Of While");
+
+      if (element.endDate.toString() == 'null') {
+        Times.add(element.startDate);
+      } else {
+        while (x!.isBefore(element.endDate!)) {
+          print(x);
+
+          Times.add(x);
+          x = x.add(const Duration(days: 1));
+        }
+        Times.add(element.endDate);
+      }
+    });
+  }
+
+  final DateRangePickerController _datePickerController =
+      DateRangePickerController();
+  Map<int, String> features = {};
+  List<XFile> imageFileList = [];
+  Future<void> selectImages() async {
+    imageFileList = [];
+    final List<XFile> selectFileList = await picker.pickMultiImage();
+    if (selectFileList.isNotEmpty) {
+      imageFileList.addAll(selectFileList);
+    }
+    setState(() {});
+  }
+  //  Set<int> featuresIds = {};
+
+  Map<String, int> eventDays = {};
   String error = '';
   String bed = '';
   String bath = '';
@@ -51,13 +99,15 @@ class _EditServiceFormState extends State<EditServiceForm> {
   double latetude = 0.0;
   double longitude = 0.0;
   String address = '';
-  Set<String> days = {};
   File? file;
   ImagePicker picker = ImagePicker();
   var formKey = GlobalKey<FormState>();
+  List<PickerDateRange> ranges = [];
   //[05/16/2024 3:52 PM]
+  //
 
   Future<void> getuserprofile({required ImageSource i}) async {
+    // _datePickerController.selectedRanges=
     // emit(getuserprofileLoading());
     var pickedfile = await picker.pickImage(source: i);
     if (pickedfile != null) {
@@ -69,11 +119,41 @@ class _EditServiceFormState extends State<EditServiceForm> {
       print("No Image");
     }
   }
+  //06/04/202
+  //
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    widget.model.rangeDays
+        ?.replaceAll('[', '')
+        .replaceAll('"', '')
+        .replaceAll(']', '')
+        .replaceAll('\\', '')
+        .trim()
+        .split(',')
+        .forEach((element) {
+      testMan.add(element.trim());
+    });
+    for (var i = 0; i < testMan.length; i = i + 2) {
+      print(
+          '${testMan[i].substring(5, 7)} ${testMan[i].substring(8, 10)} ${testMan[i].substring(0, 4)}');
+      ranges.add(PickerDateRange(
+          DateFormat.yMd('en_US').parse(
+              '${testMan[i].substring(5, 7)}/${testMan[i].substring(8, 10)}/${testMan[i].substring(0, 4)}'),
+          DateFormat.yMd('en_US').parse(
+              '${testMan[i + 1].substring(5, 7)}/${testMan[i + 1].substring(8, 10)}/${testMan[i + 1].substring(0, 4)}')));
+    }
+
+    _datePickerController.selectedRanges = ranges;
+    print('range is $ranges');
+    //06/04/2024
+    //2024/06/04
+    // for (var element in testMan) {
+    //   ranges.add(PickerDateRange(DateFormat.yMd('en_US').parse(element), DateFormat.yMd('en_US').parse(element)));
+    // }
     File mack = File('');
     print("siu is siu ${mack.path}");
 
@@ -92,7 +172,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
         // setState(() {
         Times.add(x);
 
-        String formattedDate = DateFormat('MM/dd/yyyy', 'en').format(x);
+        String formattedDate = DateFormat('MM/dd/yyyy hh:mm a', 'en').format(x);
 
         print(formattedDate);
 
@@ -143,10 +223,16 @@ class _EditServiceFormState extends State<EditServiceForm> {
       child: BlocConsumer<AddServceCubit, AddServceState>(
         listener: (context, state) {
           if (state is AddServceSucc) {
-            showToast(msq: state.msq);
+            showToast(
+                msq: LocalizationCubit.get(context).isArabic()
+                    ? S.of(context).Successfull
+                    : state.msq.toString());
             Nav(context, const HomeView(currentidex: 0));
           } else if (state is AddServceError) {
-            showToast(msq: state.msg);
+            showToast(
+                msq: LocalizationCubit.get(context).isArabic()
+                    ? S.of(context).oppsMessage
+                    : state.msg.toString());
           }
         },
         builder: (context, state) {
@@ -159,7 +245,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                   children: [
                     customTextFormedFiled(
                         controller: Propertynamecontroller,
-                        hintText: 'Property Name',
+                        hintText: S.of(context).Property_Name,
                         preicon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -175,7 +261,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                     ),
                     customTextFormedFiled(
                         controller: PropertynameArabiccontroller,
-                        hintText: 'Property Name With Arabic',
+                        hintText: S.of(context).Property_Name_With_Arabic,
                         preicon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -215,7 +301,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                                 ...List.generate(state.list.length,
                                     (index) => state.list[index].id.toString()),
                               ],
-                              hintText: 'Category',
+                              hintText: S.of(context).Category,
                               prefixIcon: const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Image(
@@ -244,7 +330,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                     ),
                     customTextFormedFiled(
                         controller: placecontroller,
-                        hintText: 'Place',
+                        hintText: S.of(context).Place,
                         preicon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -260,7 +346,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                     ),
                     customTextFormedFiled(
                         controller: placeArbiccontroller,
-                        hintText: 'Place With Arabic',
+                        hintText: S.of(context).Place_With_Arabic,
                         preicon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -276,7 +362,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                     ),
                     customTextFormedFiled(
                         controller: Pricecontroller,
-                        hintText: 'Price',
+                        hintText: S.of(context).price,
                         preicon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -335,7 +421,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                           "21",
                           "22",
                         ],
-                        hintText: 'Bed rooms',
+                        hintText: S.of(context).bedRooms,
                         prefixIcon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -378,7 +464,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                           "21",
                           "22",
                         ],
-                        hintText: 'Bath rooms',
+                        hintText: S.of(context).bathRooms,
                         prefixIcon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -421,7 +507,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                           "21",
                           "22",
                         ],
-                        hintText: 'Floor',
+                        hintText: S.of(context).floor,
                         prefixIcon: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image(
@@ -439,7 +525,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                       children: [
                         customTextFormedFiled(
                           controller: descriptioncontroller,
-                          hintText: 'Description',
+                          hintText: S.of(context).Description,
                           maxLines: 6,
                           preicon: Icon(
                             Icons.add,
@@ -474,7 +560,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                             size: 0.0,
                           ),
                           controller: descriptionArabiccontroller,
-                          hintText: 'Description Arabic',
+                          hintText: S.of(context).Description_Arabic,
                           maxLines: 6,
                         ),
                         const Align(
@@ -601,28 +687,217 @@ class _EditServiceFormState extends State<EditServiceForm> {
                     const SizedBox(
                       height: 15,
                     ),
-                    CalendarDatePicker2(
-                      onValueChanged: (value) {
-                        Times = value;
-                        for (var element in value) {
-                          String formattedDate =
-                              DateFormat('MM/dd/yyyy', 'en').format(element!);
+                    BlocProvider(
+                      create: (context) => FeaturedCubit(HomeRepoImpl())
+                        ..getServesInfo(servesId: widget.model.id!),
+                      child: BlocConsumer<FeaturedCubit, FeaturedState>(
+                        listener: (context, state) {
+                          // TODO: implement listener
+                        },
+                        builder: (context, state) {
+                          if (state is getservProSuccess) {
+                            return Column(
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      print(
+                                          "index is ya faks ${state.model.data?.gallery?.length}");
+                                    },
+                                    child: imageFileList.isEmpty &&
+                                            state.model.data!.gallery!.isEmpty
+                                        ? const SizedBox()
+                                        : Container(
+                                            width: double.infinity,
+                                            height: 180,
+                                            padding: const EdgeInsets.all(12),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color:
+                                                        Colors.grey.shade300)),
+                                            child: state is getservProLoading
+                                                ? const Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  )
+                                                : ListView.separated(
+                                                    separatorBuilder:
+                                                        (context, index) {
+                                                      return const SizedBox(
+                                                          width: 12);
+                                                    },
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      //3
+                                                      //0
+                                                      // if (index <
+                                                      //    state.model.data!.gallery!.length) {
+                                                      return Stack(
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        children: [
+                                                          Container(
+                                                            height: 130,
+                                                            width: 130,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20),
+                                                            ),
+                                                            child: CachedImage(
+                                                                '$xURLIMAGE${state.model.data!.gallery![index].path}'),
+                                                          ),
+                                                          IconButton(
+                                                              onPressed: () {
+                                                                FeaturedCubit.get(context).deleteGallary(
+                                                                    gallerieId: state
+                                                                            .model
+                                                                            .data!
+                                                                            .gallery![
+                                                                                index]
+                                                                            .id ??
+                                                                        0,
+                                                                    serviceId:
+                                                                        widget
+                                                                            .model
+                                                                            .id!);
+                                                              },
+                                                              icon: const Icon(
+                                                                Icons.delete,
+                                                                color:
+                                                                    Colors.red,
+                                                              ))
+                                                        ],
+                                                      );
+                                                      // }
 
-                          print(formattedDate);
-
-                          days.add(formattedDate);
-                        }
-                      },
-                      config: CalendarDatePicker2Config(
-                          // enabled: false,
-                          disableModePicker: false,
-                          rangeBidirectional: false,
-                          calendarType: CalendarDatePicker2Type.multi,
-                          centerAlignModePicker: true),
-
-                      value: Times,
-                      // onValueChanged: (dates) => _dates = dates,
+                                                      //  else {
+                                                      //   return Stack(
+                                                      //     alignment: Alignment.topRight,
+                                                      //     children: [
+                                                      //       Container(
+                                                      //         height: 130,
+                                                      //         width: 130,
+                                                      //         decoration: BoxDecoration(
+                                                      //           borderRadius:
+                                                      //               BorderRadius.circular(
+                                                      //                   20),
+                                                      //         ),
+                                                      //         child: Image.file(File(
+                                                      //             imageFileList[(index -
+                                                      //                     widget
+                                                      //                         .model
+                                                      //                         .gallery!
+                                                      //                         .length)]
+                                                      //                 .path)),
+                                                      //       ),
+                                                      //       IconButton(
+                                                      //           onPressed: () {},
+                                                      //           icon: const Icon(
+                                                      //             Icons.delete,
+                                                      //             color: Colors.red,
+                                                      //           ))
+                                                      //     ],
+                                                      //   );
+                                                      // }
+                                                    },
+                                                    itemCount: (state
+                                                            .model
+                                                            .data!
+                                                            .gallery
+                                                            ?.length ??
+                                                        0),
+                                                  ))),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                defaultButton(
+                                    fun: () async {
+                                      await selectImages();
+                                      FeaturedCubit.get(context).addGallary(
+                                          galleries: imageFileList,
+                                          serviceId: widget.model.id!);
+                                    },
+                                    textWidget: Text(
+                                      S.of(context).AddImages,
+                                      style: StylesData.font12.copyWith(
+                                          color: ConstColor.kMainColor),
+                                    ),
+                                    c: Colors.white)
+                              ],
+                            );
+                          } else if (state is getservProError) {
+                            return Text(state.error);
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
                     ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SfDateRangePicker(
+                      monthCellStyle: const DateRangePickerMonthCellStyle(
+                          selectionTextStyle: TextStyle(color: Colors.white),
+                          blackoutDatesDecoration: BoxDecoration(
+                              color: Colors.red,
+                              // border: Border.all(color: Color(0xFFF44436), width: 1),
+                              shape: BoxShape.circle),
+                          blackoutDateTextStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              decoration: TextDecoration.lineThrough),
+                          specialDatesTextStyle: TextStyle(color: Colors.white),
+                          selectionColor: Colors.white),
+                      controller: _datePickerController,
+
+                      selectionShape: DateRangePickerSelectionShape.circle,
+                      headerStyle: const DateRangePickerHeaderStyle(
+                          textAlign: TextAlign.center,
+                          backgroundColor: Color(0xffF5F5F5)),
+                      onSelectionChanged:
+                          (dateRangePickerSelectionChangedArgs) {},
+                      view: DateRangePickerView.month,
+                      backgroundColor: const Color(0xffF5F5F5),
+                      monthViewSettings: const DateRangePickerMonthViewSettings(
+                          firstDayOfWeek: 6),
+                      selectionMode: DateRangePickerSelectionMode.multiRange,
+                      // showActionButtons: true,
+                      onSubmit: (val) {
+                        print("s");
+                        print(val);
+                      },
+                      // onCancel: () {
+                      //   print(_datePickerController.selectedRanges);
+                      // }
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+
+                    // CalendarDatePicker2(
+                    //   onValueChanged: (value) {
+                    //     Times = value;
+                    //     // for (var element in Times) {}
+                    //   },
+                    //   config: CalendarDatePicker2Config(
+                    //       // enabled: false,
+                    //       disableModePicker: false,
+                    //       rangeBidirectional: false,
+                    //       calendarType: CalendarDatePicker2Type.multi,
+                    //       centerAlignModePicker: true),
+
+                    //   value: Times,
+                    //   // onValueChanged: (dates) => _dates = dates,
+                    // ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -664,6 +939,38 @@ class _EditServiceFormState extends State<EditServiceForm> {
                     const SizedBox(
                       height: 15,
                     ),
+                    if (Times.isNotEmpty)
+                      defaultButton(
+                          fun: () async {
+                            showEventsDays(context);
+                          },
+                          textWidget: Text(
+                            S.of(context).AddEventDays,
+                            style:
+                                StylesData.font13.copyWith(color: Colors.black),
+                          ),
+                          height: 54,
+                          c: Colors.white),
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                    defaultButton(
+                        fun: () async {
+                          showFeatures(context);
+                        },
+                        textWidget: Text(
+                          S.of(context).addFeature,
+                          style:
+                              StylesData.font13.copyWith(color: Colors.black),
+                        ),
+                        height: 54,
+                        c: Colors.white),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    // if (latetude != 0 && longitude != 0)
+
                     if (error != '')
                       Container(
                         width: double.infinity,
@@ -685,7 +992,48 @@ class _EditServiceFormState extends State<EditServiceForm> {
                         height: 20,
                       ),
                     defaultButton(
-                        fun: () {
+                        fun: () async {
+                          await addListToTimes();
+                          dataTimes = [];
+                          _datePickerController.selectedRanges
+                              ?.forEach((element) {
+                            dataTimes.add([
+                              element.startDate,
+                              element.endDate ?? element.startDate
+                            ]);
+                          });
+                          days = {};
+                          for (var element in Times) {
+                            print(element);
+
+                            //05/16/2024 3:52 PM
+                            String formattedDate =
+                                DateFormat('MM/dd/yyyy hh:mm a', 'en')
+                                    .format(element!);
+
+                            print(formattedDate);
+                            setState(() {
+                              days.add(formattedDate);
+                            });
+                          }
+                          List<String> eventdaysList = [];
+                          print('days is ya bz  $Times');
+
+                          // for (var element in days) {
+                          //   // s.add('"${element.toString()}"');
+                          // }
+                          // // print(' s is ${s.toString()} ');
+                          print(eventDays.keys.toList());
+
+                          for (var element in eventDays.keys) {
+                            eventdaysList.add('"$element"');
+                          }
+                          print(eventdaysList);
+
+                          print(eventDays.values.toList());
+
+                          print(features.keys.toList());
+
                           print(
                               'data is ${PropertynameArabiccontroller.text} and ${Propertynamecontroller.text} and ${descriptionArabiccontroller.text} and ${descriptioncontroller.text} and ${Pricecontroller.text} $bed $bath $days $latetude $longitude $floor $category ${placecontroller.text} ${placeArbiccontroller.text} ${file?.path} ');
                           if (formKey.currentState!.validate()) {
@@ -704,6 +1052,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
 
                               BlocProvider.of<AddServceCubit>(context)
                                   .Editservice(
+                                      range_days: dataTimes,
                                       id: int.parse(widget.model.id.toString()),
                                       name: PropertynameArabiccontroller.text,
                                       nameEn: Propertynamecontroller.text,
@@ -713,7 +1062,7 @@ class _EditServiceFormState extends State<EditServiceForm> {
                                       price: Pricecontroller.text,
                                       bed: bed,
                                       bath: bath,
-                                      days: days.toList().toString(),
+                                      days: days.toList(),
                                       latitude: latetude.toString(),
                                       longitude: longitude.toString(),
                                       floor: floor,
@@ -770,6 +1119,405 @@ class _EditServiceFormState extends State<EditServiceForm> {
                     print(pickedData.address);
                     Navigator.pop(context);
                   }));
+        });
+  }
+
+  void showEventsDays(context) async {
+    await addListToTimes();
+    TextEditingController controller = TextEditingController();
+    String? date;
+    List<String> listDays = [];
+    days = {};
+
+    for (var element in Times) {
+      String formattedDate =
+          DateFormat('MM/dd/yyyy hh:mm a', 'en').format(element!);
+
+      print(formattedDate);
+      setState(() {
+        days.add(formattedDate);
+      });
+    }
+    listDays = days.toList();
+    var x = AlertDialog(
+      surfaceTintColor: Colors.white,
+      title: Text(
+        S.of(context).AddEventDay,
+      ),
+      content: SizedBox(
+        height: 350,
+        child: SingleChildScrollView(
+          child: BlocProvider(
+            create: (context) => FeaturedCubit(HomeRepoImpl())
+              ..getServesInfo(servesId: widget.model.id!),
+            child: BlocConsumer<FeaturedCubit, FeaturedState>(
+              listener: (context, state) {
+                if (state is addEventDaySuccess) {
+                  // showToast(
+                  //     msq: LocalizationCubit.get(context).isArabic()
+                  //         ? S.of(context).Successfull
+                  //         : state.txt.toString());
+                  // Navigator.pop(context);
+                }
+              },
+              builder: (context, state) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    customDropDownList(
+                        list: listDays,
+                        hintText: S.of(context).SelectEventDays,
+                        onChanged: (i) {
+                          date = i!;
+                        }),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: customTextFiled(
+                              controller: controller,
+                              hintText: S.of(context).price,
+                              type: TextInputType.number,
+                              prefixIcon: const SizedBox()),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              FeaturedCubit.get(context)
+                                  .addeventday(
+                                      servesId: widget.model.id! ?? 0,
+                                      day: '$date' ?? '',
+                                      price: controller.text)
+                                  .then((value) {
+                                FeaturedCubit.get(context)
+                                    .getServesInfo(servesId: widget.model.id!);
+                              });
+                            },
+                            icon: const Icon(Icons.add))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                        height: 150,
+                        child: Builder(builder: (context) {
+                          if (state is getservProSuccess) {
+                            return ListView.builder(
+                              itemCount:
+                                  state.model.data?.eventDays?.length ?? 0,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ListTile(
+                                  title: InkWell(
+                                    onTap: () async {
+                                      FeaturedCubit.get(context)
+                                          .deleteeventday(
+                                              servesId: widget.model.id!,
+                                              eventId: state.model.data!
+                                                  .eventDays![index].id!)
+                                          .then((value) {
+                                        // FeaturedCubit.get(context)
+                                        //     .getServesInfo(
+                                        //         servesId: widget.model.id!);
+                                      });
+
+                                      // eventDays.remove(
+                                      //     eventDays.keys.toList()[index]);
+                                      // setState(() {});
+                                      // Navigator.pop(context);
+                                    },
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  leading: Text(
+                                    '${state.model.data?.eventDays?[index].day.toString().substring(0, 10)}    ${state.model.data?.eventDays?[index].price} ${S.of(context).SAR}',
+                                  ),
+                                );
+                              },
+                            );
+                          } else if (state is getservProError) {
+                            return Text(state.error);
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        })),
+                    defaultButton(
+                        fun: () {
+                          Navigator.pop(context);
+
+                          print(
+                              'shshshsh${widget.model.id!} $date ${controller.text}');
+
+                          // addeventday
+
+                          // print(eventDays.values);
+                        },
+                        textWidget: Text(
+                          S.of(context).close,
+                          style: StylesData.font13,
+                        ),
+                        height: 54,
+                        c: ConstColor.kMainColor),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return x;
+        });
+  }
+
+  void showFeatures(context) {
+    String? valuetxt;
+    int? valueId;
+
+    var x = AlertDialog(
+      surfaceTintColor: Colors.white,
+      title: Text(
+        S.of(context).addFeature,
+      ),
+      content: SizedBox(
+        height: 350,
+        child: BlocProvider(
+          create: (context) => FeaturedCubit(HomeRepoImpl())
+            ..getFeaturesData()
+            ..getServesInfo(servesId: widget.model.id!),
+          child: BlocConsumer<FeaturedCubit, FeaturedState>(
+            listener: (context, state) {
+              if (state is addEventDaySuccess) {
+                // showToast(
+                //     msq: LocalizationCubit.get(context).isArabic()
+                //         ? S.of(context).Successfull
+                //         : state.txt.toString());
+                // Navigator.pop(context);
+              }
+            },
+            builder: (context, state) {
+              if (state is FeaturedLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (FeaturedCubit.get(context).model != null) {
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            // border: Border.all(color: Colors.grey.shade300),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: DropdownButton<String>(
+                                  underline: const SizedBox(),
+                                  value: FeaturedCubit.get(context).value,
+                                  alignment: AlignmentDirectional.centerStart,
+                                  isExpanded: true,
+                                  hint: Text(S.of(context).addFeature),
+                                  onChanged: (String? selecteddata) {
+                                    print("Aha ya Sahby");
+                                    print(selecteddata);
+                                    FeaturedCubit.get(context)
+                                        .changeValue(value: selecteddata!);
+                                    setState(() {
+                                      FeaturedCubit.get(context).value =
+                                          selecteddata;
+                                    });
+                                    for (var element
+                                        in FeaturedCubit.get(context)
+                                            .model!
+                                            .data!) {
+                                      if (FeaturedCubit.get(context).value ==
+                                          element.featureName) {
+                                        valueId = element.id;
+                                      }
+                                    }
+
+                                    setState(() {});
+                                  },
+                                  items: FeaturedCubit.get(context)
+                                      .model!
+                                      .data
+                                      ?.map((item) {
+                                    return DropdownMenuItem<String>(
+                                      value: item.featureName.toString(),
+                                      child: Row(
+                                        children: [
+                                          Image.network(
+                                            '$xURLIMAGE${item.image}' ?? '',
+                                            width: 30,
+                                            height: 30,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text((LocalizationCubit.get(context)
+                                                      .isArabic()
+                                                  ? item.featureNameAr
+                                                  : item.featureName) ??
+                                              ''),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    FeaturedCubit.get(context)
+                                        .addFeature(
+                                            serviceIdd: widget.model.id!,
+                                            featureIds: valueId!)
+                                        .then((value) {
+                                      FeaturedCubit.get(context).getServesInfo(
+                                          servesId: widget.model.id!);
+                                    });
+                                  },
+                                  icon: const Icon(Icons.add))
+                            ],
+                          )),
+                      SizedBox(
+                          height: 150,
+                          child: Builder(builder: (context) {
+                            if (FeaturedCubit.get(context).sercesInfo != null) {
+                              return state is getservProLoading
+                                  ? const Center(
+                                      child: CircularProgressIndicator())
+                                  : ListView.builder(
+                                      itemCount: FeaturedCubit.get(context)
+                                              .sercesInfo
+                                              ?.data
+                                              ?.features
+                                              ?.length ??
+                                          0,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return ListTile(
+                                          title: InkWell(
+                                            onTap: () {
+                                              FeaturedCubit.get(context)
+                                                  .deleteFeture(
+                                                      serviceIdd:
+                                                          widget.model.id!,
+                                                      featureIds: FeaturedCubit
+                                                                  .get(context)
+                                                              .sercesInfo
+                                                              ?.data
+                                                              ?.features![index]
+                                                              .id ??
+                                                          0)
+                                                  .then((value) {
+                                                FeaturedCubit.get(context)
+                                                    .getServesInfo(
+                                                        servesId:
+                                                            widget.model.id!);
+                                              });
+
+                                              // features.remove(features.toList()[index]);
+                                              // print(features[index]);
+                                              // features
+                                              //     .remove(features.keys.toList()[index]);
+                                              // featuresIds.remove(featuresIds.toList()[index]);
+                                              // print(
+                                              //     "the features is $features and th index is $index");
+                                              // print(features);
+                                              setState(() {});
+                                              // Navigator.pop(context);
+                                            },
+                                            child: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                          leading: Text(
+                                            LocalizationCubit.get(context)
+                                                    .isArabic()
+                                                ? (FeaturedCubit.get(context)
+                                                        .sercesInfo
+                                                        ?.data
+                                                        ?.features?[index]
+                                                        .featureNameAr
+                                                        .toString() ??
+                                                    '')
+                                                : (FeaturedCubit.get(context)
+                                                        .sercesInfo
+                                                        ?.data
+                                                        ?.features?[index]
+                                                        .featureName
+                                                        .toString() ??
+                                                    ''),
+                                            // features.toList()[index].toString(),
+                                          ),
+                                        );
+                                      },
+                                    );
+                            } else {
+                              return const SizedBox(
+                                height: 150,
+                              );
+                            }
+                          })),
+                      defaultButton(
+                          fun: () {
+                            // setState(() {
+                            //   // features[date!] = int.parse(controller.text);
+                            //   FeaturedCubit.get(context)
+                            //       .model!
+                            //       .data
+                            //       ?.forEach((element) {
+                            //     if (FeaturedCubit.get(context).value ==
+                            //         element.featureName) {
+                            //       valuetxt = element.id.toString();
+                            //     }
+                            //   });
+                            //   // features[valueId!] =
+                            //   //     FeaturedCubit.get(context).value!;
+
+                            //   // print(FeaturedCubit.get(context).value);
+                            //   // print(features.length);
+                            // });
+                            // FeaturedCubit.get(context).addFeature(
+                            //     serviceIdd: widget.model.id!,
+                            //     featureIds: valueId!);
+
+                            // print(eventDays.values);
+                            Navigator.pop(context);
+                          },
+                          textWidget: Text(
+                            S.of(context).close,
+                            style: StylesData.font13,
+                          ),
+                          height: 54,
+                          c: ConstColor.kMainColor),
+                    ],
+                  ),
+                );
+              } else if (state is FeaturedError) {
+                return Text(state.error);
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return x;
         });
   }
 }

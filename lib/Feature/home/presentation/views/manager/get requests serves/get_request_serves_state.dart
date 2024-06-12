@@ -13,7 +13,7 @@ final class GetRequestServesError extends GetRequestServesState {
 }
 
 final class GetRequestServesSucc extends GetRequestServesState {
-  final BookingModel data;
+  final RequstesModel data;
   GetRequestServesSucc(this.data);
 }
 

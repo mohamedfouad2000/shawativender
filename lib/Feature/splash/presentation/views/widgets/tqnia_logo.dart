@@ -10,7 +10,7 @@ class TqniaLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Image(
       image: AssetImage(AssetsData.tqniaLogo),
-      width: 170,
+      width: 50,
     );
   }
 }

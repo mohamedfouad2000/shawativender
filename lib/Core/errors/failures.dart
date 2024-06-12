@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
 
-abstract class Failure {
+class Failure {
   String msq;
   Failure({required this.msq});
 }
 
 class ServerFailure extends Failure {
-  ServerFailure({required super.msq});
+  ServerFailure({required super.msq, this.msg});
+  String? msg;
   factory ServerFailure.fromDioError(DioException dio) {
     switch (dio.type) {
       case DioExceptionType.connectionTimeout:
@@ -25,37 +28,35 @@ class ServerFailure extends Failure {
             dio.response!.statusCode!, dio.response!.data);
 
       case DioExceptionType.cancel:
-        return ServerFailure(msq: 'opps There Was An Eroor try Again Later !');
+        return ServerFailure(msq: 'opps There Was An Error try Again Later !');
 
       case DioExceptionType.connectionError:
-        return ServerFailure(msq: 'opps There Was An Eroor try Again Later ');
+        return ServerFailure(msq: 'opps There Was An Error try Again Later ');
 
       case DioExceptionType.unknown:
         if (dio.message!.contains("SocketException")) {
           return ServerFailure(msq: 'No Internet Connection');
         } else {
           return ServerFailure(
-              msq: 'opps There Was An Eroor try Again Later !');
+              msq: 'opps There Was An Error try Again Later !');
         }
       default:
-        return ServerFailure(msq: 'opps There Was An Eroor try Again Later !');
+        return ServerFailure(msq: 'opps There Was An Error try Again Later !');
     }
   }
   factory ServerFailure.fromRespo(int statusCode, dynamic respo) {
+    print("object from Error");
     if (statusCode == 400 ||
         statusCode == 401 ||
         statusCode == 403 ||
         statusCode == 422) {
-      return ServerFailure(msq: 'opps There Was An Eroor try Again Later !');
+      return ServerFailure(msq: respo['msg'].toString());
     } else if (statusCode == 404) {
       return ServerFailure(msq: 'Your Request Not Found , Try Later !');
     } else if (statusCode == 500) {
       return ServerFailure(msq: 'Internet Server Error , Try Later !');
-    } else if (statusCode == 403) {
-      return ServerFailure(
-          msq: "You don't have permission to access this resource.");
     } else {
-      return ServerFailure(msq: 'opps There Was An Eroor try Again Later !');
+      return ServerFailure(msq: 'opps There Was An Error try Again Later !');
     }
   }
 }

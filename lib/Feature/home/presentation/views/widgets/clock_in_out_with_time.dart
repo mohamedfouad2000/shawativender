@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/styles.dart';
@@ -82,9 +83,12 @@ class _ClockInOutWithTimeState extends State<ClockInOutWithTime> {
                     style: StylesData.font9.copyWith(
                         color: const Color(0xffABABAB),
                         fontWeight: FontWeight.w400),
-                  ),
+                  ).animate().fade().slide(),
                 ],
-              ),
+              )
+                  .animate()
+                  .addEffect(const AlignEffect(curve: Curves.bounceIn))
+                  .scale(curve: Curves.easeInOutQuad),
               const SizedBox(
                 height: 4,
               ),
@@ -92,8 +96,15 @@ class _ClockInOutWithTimeState extends State<ClockInOutWithTime> {
                 widget.clockin.isNotEmpty && widget.clockin != ''
                     ? (start.substring(0, 10))
                     : '',
+                textAlign: TextAlign.start,
                 style: StylesData.font11.copyWith(color: Colors.black),
+              ).animate(
+                onPlay: (controller) {
+                  // controller.forward().then((value) => controller.reverse());
+                },
               )
+                  // .addEffect(const AlignEffect(curve: Curves.easeInOutQuad))
+                  .scale(curve: Curves.easeInOutQuad),
             ],
           ),
         ),
@@ -115,7 +126,10 @@ class _ClockInOutWithTimeState extends State<ClockInOutWithTime> {
                   style: StylesData.font9.copyWith(
                       color: const Color(0xffABABAB),
                       fontWeight: FontWeight.w400),
-                ),
+                )
+                    .animate()
+                    .addEffect(const AlignEffect(curve: Curves.bounceIn))
+                    .scale(curve: Curves.easeInOutQuad),
               ],
             ),
             const SizedBox(
@@ -127,6 +141,9 @@ class _ClockInOutWithTimeState extends State<ClockInOutWithTime> {
                   : '',
               style: StylesData.font11.copyWith(color: Colors.black),
             )
+                .animate()
+                .addEffect(const AlignEffect(curve: Curves.bounceIn))
+                .scale(curve: Curves.easeInOutQuad),
           ],
         )
       ],

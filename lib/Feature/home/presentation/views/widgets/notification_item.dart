@@ -1,58 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
+import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
+import 'package:shawativender/Feature/home/data/model/notification_model/datum.dart';
+import 'package:shawativender/Feature/home/presentation/views/home_view.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/screens/requests_screen.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({
     super.key,
+    required this.data,
   });
 
+  final DatumNotif data;
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      key: const ValueKey(
-        1,
-      ),
-      endActionPane: ActionPane(
-        // A motion is a widget used to control how the pane animates.
-        motion: const ScrollMotion(),
-
-        // A pane can dismiss the Slidable.
-        dismissible: DismissiblePane(onDismissed: () {}),
-
-        // All actions are defined in the children parameter.
-        children: [
-          Container(
-            width: 57,
-            height: 80,
-            decoration: BoxDecoration(
-                color: const Color(0xFFFE4A49),
-                borderRadius: BorderRadius.circular(15)),
-            child: const Padding(
-              padding: EdgeInsets.all(14.0),
-              child: ImageIcon(
-                AssetImage(AssetsData.delete),
-                color: Colors.white,
-                size: 10,
-              ),
-            ),
-          )
-          // A SlidableAction can have an icon and/or a label.
-          // SlidableAction(
-          //   onPressed: (i) {},
-          //   backgroundColor: const Color(0xFFFE4A49),
-          //   foregroundColor: Colors.white,
-          //   icon: Icons.delete,
-          // ),
-        ],
-      ),
+    return InkWell(
+      onTap: () {
+        if (data.modelType == 2) {
+          navigateWithAnimation(
+              Get.context!,
+              RequestsScreen(
+                  serviceId: int.parse(data.modelId.toString()) ?? 0));
+        } else {
+          NavegatorPush(Get.context!, const HomeView(currentidex: 2));
+        }
+      },
       child: Stack(
-        alignment: Alignment.topRight,
+        alignment: LocalizationCubit.get(context).isArabic()
+            ? Alignment.bottomLeft
+            : Alignment.bottomRight,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
             width: double.infinity,
             decoration: ShapeDecoration(
               color: Colors.white,
@@ -70,13 +54,15 @@ class NotificationItem extends StatelessWidget {
               ],
             ),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // if (false)
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 23,
-                  backgroundColor: Color(0xff1FD526),
-                  child: Center(
+                  backgroundColor: data.modelType == 2
+                      ? Colors.red
+                      : const Color(0xff1FD526),
+                  child: const Center(
                     child: ImageIcon(
                       AssetImage(
                         // ,
@@ -97,39 +83,45 @@ class NotificationItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Your Account Has been activated',
+                        LocalizationCubit.get(context).isArabic()
+                            ? data.titleAr ?? ''
+                            : data.title ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: StylesData.font14.copyWith(
                             color: Colors.black, fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        'Order 100145 is Successfull by your request',
+                        LocalizationCubit.get(context).isArabic()
+                            ? data.bodyAr ?? ''
+                            : data.body ?? '',
                         style: StylesData.font8,
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 7, right: 7),
-                  child: Text(
-                    // ,
-                    '9:00 Pm',
-                    style: StylesData.font8,
-                  ),
-                ),
 
-                Center(
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const ShapeDecoration(
-                      color: Color(0xFFE92929),
-                      shape: OvalBorder(),
+                if (data.seen == 0)
+                  Center(
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const ShapeDecoration(
+                        color: Color(0xFFE92929),
+                        shape: OvalBorder(),
+                      ),
                     ),
                   ),
-                ),
               ],
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 7, right: 7, left: 7, bottom: 7),
+            child: Text(
+              // ,
+              data.createdAt.toString().substring(0, 10) ?? '',
+              style: StylesData.font8,
             ),
           ),
         ],

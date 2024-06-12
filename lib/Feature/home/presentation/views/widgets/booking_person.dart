@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shawativender/Core/constans/const.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/components.dart';
@@ -47,39 +49,41 @@ class BookingPerson extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: StylesData.font12
                     .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
-              ),
+              ).animate().scale(curve: Curves.easeInOutQuad),
               Text(
                 msq,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: StylesData.font10
                     .copyWith(color: Colors.grey, fontWeight: FontWeight.w400),
-              ),
+              ).animate().scale(curve: Curves.easeInOutQuad),
             ],
           ),
         ),
         const SizedBox(
           width: 10,
         ),
-        Container(
+        AnimatedContainer(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: ConstColor.kMainColor,
             borderRadius: BorderRadius.circular(22),
             border: Border.all(color: Colors.grey.shade300),
           ),
+          duration: const Duration(seconds: 2),
+          curve: Easing.legacy,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "$rate ",
                 style: StylesData.font12Montserrat,
-              ),
+              ).animate().scale(curve: Curves.easeInOutQuad),
               const Icon(
                 Icons.star,
                 color: Colors.white,
                 size: 15,
-              ),
+              ).animate().scale(curve: Curves.easeInOutQuad),
             ],
           ),
         ),

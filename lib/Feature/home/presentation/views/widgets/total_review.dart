@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 
@@ -24,42 +25,44 @@ class TotalReview extends StatelessWidget {
           return Column(
             children: [
               GradientText(
-                state.model.data!.rating.toString().length < 4
-                    ? state.model.data!.rating.toString()
-                    : (state.model.data!.rating.toString().substring(0, 4)),
+                state.model.data!.rating.toString().length < 3
+                    ? state.model.data!.rating.toString().substring(0, 1)
+                    : (state.model.data!.rating.toString().substring(0, 1)),
                 style: StylesData.font28,
                 colors: [
-                  const Color(0xff595CF8),
                   ConstColor.kMainColor,
+                  ConstColor.kMainColor,
+
+                  // ConstColor.kMainColor,
                 ],
               ),
               Text(
                 "${S.of(context).TotalReview} (${state.model.data?.reviews?.length ?? 0})",
                 style: StylesData.font11.copyWith(color: Colors.black),
-              ),
-              const Row(
+              ).animate().scale(curve: Curves.easeInOutQuad),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.star,
                     color: Color(0xFFF4B85D),
-                  ),
-                  Icon(
+                  ).animate().scale(curve: Curves.easeInOutQuad),
+                  const Icon(
                     Icons.star,
                     color: Color(0xFFF4B85D),
-                  ),
-                  Icon(
+                  ).animate().scale(curve: Curves.easeInOutQuad),
+                  const Icon(
                     Icons.star,
                     color: Color(0xFFF4B85D),
-                  ),
-                  Icon(
+                  ).animate().scale(curve: Curves.easeInOutQuad),
+                  const Icon(
                     Icons.star,
                     color: Color(0xFFF4B85D),
-                  ),
-                  Icon(
+                  ).animate().scale(curve: Curves.easeInOutQuad),
+                  const Icon(
                     Icons.star,
                     color: Color(0xFFF4B85D),
-                  ),
+                  ).animate().scale(curve: Curves.easeInOutQuad),
                 ],
               ),
             ],

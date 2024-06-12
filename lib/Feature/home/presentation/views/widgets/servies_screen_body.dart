@@ -11,6 +11,7 @@ import 'package:shawativender/Feature/home/presentation/views/screens/booking_sc
 import 'package:shawativender/Feature/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/search_widget.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/service_product_item_list.dart';
+import 'package:shawativender/Feature/home/presentation/views/widgets/type_request_search.dart';
 
 import 'package:shawativender/generated/l10n.dart';
 
@@ -32,7 +33,7 @@ class _ServicesScreenBodyState extends State<ServicesScreenBody> {
       builder: (context, state) {
         return Padding(
           padding:
-              const EdgeInsets.only(left: 16.0, right: 16, top: 32, bottom: 16),
+              const EdgeInsets.only(left: 16.0, right: 16, top: 16, bottom: 16),
           child: BlocConsumer<SearchCubit, SearchState>(
             listener: (context, state) {
               // TODO: implement listener
@@ -44,7 +45,12 @@ class _ServicesScreenBodyState extends State<ServicesScreenBody> {
                   const SizedBox(
                     height: 20,
                   ),
+
                   SearchWidget(searchController: widget.searchController),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const TypeRequestSearch(),
                   const SizedBox(
                     height: 20,
                   ),

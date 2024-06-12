@@ -1,4 +1,5 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -10,6 +11,7 @@ import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/forget%20password/presentation/views/forget_password_view.dart';
 import 'package:shawativender/Feature/home/presentation/views/home_view.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
 import 'package:shawativender/Feature/location/presentation/views/enable_location_view.dart';
 import 'package:shawativender/Feature/login/data/repo/login_repo_imp.dart';
 import 'package:shawativender/Feature/login/presentation/manager/Login/login_cubit.dart';
@@ -19,6 +21,7 @@ import 'package:shawativender/Feature/login/presentation/views/widgets/signup_he
 import 'package:shawativender/Feature/splash/presentation/views/widgets/splach_image_logo.dart';
 import 'package:shawativender/Feature/splash/presentation/views/widgets/tqnia_logo.dart';
 import 'package:shawativender/generated/l10n.dart';
+import 'package:intl_phone_field/countries.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody(
@@ -61,17 +64,29 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       if (state.model.data?.token != null) {
                         TOKEN = state.model.data!.token!;
 
-                        if (isChecked) {
-                          CacheHelper.saveData(key: 'Token', value: TOKEN).then(
-                              (value) =>
-                                  {Nav(context, const EnableLocation())});
-                        } else {
-                          Nav(context, const EnableLocation());
-                        }
+                        // if (isChecked) {
+                        CacheHelper.saveData(key: 'Token', value: TOKEN)
+                            .then((value) => {
+                                  Nav(
+                                      context,
+                                      const EnableLocation(
+                                        fromLogin: true,
+                                      ))
+                                });
+                        // } else {
+                        //   Nav(
+                        //       context,
+                        //       const EnableLocation(
+                        //         fromLogin: true,
+                        //       ));
+                        // }
                       }
                     } else if (state is LoginFailed) {
                       state.msg == 'Login Successfully'
-                          ? showToast(msq: 'Failed This User Not Have Access')
+                          ? showToast(
+                              msq: LocalizationCubit.get(context).isArabic()
+                                  ? S.of(context).oppsMessage
+                                  : 'Failed This User Not Have Access')
                           : showToast(msq: state.msg.toString());
                     }
                   },
@@ -169,8 +184,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
                           IntlPhoneField(
                             // disableLengthCheck: true,
+                            invalidNumberMessage: S.of(context).phone_eroor,
+                            searchText: S.of(context).search,
 
-                            initialCountryCode: 'SA',
+                            languageCode:
+                                LocalizationCubit.get(context).isArabic()
+                                    ? 'ar'
+                                    : 'en',
+                            initialCountryCode: 'EG',
+                            countries: countries
+                                .where(
+                                    (element) => ['EG'].contains(element.code))
+                                .toList(),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
 
@@ -246,9 +271,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                               String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
                               RegExp regExp = RegExp(pattern);
                               if (value == null || value.number.isEmpty) {
-                                return 'Sila masukkan nombor telefon.';
+                                return S.of(context).phone_eroor;
                               } else if (!regExp.hasMatch(value.number)) {
-                                return 'Sila masukkan nombor telefon yang sah.';
+                                return S.of(context).phone_eroor;
                               }
                               return null;
                             },
@@ -316,12 +341,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                             ),
 
                           defaultButton(
-                              fun: () {
+                              fun: () async {
                                 formKey.currentState!.validate();
                                 if (formKey.currentState!.validate()) {
                                   if (widget.phoneController.text != '' &&
                                       widget.phoneController.text != '') {
+                                    String? fcmToken = '';
+
+                                    fcmToken = await FirebaseMessaging.instance
+                                        .getToken();
+                                    print("Token is $fcmToken");
                                     BlocProvider.of<LoginCubit>(context).loginUser(
+                                        fcmToken: fcmToken ?? '',
                                         phone:
                                             '${code.substring(1)}${widget.phoneController.text}',
                                         password:
@@ -376,17 +407,17 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                 S.of(context).Rememberme,
                                 style: StylesData.font12,
                               ),
-                              const Spacer(),
-                              InkWell(
-                                onTap: () {
-                                  NavegatorPush(
-                                      context, const ForgetPasswordView());
-                                },
-                                child: Text(
-                                  S.of(context).ForgotYourPassword,
-                                  style: StylesData.font10,
-                                ),
-                              ),
+                              // const Spacer(),
+                              // InkWell(
+                              //   onTap: () {
+                              //     NavegatorPush(
+                              //         context, const ForgetPasswordView());
+                              //   },
+                              //   child: Text(
+                              //     S.of(context).ForgotYourPassword,
+                              //     style: StylesData.font10,
+                              //   ),
+                              // ),
                             ],
                           ),
                           // const SizedBox(
@@ -399,10 +430,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           const SizedBox(
                             height: 20,
                           ),
-                          const SigninWithWidget(),
-                          const SizedBox(
-                            height: 40,
-                          ),
+                          // const SigninWithWidget(),
+                          // const SizedBox(
+                          //   height: 40,
+                          // ),
                           const SignUpHere(),
                         ],
                       ),
@@ -411,10 +442,17 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 ),
               ),
             ),
-            const SliverFillRemaining(
+             SliverFillRemaining(
               hasScrollBody: false,
               child:
-                  Align(alignment: Alignment.bottomCenter, child: TqniaLogo()),
+                  Align(alignment: Alignment.bottomCenter, child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(S.of(context).Powered_By),
+                const TqniaLogo(),
+              ],
+            )),
             )
           ],
         ));

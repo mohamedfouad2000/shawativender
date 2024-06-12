@@ -6,7 +6,7 @@ import 'package:shawativender/Core/widgets/empty_wid.dart';
 import 'package:shawativender/Core/widgets/faliure_wid.dart';
 import 'package:shawativender/Core/widgets/loading/home_lead_loading.dart';
 
-import 'package:shawativender/Feature/home/presentation/views/manager/cubit/get_provider_serves_cubit.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Provider%20Serves/get_provider_serves_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/product_item_widget.dart';
 
 class ProductItemList extends StatelessWidget {
@@ -29,6 +29,11 @@ class ProductItemList extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ProductItem(
                   model: state.data.data![index],
+                  start: '',
+                  end: "",
+
+                  fromhome: true,
+
                   // contact: state.data.data!.contactDetails!,
                 );
               },

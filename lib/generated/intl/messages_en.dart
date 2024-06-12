@@ -26,6 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("About Apartment"),
         "Accept": MessageLookupByLibrary.simpleMessage("Accept"),
         "Account": MessageLookupByLibrary.simpleMessage("Account!"),
+        "AddEventDay": MessageLookupByLibrary.simpleMessage("Add Event Day"),
+        "AddEventDays": MessageLookupByLibrary.simpleMessage("Add Event Days"),
+        "AddImages": MessageLookupByLibrary.simpleMessage("Add Images"),
         "AddRating": MessageLookupByLibrary.simpleMessage("Add Rating"),
         "Addservice": MessageLookupByLibrary.simpleMessage("Add Service"),
         "AllowAccess": MessageLookupByLibrary.simpleMessage("Allow Access"),
@@ -35,9 +38,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Already have an account? "),
         "ApplayFilter": MessageLookupByLibrary.simpleMessage("Add Service"),
         "Applyfilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
+        "Approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "Area": MessageLookupByLibrary.simpleMessage("Area"),
         "Areyouready": MessageLookupByLibrary.simpleMessage(
             "Are you ready to make a new account, Let’s go"),
+        "AvailableDays": MessageLookupByLibrary.simpleMessage("Available Days"),
         "Booking": MessageLookupByLibrary.simpleMessage("Booking"),
         "Bookings": MessageLookupByLibrary.simpleMessage("Bookings"),
         "CHECKIN": MessageLookupByLibrary.simpleMessage("CHECK IN"),
@@ -97,6 +102,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Please select payment method and upload payment screen"),
         "Pleaseprovideyourinformation": MessageLookupByLibrary.simpleMessage(
             "Please, provide your information"),
+        "Powered_By": MessageLookupByLibrary.simpleMessage("Powered By "),
+        "Privacypolicy": MessageLookupByLibrary.simpleMessage("Privacy policy"),
         "ProfileInfo":
             MessageLookupByLibrary.simpleMessage("Profile Information"),
         "Property_Name": MessageLookupByLibrary.simpleMessage("Property Name"),
@@ -105,12 +112,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "RatingDialog": MessageLookupByLibrary.simpleMessage("Rating Dialog"),
         "Recentlysearch":
             MessageLookupByLibrary.simpleMessage("Recently search"),
+        "Refunds": MessageLookupByLibrary.simpleMessage("Refunds"),
         "Reject": MessageLookupByLibrary.simpleMessage("Reject"),
+        "Rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "Rememberme": MessageLookupByLibrary.simpleMessage("Remember me"),
         "RentalHistory": MessageLookupByLibrary.simpleMessage("Rental history"),
         "Reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "SAR": MessageLookupByLibrary.simpleMessage("EGP"),
         "Search": MessageLookupByLibrary.simpleMessage("Search"),
+        "SelectEventDays":
+            MessageLookupByLibrary.simpleMessage("Select Event Days"),
         "Servecs": MessageLookupByLibrary.simpleMessage("Services"),
         "SetCurrentLocation":
             MessageLookupByLibrary.simpleMessage("Set Current Location"),
@@ -121,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "SignuPHere": MessageLookupByLibrary.simpleMessage("Sign Up Here"),
         "SkipForNow": MessageLookupByLibrary.simpleMessage("Skip for now"),
+        "Successfull": MessageLookupByLibrary.simpleMessage("Successfull"),
         "TandC": MessageLookupByLibrary.simpleMessage(
             "This text is extracted from a tqnia company its a text generator and is an example of an unreal virtual text that can be replaced in the same space. This text was generated from a tqnia text generator, where you can generate such text or many other texts in addition to increasing the number of characters it generates application./n  Where the designer has to put temporary, virtual and unreal texts on the design to show the client the full form, and here comes the role of the default text, which saves the designer the trouble of searching for an alternative text that has nothing to do with the topic that the design is talking about, so it appears in an inappropriate way or with incorrect content that distracts the mind Client ./n    This text can be installed on any design without a problem, the design will appear organized, coordinated, and clear because it is still an alternative and temporary text and not a real text./n    Also, this text will be modified later by the customer after receiving his site and starting to add his real contents through it or through his data entry or through his participation in the content management services that a tqnia company gladly provides to its valued customers.          "),
         "TandC2": MessageLookupByLibrary.simpleMessage(
@@ -134,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Upload_your_payment_screen_here": MessageLookupByLibrary.simpleMessage(
             "Upload your payment screen here"),
         "Yearly": MessageLookupByLibrary.simpleMessage("Yearly"),
+        "addFeature": MessageLookupByLibrary.simpleMessage("Add Feature"),
         "add_your_service_now":
             MessageLookupByLibrary.simpleMessage("add your service now!"),
         "allProperties": MessageLookupByLibrary.simpleMessage("All Properties"),
@@ -149,7 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change location"),
         "chooseLocation": MessageLookupByLibrary.simpleMessage(
             "choose your location to start find the request"),
-        "colse": MessageLookupByLibrary.simpleMessage("close"),
+        "close": MessageLookupByLibrary.simpleMessage("close"),
+        "colse": MessageLookupByLibrary.simpleMessage("Rejected"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("confirm password"),
         "day": MessageLookupByLibrary.simpleMessage("day"),
@@ -157,17 +171,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailus": MessageLookupByLibrary.simpleMessage("email us"),
         "enteryourmessage":
             MessageLookupByLibrary.simpleMessage("enter your message"),
+        "eroor507": MessageLookupByLibrary.simpleMessage(
+            "The password field must be at least 8 characters"),
         "error_Msq_add_service":
             MessageLookupByLibrary.simpleMessage("Please fill all the fields"),
+        "eventdays": MessageLookupByLibrary.simpleMessage("Event Days"),
         "favorites": MessageLookupByLibrary.simpleMessage("favorites"),
         "filter": MessageLookupByLibrary.simpleMessage("filter"),
         "floor": MessageLookupByLibrary.simpleMessage("floor"),
         "imageSize": MessageLookupByLibrary.simpleMessage(
             "JPG, PNG, PDF (Max 800x400px - 2Mo)"),
+        "inprogress": MessageLookupByLibrary.simpleMessage("inprogress"),
+        "lastPayment": MessageLookupByLibrary.simpleMessage("Last Payment"),
         "logout": MessageLookupByLibrary.simpleMessage("logout"),
         "max": MessageLookupByLibrary.simpleMessage("max"),
         "min": MessageLookupByLibrary.simpleMessage("min"),
-        "open": MessageLookupByLibrary.simpleMessage("open"),
+        "open": MessageLookupByLibrary.simpleMessage("Accepted"),
+        "oppsMessage":
+            MessageLookupByLibrary.simpleMessage("Opps! Something went wrong"),
         "paid": MessageLookupByLibrary.simpleMessage("paid"),
         "password": MessageLookupByLibrary.simpleMessage("password"),
         "passwordErorr":
@@ -184,8 +205,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "This site is protected by reCAPTCHA and the Google "),
         "profile2": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "profile3": MessageLookupByLibrary.simpleMessage(" and "),
-        "profile4": MessageLookupByLibrary.simpleMessage("Terms of Service"),
-        "profile5": MessageLookupByLibrary.simpleMessage(" apply "),
+        "profile4": MessageLookupByLibrary.simpleMessage(
+            "If you want To Delete Your Account "),
+        "profile5": MessageLookupByLibrary.simpleMessage("Click Here"),
         "rateText": MessageLookupByLibrary.simpleMessage(
             "Tap a star to set your rating. Add more description here if you want."),
         "ratehint": MessageLookupByLibrary.simpleMessage(
@@ -194,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "schedule": MessageLookupByLibrary.simpleMessage("schedule"),
         "search": MessageLookupByLibrary.simpleMessage("search"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
+        "selectsubject": MessageLookupByLibrary.simpleMessage("Title"),
         "services": MessageLookupByLibrary.simpleMessage("services"),
         "setlocation": MessageLookupByLibrary.simpleMessage("set location"),
         "signInhere": MessageLookupByLibrary.simpleMessage("sign In here"),

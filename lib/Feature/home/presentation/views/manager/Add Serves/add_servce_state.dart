@@ -16,3 +16,15 @@ final class AddServceError extends AddServceState {
   final String msg;
   AddServceError({required this.msg});
 }
+
+final class AddToGallaryLoading extends AddServceState {}
+
+final class AddToGallarySucc extends AddServceState {
+  final String msq;
+  AddToGallarySucc({required this.msq});
+}
+
+final class AddToGallaryError extends AddServceState {
+  final String msg;
+  AddToGallaryError({required this.msg});
+}

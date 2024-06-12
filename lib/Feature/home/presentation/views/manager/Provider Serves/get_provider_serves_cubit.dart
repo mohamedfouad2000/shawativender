@@ -8,9 +8,10 @@ part 'get_provider_serves_state.dart';
 class GetProviderServesCubit extends Cubit<GetProviderServesState> {
   GetProviderServesCubit(this.repo) : super(GetProviderServesInitial());
   final HomeRepo repo;
-  Future<void> getProviderServes({required int catId}) async {
+  Future<void> getProviderServes(
+      {required int catId, required int index}) async {
     emit(GetProviderServesLoading());
-    final result = await repo.getProviderServes(catId: catId);
+    final result = await repo.getProviderServes(catId: catId, index: index);
     result.fold((l) => emit(GetProviderServesError(msg: l.msq.toString())),
         (r) => emit(GetProviderServesSuccess(data: r)));
   }

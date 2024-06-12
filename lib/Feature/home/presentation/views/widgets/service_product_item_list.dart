@@ -32,6 +32,7 @@ class _ServceProductListState extends State<ServceProductList> {
     // TODO: implement initState
     super.initState();
     SearchCubit.get(context).searchData(
+        accept: SearchCubit.get(context).accept ?? -1,
         lat: SearchCubit.get(context).lat ?? 0.0,
         long: SearchCubit.get(context).long ?? 0.0,
         text: SearchCubit.get(context).text ?? '',
@@ -72,7 +73,7 @@ class _ServceProductListState extends State<ServceProductList> {
       builder: (context, state) {
         if (state is SearchDataSucc) {
           if (state.model.data!.services!.isEmpty) {
-            return const EmptyWidget();
+            return const SingleChildScrollView(child: EmptyWidget());
           }
 
           return ListView.separated(
@@ -83,8 +84,11 @@ class _ServceProductListState extends State<ServceProductList> {
                   alignment: Alignment.bottomRight,
                   children: [
                     ProductItem(
+                      // paymentStatusId: state.model.data. ?? 1,
                       isEdit: true,
                       model: state.model.data!.services![index],
+                      contactDetails: state.model.data!.contactDetails!,
+                      start: '', end: '',
                       // contact: state.model.data!.contactDetails!,
                     ),
                   ],

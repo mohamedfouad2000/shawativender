@@ -1,18 +1,22 @@
 import 'dart:io';
 
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:shawativender/Core/constans/const.dart';
+import 'package:shawativender/Core/local/cache_Helper.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/colors.dart';
 import 'package:shawativender/Core/utils/components.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shawativender/Core/utils/styles.dart';
-import 'package:shawativender/Core/widgets/faliure_wid.dart';
 import 'package:shawativender/Feature/home/data/repo/home_repo_imp.dart';
 import 'package:shawativender/Feature/home/presentation/views/home_view.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/profile%20cubit/profile_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/profile%20cubit/profile_state.dart';
+import 'package:shawativender/Feature/login/presentation/views/login_view.dart';
 import 'package:shawativender/generated/l10n.dart';
 
 class EditUserForm extends StatefulWidget {
@@ -26,7 +30,7 @@ class _EditUserFormState extends State<EditUserForm> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  String code = '';
+  String code = '+20';
   String eroorMsq = '';
   String country = 'Saudi Arabia';
   bool obscureTextconpass = true;
@@ -56,18 +60,36 @@ class _EditUserFormState extends State<EditUserForm> {
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is UpdateProfileError) {
-            showToast(msq: state.msg.toString());
+            showToast(
+                msq: LocalizationCubit.get(context).isArabic()
+                    ? S.of(context).oppsMessage
+                    : state.msg.toString());
+            ProfileCubit.get(context).getProfileData();
           } else if (state is UpdateProfileSucc) {
             Nav(context, const HomeView(currentidex: 0));
+          } else if (state is DeleteAccountSucc) {
+            showToast(
+                msq: LocalizationCubit.get(context).isArabic()
+                    ? S.of(context).Successfull
+                    : state.msq.toString());
+            CacheHelper.removeData(key: 'Token');
+            TOKEN = '';
+            Nav(context, const LoginView());
+          } else if (state is DeleteAccountError) {
+            showToast(
+                msq: LocalizationCubit.get(context).isArabic()
+                    ? S.of(context).oppsMessage
+                    : state.msg.toString());
+
+            ProfileCubit.get(context).getProfileData();
           }
         },
         builder: (context, state) {
           if (state is ProfileSucc || state is UpdateProfileLoading) {
             if (state is ProfileSucc) {
-              // code = state.model.data!.phone.toString().substring(0, 3);
-
-              phoneController.text = state.model.data!.phone.toString();
+              phoneController.text = state.model.data!.phone!;
               nameController.text = state.model.data!.name!;
+              // code = '+20';
             }
 
             return Form(
@@ -207,32 +229,6 @@ class _EditUserFormState extends State<EditUserForm> {
                       controller: phoneController,
                       enabled: false,
                       hintText: S.of(context).phone,
-                      // sufficon: InkWell(
-                      //   onTap: () {},
-                      //   child: SizedBox(
-                      //     width: 80,
-                      //     child: Row(
-                      //       children: [
-                      //         const Icon(Icons.arrow_drop_down_outlined),
-                      //         const SizedBox(
-                      //           width: 10,
-                      //         ),
-                      //         const Image(
-                      //           image: AssetImage(AssetsData.vectorLogo),
-                      //           height: 20,
-                      //         ),
-                      //         const SizedBox(
-                      //           width: 10,
-                      //         ),
-                      //         Text(
-                      //           code,
-                      //           style: StylesData.font12,
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-
-                      // ),
                       preicon: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: ImageIcon(
@@ -244,9 +240,7 @@ class _EditUserFormState extends State<EditUserForm> {
                         ),
                       )),
                   // IntlPhoneField(
-                  //   languageCode: code,
                   //   autovalidateMode: AutovalidateMode.onUserInteraction,
-
                   //   onChanged: (phone) {
                   //     print(phone.completeNumber);
                   //   },
@@ -390,45 +384,52 @@ class _EditUserFormState extends State<EditUserForm> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: Center(
-                        child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: '${S.of(context).profile1}  ',
-                              style: StylesData.font11.copyWith(
-                                color: Colors.grey,
-                              )),
-                          TextSpan(
-                              text: S.of(context).profile2,
-                              style: StylesData.font11.copyWith(
-                                decoration: TextDecoration.underline,
-                              )),
-                          TextSpan(
-                              text: S.of(context).profile3,
-                              style: StylesData.font11.copyWith(
-                                color: Colors.grey,
-                              )),
-                          TextSpan(
-                              text: S.of(context).profile4,
-                              style: StylesData.font11.copyWith(
-                                decoration: TextDecoration.underline,
-                              )),
-                          TextSpan(
-                              text: S.of(context).profile5,
-                              style: StylesData.font11.copyWith(
-                                color: Colors.grey,
-                              )),
-                        ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        S.of(context).profile4,
+                        style: StylesData.font11.copyWith(
+                          color: Colors.grey,
+                        ),
                       ),
-                    )),
+                      InkWell(
+                        onTap: () {
+                          ProfileCubit.get(context).deleteAccount();
+                        },
+                        child: Text(S.of(context).profile5,
+                            style: StylesData.font11.copyWith(
+                              decoration: TextDecoration.underline,
+                            )),
+                      ),
+                    ],
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 18),
+                  //   child: Center(
+                  //       child: RichText(
+                  //     textAlign: TextAlign.center,
+                  //     text: TextSpan(
+                  //       children: <TextSpan>[
+                  //         TextSpan(
+                  //             text: S.of(context).profile4,
+                  //             style: StylesData.font11.copyWith(
+                  //               color: Colors.grey,
+                  //             )),
+                  //         TextSpan(
+                  //             text: S.of(context).profile5,
+                  //             style: StylesData.font11.copyWith(
+                  //               decoration: TextDecoration.underline,
+                  //             )),
+                  //       ],
+                  //     ),
+                  //   )),
+                  // ),
+
                   const SizedBox(
                     height: 20,
                   ),
+
                   if (eroorMsq != '')
                     Container(
                       width: double.infinity,
@@ -488,7 +489,7 @@ class _EditUserFormState extends State<EditUserForm> {
               ),
             );
           } else if (state is ProfileError) {
-            return const Center(child: FailureWidget());
+            return Text(state.msg);
           } else {
             return const Center(child: CircularProgressIndicator());
           }

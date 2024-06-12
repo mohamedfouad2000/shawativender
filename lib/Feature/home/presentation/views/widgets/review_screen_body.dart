@@ -25,7 +25,7 @@ class ReviewScreenBody extends StatelessWidget {
         builder: (context, state) {
           return const Padding(
             padding:
-                EdgeInsets.only(left: 16.0, right: 16, top: 32, bottom: 16),
+                EdgeInsets.only(left: 16.0, right: 16, top: 16, bottom: 16),
             child: SingleChildScrollView(
               child: Column(
                 children: [

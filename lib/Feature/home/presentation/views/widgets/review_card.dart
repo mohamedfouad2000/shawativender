@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Core/widgets/spacer.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
@@ -24,13 +25,15 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: Colors.grey.shade300),
       ),
+      duration: const Duration(seconds: 2),
+      curve: Easing.legacy,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -51,7 +54,7 @@ class ReviewCard extends StatelessWidget {
                 ? serverNameArabic
                 : serverName,
             style: StylesData.font11.copyWith(color: Colors.black),
-          )
+          ).animate().scale(curve: Curves.easeInOutQuad),
         ],
       ),
     );
