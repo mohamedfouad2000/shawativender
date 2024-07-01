@@ -22,12 +22,14 @@ class ProductItemInfo extends StatelessWidget {
       required this.start,
       required this.end,
       this.paymentStatusId,
-      this.fromhome});
+      this.fromhome,
+      required this.distance});
   final Service model;
   // final ContactDetails contact;
   final bool? isEdit;
   final int? paymentStatusId;
   final bool? fromhome;
+  final String distance;
 
   final ContactDetails? contactDetails;
   final String start;
@@ -128,6 +130,30 @@ class ProductItemInfo extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+          if (model.distance != null && model.distance != '')
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.location_searching_rounded,
+                  color: Colors.grey,
+                  size: 20,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  '${model.distance}',
+                  style: StylesData.font20.copyWith(
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600),
+                )
+              ],
+            ),
+          const SizedBox(
+            height: 10,
+          ),
           Row(
             children: [
               Text(

@@ -9,6 +9,8 @@ class SplachView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ConstColor.kbackColor,
+      resizeToAvoidBottomInset: false,
+      
       body: const SplachViewBody(),
     );
   }

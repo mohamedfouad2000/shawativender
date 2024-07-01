@@ -60,6 +60,10 @@ class RequestsScreen extends StatelessWidget {
                       return Column(
                         children: [
                           RequestItem(
+                            bookingid: state.data.data?[index].id ?? 0,
+                            endTime: state.data.data?[index].endAt ?? '',
+                            startTime: state.data.data?[index].startAt ?? '',
+
                             paymentStatusId:
                                 state.data.data?[index].paymentStatusId ?? 0,
                             model: state.data.data?[index] ?? DatumRequests(),

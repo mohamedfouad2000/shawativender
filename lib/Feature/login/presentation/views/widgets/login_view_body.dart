@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:shawativender/Core/constans/const.dart';
+import 'package:shawativender/Core/local/cache_Enc_helper.dart';
 import 'package:shawativender/Core/local/cache_Helper.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/colors.dart';
@@ -63,6 +64,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     if (state is LoginSuccess) {
                       if (state.model.data?.token != null) {
                         TOKEN = state.model.data!.token!;
+                        
 
                         // if (isChecked) {
                         CacheHelper.saveData(key: 'Token', value: TOKEN)
@@ -73,6 +75,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                         fromLogin: true,
                                       ))
                                 });
+
+                                // CacheEncryptHelper.writeData(key: 'TokenEncrypted',value: TOKEN);
                         // } else {
                         //   Nav(
                         //       context,
@@ -193,8 +197,36 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                     : 'en',
                             initialCountryCode: 'EG',
                             countries: countries
-                                .where(
-                                    (element) => ['EG'].contains(element.code))
+                                .where((element) => [
+                                      'EG',
+                                      'SA',
+                                      'MA',
+                                      'TN',
+                                      'DZ',
+                                      'AE',
+                                      'KW',
+                                      'OM',
+                                      'QA',
+                                      'BH',
+                                      'JO',
+                                      'SY',
+                                      'PS',
+                                      'LB',
+                                      'IQ',
+                                      'LY',
+                                      'MR',
+                                      'SD',
+                                      'SO',
+                                      'YE',
+                                      'KM',
+                                      'DJ',
+                                      'TN',
+                                      'MR',
+                                      'MA',
+                                      'DZ',
+                                      'EG',
+                                      'SS'
+                                    ].contains(element.code))
                                 .toList(),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -292,7 +324,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                       obscureText = !obscureText;
                                     });
                                   },
-                                  child: obscureText
+                                  child: !obscureText
                                       ? const Icon(
                                           Icons.remove_red_eye,
                                           color: Colors.grey,
@@ -347,10 +379,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                   if (widget.phoneController.text != '' &&
                                       widget.phoneController.text != '') {
                                     String? fcmToken = '';
+                                    print(
+                                        'code is ya code ${code.substring(1)}');
 
                                     fcmToken = await FirebaseMessaging.instance
                                         .getToken();
-                                    print("Token is $fcmToken");
+                                    print(" $fcmToken");
                                     BlocProvider.of<LoginCubit>(context).loginUser(
                                         fcmToken: fcmToken ?? '',
                                         phone:
@@ -407,17 +441,19 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                 S.of(context).Rememberme,
                                 style: StylesData.font12,
                               ),
-                              // const Spacer(),
-                              // InkWell(
-                              //   onTap: () {
-                              //     NavegatorPush(
-                              //         context, const ForgetPasswordView());
-                              //   },
-                              //   child: Text(
-                              //     S.of(context).ForgotYourPassword,
-                              //     style: StylesData.font10,
-                              //   ),
-                              // ),
+                              const Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  NavegatorPush(
+                                      context, const ForgetPasswordView());
+                                },
+                                child: Text(
+                                  S.of(context).ForgotYourPassword,
+                                  style: StylesData.font14.copyWith(
+                                      color: ConstColor.kMainColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
                             ],
                           ),
                           // const SizedBox(
@@ -428,7 +464,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           //   style: StylesData.font12.copyWith(fontSize: 14),
                           // ),
                           const SizedBox(
-                            height: 20,
+                            height: 30,
                           ),
                           // const SigninWithWidget(),
                           // const SizedBox(
@@ -442,17 +478,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 ),
               ),
             ),
-             SliverFillRemaining(
+            SliverFillRemaining(
               hasScrollBody: false,
-              child:
-                  Align(alignment: Alignment.bottomCenter, child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(S.of(context).Powered_By),
-                const TqniaLogo(),
-              ],
-            )),
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(S.of(context).Powered_By),
+                      const TqniaLogo(),
+                    ],
+                  )),
             )
           ],
         ));

@@ -202,8 +202,36 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                     : 'en',
                             initialCountryCode: 'EG',
                             countries: countries
-                                .where(
-                                    (element) => ['EG'].contains(element.code))
+                                .where((element) => [
+                                      'EG',
+                                      'SA',
+                                      'MA',
+                                      'TN',
+                                      'DZ',
+                                      'AE',
+                                      'KW',
+                                      'OM',
+                                      'QA',
+                                      'BH',
+                                      'JO',
+                                      'SY',
+                                      'PS',
+                                      'LB',
+                                      'IQ',
+                                      'LY',
+                                      'MR',
+                                      'SD',
+                                      'SO',
+                                      'YE',
+                                      'KM',
+                                      'DJ',
+                                      'TN',
+                                      'MR',
+                                      'MA',
+                                      'DZ',
+                                      'EG',
+                                      'SS'
+                                    ].contains(element.code))
                                 .toList(),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -298,7 +326,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                       obscureTextpass = !obscureTextpass;
                                     });
                                   },
-                                  child: obscureTextpass
+                                  child: !obscureTextpass
                                       ? const Icon(
                                           Icons.remove_red_eye,
                                           color: Colors.grey,
@@ -335,7 +363,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                       obscureTextconpass = !obscureTextconpass;
                                     });
                                   },
-                                  child: obscureTextconpass
+                                  child: !obscureTextconpass
                                       ? const Icon(
                                           Icons.remove_red_eye,
                                           color: Colors.grey,
@@ -382,47 +410,41 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                 width: 10,
                               ),
                               Text(
-                                S.of(context).Iacceptallthe,
+                                '${S.of(context).Iacceptallthe} ',
                                 style: StylesData.font12,
                               ),
-                              BlocProvider(
-                                create: (context) =>
-                                    TermsAndPrivacyCubit(HomeRepoImpl())
-                                      ..getTermsAndPrivacy(),
-                                child: BlocConsumer<TermsAndPrivacyCubit,
-                                    TermsAndPrivacyState>(
-                                  listener: (context, state) {
-                                    // TODO: implement listener
-                                  },
-                                  builder: (context, state) {
-                                    if (state is GetTermsAndPrivacySucc) {
-                                      return InkWell(
-                                        onTap: () {
-                                          NavegatorPush(
-                                              context,
-                                              TermsScreen(
-                                                  termsText:
-                                                      state.model.data?.term ??
-                                                          '',
-                                                  termsTextAr: state
-                                                          .model.data?.termAr ??
-                                                      ''));
-                                        },
-                                        child: Text(
-                                          S.of(context).termsconditions,
-                                          style: StylesData.font12.copyWith(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w800),
-                                        ),
-                                      );
-                                    } else if (state
-                                        is GetTermsAndPrivacyError) {
-                                      return Text(state.msg);
-                                    } else {
-                                      return const Text('');
-                                    }
-                                  },
-                                ),
+                              BlocConsumer<TermsAndPrivacyCubit,
+                                  TermsAndPrivacyState>(
+                                listener: (context, state) {
+                                  // TODO: implement listener
+                                },
+                                builder: (context, state) {
+                                  if (state is GetTermsAndPrivacySucc) {
+                                    return InkWell(
+                                      onTap: () {
+                                        NavegatorPush(
+                                            context,
+                                            TermsScreen(
+                                                termsText:
+                                                    state.model.data?.term ??
+                                                        '',
+                                                termsTextAr:
+                                                    state.model.data?.termAr ??
+                                                        ''));
+                                      },
+                                      child: Text(
+                                        S.of(context).termsconditions,
+                                        style: StylesData.font12.copyWith(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w800),
+                                      ),
+                                    );
+                                  } else if (state is GetTermsAndPrivacyError) {
+                                    return Text(state.msg);
+                                  } else {
+                                    return const Text('');
+                                  }
+                                },
                               ),
                             ],
                           ),

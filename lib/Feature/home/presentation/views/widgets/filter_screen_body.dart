@@ -41,7 +41,7 @@ class _FilterScreenBodyState extends State<FilterScreenBody> {
     SearchCubit.get(context).minPrice = null;
     SearchCubit.get(context).minarea = '';
     SearchCubit.get(context).priceDuration = null;
-    SearchCubit.get(context).text = '';
+    // SearchCubit.get(context).text = '';
     SearchCubit.get(context).maxarea = '';
   }
 

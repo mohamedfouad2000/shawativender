@@ -9,6 +9,7 @@ import 'package:shawativender/Feature/home/data/model/notification_model/datum.d
 import 'package:shawativender/Feature/home/presentation/views/home_view.dart';
 import 'package:shawativender/Feature/home/presentation/views/manager/local/localication_cubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/screens/requests_screen.dart';
+import 'package:shawativender/Feature/home/presentation/views/screens/withdraw_screen.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({
@@ -26,6 +27,8 @@ class NotificationItem extends StatelessWidget {
               Get.context!,
               RequestsScreen(
                   serviceId: int.parse(data.modelId.toString()) ?? 0));
+        } else if (data.modelType == 3) {
+          NavegatorPush(Get.context!, const WIthDrawScreen());
         } else {
           NavegatorPush(Get.context!, const HomeView(currentidex: 2));
         }

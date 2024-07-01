@@ -12,6 +12,7 @@ import 'package:shawativender/Feature/home/presentation/views/screens/notificati
 import 'package:shawativender/Feature/home/presentation/views/screens/refund_screen.dart';
 import 'package:shawativender/Feature/home/presentation/views/screens/support_screen.dart';
 import 'package:shawativender/Feature/home/presentation/views/screens/terms_screen.dart';
+import 'package:shawativender/Feature/home/presentation/views/screens/withdraw_screen.dart';
 import 'package:shawativender/Feature/lang/presentation/views/lang_page_view.dart';
 import 'package:shawativender/Feature/login/data/repo/login_repo_imp.dart';
 import 'package:shawativender/Feature/login/presentation/views/login_view.dart';
@@ -30,6 +31,7 @@ class _ListTitleMenuState extends State<ListTitleMenu> {
   Widget build(BuildContext context) {
     List<String> images = [
       AssetsData.note,
+      AssetsData.image11,
       AssetsData.like,
       AssetsData.notification,
       AssetsData.language,
@@ -43,6 +45,7 @@ class _ListTitleMenuState extends State<ListTitleMenu> {
       const HomeView(
         currentidex: 2,
       ),
+      const WIthDrawScreen(),
       const HomeView(
         currentidex: 1,
       ),
@@ -67,6 +70,7 @@ class _ListTitleMenuState extends State<ListTitleMenu> {
     ];
     List<String> titles = [
       S.of(context).MyServecs,
+      S.of(context).wIthdraw,
       S.of(context).Reviews,
       S.of(context).Notifications,
       S.of(context).Language,

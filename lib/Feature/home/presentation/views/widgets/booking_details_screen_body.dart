@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:shawativender/Core/constans/const.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/components.dart';
 import 'package:shawativender/Core/utils/styles.dart';
 import 'package:shawativender/Feature/home/data/model/requstes_model/datum.dart';
+import 'package:shawativender/Feature/home/data/repo/home_repo_imp.dart';
+import 'package:shawativender/Feature/home/presentation/views/manager/Serves%20prices%20Cubit/servesPricesCubit.dart';
 import 'package:shawativender/Feature/home/presentation/views/screens/view_image_screen.dart';
+import 'package:shawativender/Feature/home/presentation/views/widgets/amount_widget.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/booking_product.dart';
 import 'package:shawativender/Feature/home/presentation/views/widgets/map_widget.dart';
 import 'package:shawativender/generated/l10n.dart';
 
 class BookingDetailsScreenBody extends StatefulWidget {
   const BookingDetailsScreenBody(
-      {super.key, required this.model, this.fromData});
+      {super.key,
+      required this.model,
+      this.fromData,
+      required this.bookingid,
+      required this.startTime,
+      required this.endTime});
   final DatumRequests model;
   final bool? fromData;
+  final int bookingid;
+  final String startTime;
+  final String endTime;
 
   @override
   State<BookingDetailsScreenBody> createState() =>
@@ -179,6 +191,26 @@ class _BookingDetailsScreenBodyState extends State<BookingDetailsScreenBody> {
               ),
             const SizedBox(
               height: 13,
+            ),
+            BlocProvider(
+              create: (context) => ServesPricesCubit(HomeRepoImpl())
+                ..getServesPrices(
+                  bookingId: widget.bookingid,
+                  coupon: '',
+                  serid: widget.model.service?.id ?? 0,
+                  startAt:
+                      '${widget.startTime.substring(5, 7)}/${widget.startTime.substring(8, 10)}/${widget.startTime.substring(0, 4)}',
+                  endAt:
+                      '${widget.endTime.trim().substring(5, 7)}/${widget.endTime.trim().substring(8, 10)}/${widget.endTime.trim().substring(0, 4)}',
+                ),
+              child: AmountPayment(
+                fromBooking: true,
+                id: widget.model.id ?? 0,
+                start:
+                    '${widget.startTime.substring(5, 7)}/${widget.startTime.substring(8, 10)}/${widget.startTime.substring(0, 4)}',
+                end:
+                    '${widget.endTime.trim().substring(5, 7)}/${widget.endTime.trim().substring(8, 10)}/${widget.endTime.trim().substring(0, 4)}',
+              ),
             ),
           ],
         ),

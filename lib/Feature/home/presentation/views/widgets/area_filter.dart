@@ -27,81 +27,55 @@ class _AreaFIltterState extends State<AreaFIltter> {
 
   @override
   Widget build(BuildContext context) {
-    // if (SearchCubit.get(context).lat != null) {
-    // return BlocConsumer<SearchCubit, SearchState>(
-    //   listener: (context, state) {
-    //     // TODO: implement listener
-    //   },
-    //   builder: (context, state) {
-    //     return Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         Text(
-    //           S.of(context).Area,
-    //           style: StylesData.font16,
-    //         ),
-    //         const SizedBox(
-    //           height: 10,
-    //         ),
-    //         Row(
-    //           children: [
-    //             Expanded(
-    //               child: SizedBox(
-    //                   height: 45,
-    //                   child: customTextFiled(
-    //                       controller: mincontroller,
-    //                       onChanged: (i) {
-    //                         SearchCubit.get(context).minarea = i;
-    //                       },
-    //                       hintText: S.of(context).min,
-    //                       type: TextInputType.number)),
-    //             ),
-    //             const SizedBox(
-    //               width: 15,
-    //             ),
-    //             Container(
-    //               width: 20,
-    //               height: 3,
-    //               decoration: BoxDecoration(
-    //                 color: Colors.grey[300],
-    //                 borderRadius: BorderRadius.circular(10),
-    //               ),
-    //             ),
-    //             const SizedBox(
-    //               width: 15,
-    //             ),
-    //             Expanded(
-    //               child: SizedBox(
-    //                   height: 45,
-    //                   child: customTextFiled(
-    //                       controller: maxcontroller,
-    //                       onChanged: (i) {
-    //                         SearchCubit.get(context).maxarea = i;
-    //                       },
-    //                       hintText: S.of(context).max,
-    //                       type: TextInputType.number)),
-    //             ),
-    //           ],
-    //         )
-    //       ],
-    //     );
-    //   },
-    // );
-
-    // } else {
-    return defaultButton(
-        fun: () async {
-          ShowModeSheet(context);
+    if (SearchCubit.get(context).lat != null) {
+      return BlocConsumer<SearchCubit, SearchState>(
+        listener: (context, state) {
+          // TODO: implement listener
         },
-        textWidget: Text(
-          SearchCubit.get(context).lat != null
-              ? S.of(context).changeLocation
-              : S.of(context).setlocation,
-          style: StylesData.font13.copyWith(color: Colors.black),
-        ),
-        height: 54,
-        c: Colors.white);
-    // }
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                S.of(context).Area,
+                style: StylesData.font16,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                        height: 45,
+                        child: customTextFiled(
+                            controller: maxcontroller,
+                            onChanged: (i) {
+                              SearchCubit.get(context).maxarea = i;
+                            },
+                            hintText: S.of(context).MaxArea,
+                            type: TextInputType.number)),
+                  ),
+                ],
+              )
+            ],
+          );
+        },
+      );
+    } else {
+      return defaultButton(
+          fun: () async {
+            ShowModeSheet(context);
+          },
+          textWidget: Text(
+            SearchCubit.get(context).lat != null
+                ? S.of(context).changeLocation
+                : S.of(context).setlocation,
+            style: StylesData.font13.copyWith(color: Colors.black),
+          ),
+          height: 54,
+          c: Colors.white);
+    }
   }
 
   void ShowModeSheet(context) {
@@ -120,7 +94,7 @@ class _AreaFIltterState extends State<AreaFIltter> {
                     setState(() {
                       SearchCubit.get(context).lat =
                           pickedData.latLong.latitude;
-                      SearchCubit.get(context).lat =
+                      SearchCubit.get(context).long =
                           pickedData.latLong.longitude;
                     });
                     print(pickedData.latLong.latitude);

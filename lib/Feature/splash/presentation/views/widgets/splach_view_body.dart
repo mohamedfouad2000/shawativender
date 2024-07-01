@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shawativender/Core/constans/const.dart';
+import 'package:shawativender/Core/local/cache_Enc_helper.dart';
 import 'package:shawativender/Core/local/cache_Helper.dart';
 import 'package:shawativender/Core/utils/assets_data.dart';
 import 'package:shawativender/Core/utils/components.dart';
@@ -23,7 +24,7 @@ class _SplachViewBodyState extends State<SplachViewBody> {
   bool isloading = false;
   @override
   Future fadeInAnimation() async {
-    await Future.delayed(const Duration(seconds: 1));
+     ;
 
     setState(() {
       isloading = true;
@@ -31,11 +32,15 @@ class _SplachViewBodyState extends State<SplachViewBody> {
 
     await Future.delayed(const Duration(seconds: 2));
     String x = CacheHelper.getData(key: 'Token') ?? '';
+    
+    // String x2 = await CacheEncryptHelper.readData(key: 'TokenEncrypted');
     print(x);
+    // print('x2 is $x2');
     if (x != '') {
       TOKEN = x;
       Nav(context, const HomeView(currentidex: 0));
     } else {
+      
       Nav(context, const LoginView());
     }
   }

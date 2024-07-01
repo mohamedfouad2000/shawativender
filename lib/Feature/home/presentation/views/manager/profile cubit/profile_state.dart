@@ -39,3 +39,15 @@ final class DeleteAccountError extends ProfileState {
   final String msg;
   DeleteAccountError({required this.msg});
 }
+
+final class UpdateProfileImageLoading extends ProfileState {}
+
+final class UpdateProfileImageSucc extends ProfileState {
+  final String msq;
+  UpdateProfileImageSucc({required this.msq});
+}
+
+final class UpdateProfileImageError extends ProfileState {
+  final String msg;
+  UpdateProfileImageError({required this.msg});
+}

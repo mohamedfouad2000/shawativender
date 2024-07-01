@@ -84,6 +84,8 @@ class _ServceProductListState extends State<ServceProductList> {
                   alignment: Alignment.bottomRight,
                   children: [
                     ProductItem(
+                      distance:
+                          state.model.data!.services![index].distance ?? '',
                       // paymentStatusId: state.model.data. ?? 1,
                       isEdit: true,
                       model: state.model.data!.services![index],

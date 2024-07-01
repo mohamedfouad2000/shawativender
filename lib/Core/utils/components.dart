@@ -13,6 +13,7 @@ import 'package:shawativender/Feature/home/presentation/views/screens/notificati
 import 'package:location/location.dart';
 import 'package:shawativender/generated/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -346,14 +347,18 @@ AppBar customAppBarWithNotification(context) {
   );
 }
 
-AppBar customAppBarInNotification(context) {
+AppBar customAppBarInNotification(
+  context, {
+  void Function()? ontap,
+}) {
   return AppBar(
     leading: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
       child: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-        },
+        onTap: ontap ??
+            () {
+              Navigator.pop(context);
+            },
         child: Container(
           decoration: BoxDecoration(
               color: ConstColor.kMainColor,
@@ -407,6 +412,15 @@ AppBar customAppBarInNotification(context) {
       ),
     ],
   );
+}
+
+Future<bool> checkInternetConnectivity() async {
+  var connectivityResult = await Connectivity().checkConnectivity();
+  if (connectivityResult == ConnectivityResult.none) {
+    return false; // No internet connection
+  } else {
+    return true; // Connected to the internet
+  }
 }
 
 openDialPad(String phoneNumber) async {

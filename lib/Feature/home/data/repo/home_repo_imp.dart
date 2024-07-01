@@ -13,6 +13,8 @@ import 'package:shawativender/Feature/home/data/model/feature_model/feature_mode
 import 'package:shawativender/Feature/home/data/model/home_model/category.dart';
 import 'package:shawativender/Feature/home/data/model/home_model/home_model.dart';
 import 'package:shawativender/Feature/home/data/model/home_model/service.dart';
+import 'package:shawativender/Feature/home/data/model/payment_model/payment_model.dart';
+import 'package:shawativender/Feature/home/data/model/with_drawil/with_drawil.dart';
 import 'package:shawativender/Feature/home/data/model/min_max_model/min_max_model.dart';
 import 'package:shawativender/Feature/home/data/model/notification_model/notification_model.dart';
 import 'package:shawativender/Feature/home/data/model/profile_model/profile_model.dart';
@@ -20,9 +22,11 @@ import 'package:shawativender/Feature/home/data/model/provider_serves_model/prov
 import 'package:shawativender/Feature/home/data/model/requstes_model/requstes_model.dart';
 import 'package:shawativender/Feature/home/data/model/review_mdoel/review_mdoel.dart';
 import 'package:shawativender/Feature/home/data/model/search_model/search_model.dart';
+import 'package:shawativender/Feature/home/data/model/serves_price_details_model/serves_price_details_model.dart';
 import 'package:shawativender/Feature/home/data/model/seves_information/seves_information.dart';
 import 'package:shawativender/Feature/home/data/model/terms_and_privacy_model/terms_and_privacy_model.dart';
 import 'package:shawativender/Feature/home/data/repo/home_repo.dart';
+import 'package:shawativender/Feature/home/presentation/views/widgets/servies_product_item.dart';
 
 class HomeRepoImpl extends HomeRepo {
   @override
@@ -94,6 +98,7 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, String>> updateProfile({
     required String name,
     required String phone,
+    required String currentPassword,
     File? image,
     required String password,
     required String confpassword,
@@ -108,8 +113,9 @@ class HomeRepoImpl extends HomeRepo {
           if (image != null)
             'image': await MultipartFile.fromFile(image.path,
                 filename: image.path.split('/').last),
-          'password': password,
-          'password_confirmation': confpassword,
+          if (password != '') 'password': password,
+          if (confpassword != '') 'password_confirmation': confpassword,
+          if (currentPassword != '') 'current_password': currentPassword
         }),
       );
       print(res.data);
@@ -955,6 +961,224 @@ class HomeRepoImpl extends HomeRepo {
       }
     } catch (e) {
       print("error is $e");
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ServesPriceDetailsModel>> getPricesDetails(
+      {required int serid,
+      required String startAt,
+      required String coupon,
+      required int bookingId,
+      required String endAt}) async {
+    ServesPriceDetailsModel model;
+    try {
+      Response<dynamic> res =
+          await DioHelper.getData(url: 'get-prices-details', data: {}, query: {
+        'service_id': serid,
+        'start_at': startAt,
+        'end_at': endAt,
+        if (bookingId != -1) 'booking_id': bookingId,
+        if (coupon != '') 'coupon_code': coupon
+      });
+      print("aha");
+      print(res.data);
+      if (res.data["status"] == 201) {
+        model = ServesPriceDetailsModel.fromJson(res.data);
+        return right(model);
+      } else if (res.data["status"] == 200) {
+        model = ServesPriceDetailsModel.fromJson(res.data);
+        return right(model);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      print(e);
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> updateImageProfile(
+      {required File image}) async {
+    try {
+      Response<dynamic> res = await DioHelper.postData(
+        url: xUPDATEURL,
+        data: FormData.fromMap({
+          'image': await MultipartFile.fromFile(image.path,
+              filename: image.path.split('/').last),
+        }),
+      );
+      print(res.data);
+      if (res.data["status"] == 201) {
+        print('||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||');
+        return right(res.data["msg"]);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      print(e);
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> addwithdraw(
+      {required String amount,
+      required String password,
+      required String account_number,
+      required String payment_method_id}) async {
+    try {
+      Response<dynamic> res =
+          await DioHelper.postData(url: 'sent-withdrawal', data: {}, query: {
+        'amount': amount,
+        'password': password,
+        'account_number': account_number,
+        'payment_method_id': payment_method_id
+      });
+      print(res.data);
+      if (res.data["status"] == 201) {
+        print('||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||');
+        return right(res.data["msg"]);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      print(e);
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> getblance() async {
+    // TODO: implement getblance
+    //wallet
+    try {
+      Response<dynamic> res =
+          await DioHelper.getData(url: 'wallet', data: {}, query: {});
+      print("aha");
+      print(res.data);
+      if (res.data["status"] == 201) {
+        return right(res.data['data']['blance']);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      print(e);
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PaymentModel>> getPaymentMethod() async {
+    PaymentModel model;
+    try {
+      Response<dynamic> res =
+          await DioHelper.getData(url: 'payment-methods', data: {}, query: {});
+      print(res.data);
+      if (res.data['status'] == 201) {
+        // for (var item in res.data['data']) {
+        //   category.add(Category.fromJson(item));
+        // }
+        model = PaymentModel.fromJson(res.data);
+        return right(model);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> checkPhone({required String phone}) async {
+    try {
+      Response<dynamic> res = await DioHelper.postData(
+          url: 'check-phone',
+          data: {},
+          query: {'phone': phone.replaceAll('+', '').toString()});
+      print(res.data);
+      if (res.data["status"] == 201) {
+        return right(res.data["data"] as bool);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      print("error is $e");
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WithDrawilModel>> getwithdrawlRequests(
+      {required int catId}) async {
+    WithDrawilModel model;
+    try {
+      Response<dynamic> res = await DioHelper.getData(
+          url: 'withdrawal',
+          data: {},
+          query: {if (catId != -1) 'status': catId});
+      print("aha");
+      print(res.data);
+      if (res.data["status"] == 201) {
+        model = WithDrawilModel.fromJson(res.data);
+        return right(model);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      print(e);
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(msq: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> setPassword(
+      {required String newpassord,
+      required String confirmnewpassord,
+      required String phone}) async {
+    try {
+      Response<dynamic> res =
+          await DioHelper.postData(url: 'reset-password', data: {}, query: {
+        'new_password': newpassord,
+        'confrim_password': confirmnewpassord,
+        'phone': phone.replaceAll('+', ''),
+      });
+      print(res.data);
+      if (res.data["status"] == 201) {
+        print('||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||');
+        return right(res.data["msg"]);
+      } else {
+        return left(ServerFailure(msq: res.data['msg'].toString()));
+      }
+    } catch (e) {
+      print(e);
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       }

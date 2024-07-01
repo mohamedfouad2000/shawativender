@@ -30,6 +30,7 @@ class BokkingList extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return ProductItem(
+                  distance: '',
                   model: state.data.data?[index].service ?? Service(),
                   paymentStatusId: state.data.data?[index].paymentStatusId ?? 1,
                   fromhome: true,

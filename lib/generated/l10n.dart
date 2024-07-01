@@ -50,20 +50,20 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `search`
+  /// `Search`
   String get search {
     return Intl.message(
-      'search',
+      'Search',
       name: 'search',
       desc: '',
       args: [],
     );
   }
 
-  /// `day`
+  /// `Night`
   String get day {
     return Intl.message(
-      'day',
+      'Night',
       name: 'day',
       desc: '',
       args: [],
@@ -220,6 +220,16 @@ class S {
     );
   }
 
+  /// `Request`
+  String get Request {
+    return Intl.message(
+      'Request',
+      name: 'Request',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Powered By `
   String get Powered_By {
     return Intl.message(
@@ -240,10 +250,10 @@ class S {
     );
   }
 
-  /// `view profile`
+  /// `View profile`
   String get viewPofile {
     return Intl.message(
-      'view profile',
+      'View profile',
       name: 'viewPofile',
       desc: '',
       args: [],
@@ -270,40 +280,40 @@ class S {
     );
   }
 
-  /// `favorites`
+  /// `Favorites`
   String get favorites {
     return Intl.message(
-      'favorites',
+      'Favorites',
       name: 'favorites',
       desc: '',
       args: [],
     );
   }
 
-  /// `support`
+  /// `Support`
   String get support {
     return Intl.message(
-      'support',
+      'Support',
       name: 'support',
       desc: '',
       args: [],
     );
   }
 
-  /// `terms & conditions`
+  /// `Terms & Conditions`
   String get termsconditions {
     return Intl.message(
-      'terms & conditions',
+      'Terms & Conditions',
       name: 'termsconditions',
       desc: '',
       args: [],
     );
   }
 
-  /// `logout`
+  /// `Logout`
   String get logout {
     return Intl.message(
-      'logout',
+      'Logout',
       name: 'logout',
       desc: '',
       args: [],
@@ -330,40 +340,40 @@ class S {
     );
   }
 
-  /// `phone`
+  /// `Phone`
   String get phone {
     return Intl.message(
-      'phone',
+      'Phone',
       name: 'phone',
       desc: '',
       args: [],
     );
   }
 
-  /// `password`
+  /// `Password`
   String get password {
     return Intl.message(
-      'password',
+      'Password',
       name: 'password',
       desc: '',
       args: [],
     );
   }
 
-  /// `confirm password`
+  /// `Confirm password`
   String get confirmPassword {
     return Intl.message(
-      'confirm password',
+      'Confirm password',
       name: 'confirmPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `This site is protected by reCAPTCHA and the Google `
+  /// `This Site is protected by reCAPTCHA and the Google `
   String get profile1 {
     return Intl.message(
-      'This site is protected by reCAPTCHA and the Google ',
+      'This Site is protected by reCAPTCHA and the Google ',
       name: 'profile1',
       desc: '',
       args: [],
@@ -410,10 +420,10 @@ class S {
     );
   }
 
-  /// `password not match`
+  /// `Password not match`
   String get passwordErorr {
     return Intl.message(
-      'password not match',
+      'Password not match',
       name: 'passwordErorr',
       desc: '',
       args: [],
@@ -430,10 +440,10 @@ class S {
     );
   }
 
-  /// `schedule`
+  /// `Schedule`
   String get schedule {
     return Intl.message(
-      'schedule',
+      'Schedule',
       name: 'schedule',
       desc: '',
       args: [],
@@ -490,50 +500,50 @@ class S {
     );
   }
 
-  /// `call us`
+  /// `Call us`
   String get callus {
     return Intl.message(
-      'call us',
+      'Call us',
       name: 'callus',
       desc: '',
       args: [],
     );
   }
 
-  /// `email us`
+  /// `Email us`
   String get emailus {
     return Intl.message(
-      'email us',
+      'Email us',
       name: 'emailus',
       desc: '',
       args: [],
     );
   }
 
-  /// `write us`
+  /// `Write us`
   String get writeus {
     return Intl.message(
-      'write us',
+      'Write us',
       name: 'writeus',
       desc: '',
       args: [],
     );
   }
 
-  /// `enter your message`
+  /// `Enter your message`
   String get enteryourmessage {
     return Intl.message(
-      'enter your message',
+      'Enter your message',
       name: 'enteryourmessage',
       desc: '',
       args: [],
     );
   }
 
-  /// `submit`
+  /// `Submit`
   String get submit {
     return Intl.message(
-      'submit',
+      'Submit',
       name: 'submit',
       desc: '',
       args: [],
@@ -632,10 +642,10 @@ class S {
     );
   }
 
-  /// `please accept terms and conditions`
+  /// `Please accept terms and conditions`
   String get pleaseaccepttermsandconditions {
     return Intl.message(
-      'please accept terms and conditions',
+      'Please accept terms and conditions',
       name: 'pleaseaccepttermsandconditions',
       desc: '',
       args: [],
@@ -662,20 +672,20 @@ class S {
     );
   }
 
-  /// `sign In here`
+  /// `Sign In here`
   String get signInhere {
     return Intl.message(
-      'sign In here',
+      'Sign In here',
       name: 'signInhere',
       desc: '',
       args: [],
     );
   }
 
-  /// `Don't have anaccount ? `
+  /// `Don't have an account ? `
   String get Donthaveanaccount {
     return Intl.message(
-      'Don\'t have anaccount ? ',
+      'Don\'t have an account ? ',
       name: 'Donthaveanaccount',
       desc: '',
       args: [],
@@ -772,10 +782,10 @@ class S {
     );
   }
 
-  /// `camera`
+  /// `Camera`
   String get camera {
     return Intl.message(
-      'camera',
+      'Camera',
       name: 'camera',
       desc: '',
       args: [],
@@ -802,60 +812,60 @@ class S {
     );
   }
 
-  /// `filter`
+  /// `Filter`
   String get filter {
     return Intl.message(
-      'filter',
+      'Filter',
       name: 'filter',
       desc: '',
       args: [],
     );
   }
 
-  /// `price`
+  /// `Price`
   String get price {
     return Intl.message(
-      'price',
+      'Price',
       name: 'price',
       desc: '',
       args: [],
     );
   }
 
-  /// `price duration`
+  /// `Price Duration`
   String get priceduration {
     return Intl.message(
-      'price duration',
+      'Price Duration',
       name: 'priceduration',
       desc: '',
       args: [],
     );
   }
 
-  /// `bed Rooms`
+  /// `Bed Rooms`
   String get bedRooms {
     return Intl.message(
-      'bed Rooms',
+      'Bed Rooms',
       name: 'bedRooms',
       desc: '',
       args: [],
     );
   }
 
-  /// `bath Rooms`
+  /// `Bath Rooms`
   String get bathRooms {
     return Intl.message(
-      'bath Rooms',
+      'Bath Rooms',
       name: 'bathRooms',
       desc: '',
       args: [],
     );
   }
 
-  /// `floor`
+  /// `Floor`
   String get floor {
     return Intl.message(
-      'floor',
+      'Floor',
       name: 'floor',
       desc: '',
       args: [],
@@ -952,10 +962,10 @@ class S {
     );
   }
 
-  /// `edit service`
+  /// `Edit service`
   String get edit_service {
     return Intl.message(
-      'edit service',
+      'Edit service',
       name: 'edit_service',
       desc: '',
       args: [],
@@ -1002,10 +1012,10 @@ class S {
     );
   }
 
-  /// `services`
+  /// `Services`
   String get services {
     return Intl.message(
-      'services',
+      'Services',
       name: 'services',
       desc: '',
       args: [],
@@ -1052,30 +1062,30 @@ class S {
     );
   }
 
-  /// `unpaid`
+  /// `Unpaid`
   String get unpaid {
     return Intl.message(
-      'unpaid',
+      'Unpaid',
       name: 'unpaid',
       desc: '',
       args: [],
     );
   }
 
-  /// `pending`
+  /// `Pending`
   String get pending {
     return Intl.message(
-      'pending',
+      'Pending',
       name: 'pending',
       desc: '',
       args: [],
     );
   }
 
-  /// `paid`
+  /// `Paid`
   String get paid {
     return Intl.message(
-      'paid',
+      'Paid',
       name: 'paid',
       desc: '',
       args: [],
@@ -1092,10 +1102,10 @@ class S {
     );
   }
 
-  /// `change Location`
+  /// `Change Location`
   String get changeLocation {
     return Intl.message(
-      'change Location',
+      'Change Location',
       name: 'changeLocation',
       desc: '',
       args: [],
@@ -1202,10 +1212,10 @@ class S {
     );
   }
 
-  /// `weekly`
+  /// `Weekly`
   String get weekly {
     return Intl.message(
-      'weekly',
+      'Weekly',
       name: 'weekly',
       desc: '',
       args: [],
@@ -1222,6 +1232,16 @@ class S {
     );
   }
 
+  /// `Request`
+  String get request {
+    return Intl.message(
+      'Request',
+      name: 'request',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Yearly`
   String get Yearly {
     return Intl.message(
@@ -1232,20 +1252,20 @@ class S {
     );
   }
 
-  /// `set location`
+  /// `Set Location`
   String get setlocation {
     return Intl.message(
-      'set location',
+      'Set Location',
       name: 'setlocation',
       desc: '',
       args: [],
     );
   }
 
-  /// `Change location`
+  /// `Change Location`
   String get changelocation {
     return Intl.message(
-      'Change location',
+      'Change Location',
       name: 'changelocation',
       desc: '',
       args: [],
@@ -1312,10 +1332,10 @@ class S {
     );
   }
 
-  /// `browse`
+  /// `Browse`
   String get browse {
     return Intl.message(
-      'browse',
+      'Browse',
       name: 'browse',
       desc: '',
       args: [],
@@ -1362,20 +1382,20 @@ class S {
     );
   }
 
-  /// `choose your location to start find the request`
+  /// `Choose your location to start find the request`
   String get chooseLocation {
     return Intl.message(
-      'choose your location to start find the request',
+      'Choose your location to start find the request',
       name: 'chooseLocation',
       desc: '',
       args: [],
     );
   }
 
-  /// `around you.`
+  /// `Around you.`
   String get aroundyou {
     return Intl.message(
-      'around you.',
+      'Around you.',
       name: 'aroundyou',
       desc: '',
       args: [],
@@ -1412,10 +1432,10 @@ class S {
     );
   }
 
-  /// `add your service now!`
+  /// `Add your service now!`
   String get add_your_service_now {
     return Intl.message(
-      'add your service now!',
+      'Add your service now!',
       name: 'add_your_service_now',
       desc: '',
       args: [],
@@ -1512,10 +1532,10 @@ class S {
     );
   }
 
-  /// `Add Event Days`
+  /// `Add Event Nights`
   String get AddEventDays {
     return Intl.message(
-      'Add Event Days',
+      'Add Event Nights',
       name: 'AddEventDays',
       desc: '',
       args: [],
@@ -1532,10 +1552,10 @@ class S {
     );
   }
 
-  /// `Select Event Days`
+  /// `Select Event Nights`
   String get SelectEventDays {
     return Intl.message(
-      'Select Event Days',
+      'Select Event Nights',
       name: 'SelectEventDays',
       desc: '',
       args: [],
@@ -1562,10 +1582,10 @@ class S {
     );
   }
 
-  /// `Event Days`
+  /// `Event Nights`
   String get eventdays {
     return Intl.message(
-      'Event Days',
+      'Event Nights',
       name: 'eventdays',
       desc: '',
       args: [],
@@ -1602,10 +1622,10 @@ class S {
     );
   }
 
-  /// `inprogress`
+  /// `Inprogress`
   String get inprogress {
     return Intl.message(
-      'inprogress',
+      'Inprogress',
       name: 'inprogress',
       desc: '',
       args: [],
@@ -1642,10 +1662,10 @@ class S {
     );
   }
 
-  /// `Available Days`
+  /// `Available Nights`
   String get AvailableDays {
     return Intl.message(
-      'Available Days',
+      'Available Nights',
       name: 'AvailableDays',
       desc: '',
       args: [],
@@ -1677,6 +1697,396 @@ class S {
     return Intl.message(
       'Refunds',
       name: 'Refunds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get Delete {
+    return Intl.message(
+      'Delete',
+      name: 'Delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get Cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'Cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete the account?`
+  String get DeleteMsg {
+    return Intl.message(
+      'Are you sure you want to delete the account?',
+      name: 'DeleteMsg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warning!`
+  String get warning {
+    return Intl.message(
+      'Warning!',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Nights`
+  String get InvalidDays {
+    return Intl.message(
+      'Invalid Nights',
+      name: 'InvalidDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get Location {
+    return Intl.message(
+      'Location',
+      name: 'Location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go To This Location`
+  String get GoToThisLocation {
+    return Intl.message(
+      'Go To This Location',
+      name: 'GoToThisLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount`
+  String get amount {
+    return Intl.message(
+      'Amount',
+      name: 'amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select payment method and upload payment screen`
+  String get eroor500 {
+    return Intl.message(
+      'Please select payment method and upload payment screen',
+      name: 'eroor500',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal Nights`
+  String get normaldays {
+    return Intl.message(
+      'Normal Nights',
+      name: 'normaldays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `change Image`
+  String get changeImage {
+    return Intl.message(
+      'change Image',
+      name: 'changeImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking Details`
+  String get BookingDetails {
+    return Intl.message(
+      'Booking Details',
+      name: 'BookingDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get All {
+    return Intl.message(
+      'All',
+      name: 'All',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `coupon`
+  String get coupon {
+    return Intl.message(
+      'coupon',
+      name: 'coupon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total After coupon`
+  String get TotalAfterCopon {
+    return Intl.message(
+      'Total After coupon',
+      name: 'TotalAfterCopon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send To This Number :`
+  String get sendto {
+    return Intl.message(
+      'Send To This Number :',
+      name: 'sendto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max Area`
+  String get MaxArea {
+    return Intl.message(
+      'Max Area',
+      name: 'MaxArea',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reserve Now`
+  String get BookingNow {
+    return Intl.message(
+      'Reserve Now',
+      name: 'BookingNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Canceled`
+  String get Canceled {
+    return Intl.message(
+      'Canceled',
+      name: 'Canceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get ChangePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'ChangePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Password`
+  String get Currentpassword {
+    return Intl.message(
+      'Current Password',
+      name: 'Currentpassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add WIthdraw`
+  String get Add_wIthdraw {
+    return Intl.message(
+      'Add WIthdraw',
+      name: 'Add_wIthdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Number`
+  String get AccountNumber {
+    return Intl.message(
+      'Account Number',
+      name: 'AccountNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `provider`
+  String get provider {
+    return Intl.message(
+      'provider',
+      name: 'provider',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `request Time`
+  String get requestTime {
+    return Intl.message(
+      'request Time',
+      name: 'requestTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `status`
+  String get status {
+    return Intl.message(
+      'status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `admin name`
+  String get adminname {
+    return Intl.message(
+      'admin name',
+      name: 'adminname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `action`
+  String get action {
+    return Intl.message(
+      'action',
+      name: 'action',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Balance`
+  String get YourBalance {
+    return Intl.message(
+      'Your Balance',
+      name: 'YourBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wIthdraw`
+  String get wIthdraw {
+    return Intl.message(
+      'wIthdraw',
+      name: 'wIthdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don’t worry, take it easy!`
+  String get Dont_worry_take_iteasy {
+    return Intl.message(
+      'Don’t worry, take it easy!',
+      name: 'Dont_worry_take_iteasy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write your OTP code`
+  String get WriteyourOTPcode {
+    return Intl.message(
+      'Write your OTP code',
+      name: 'WriteyourOTPcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter The 6-Digit Code Sent To You At`
+  String get Enter_The_Code_Sent_To_You_At {
+    return Intl.message(
+      'Enter The 6-Digit Code Sent To You At',
+      name: 'Enter_The_Code_Sent_To_You_At',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I Haven’t receved a code `
+  String get IHaventrecevedacode {
+    return Intl.message(
+      'I Haven’t receved a code ',
+      name: 'IHaventrecevedacode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset password`
+  String get Resetpassword {
+    return Intl.message(
+      'Reset password',
+      name: 'Resetpassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send OTP`
+  String get SendOTP {
+    return Intl.message(
+      'Send OTP',
+      name: 'SendOTP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP eroor`
+  String get OTP_eroor {
+    return Intl.message(
+      'OTP eroor',
+      name: 'OTP_eroor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Day`
+  String get requestDay {
+    return Intl.message(
+      'Request Day',
+      name: 'requestDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set New Password`
+  String get SetNewPassword {
+    return Intl.message(
+      'Set New Password',
+      name: 'SetNewPassword',
       desc: '',
       args: [],
     );

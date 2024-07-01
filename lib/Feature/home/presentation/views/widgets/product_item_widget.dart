@@ -23,6 +23,7 @@ class ProductItem extends StatelessWidget {
     required this.start,
     required this.end,
     this.paymentStatusId,
+    required this.distance,
   });
   final Service model;
   final ContactDetails? contactDetails;
@@ -30,6 +31,8 @@ class ProductItem extends StatelessWidget {
   final int? paymentStatusId;
   final String start;
   final String end;
+  final String distance;
+
   // final ContactDetails contact;
   final bool? isEdit;
   final int? bookingStatus;
@@ -41,6 +44,7 @@ class ProductItem extends StatelessWidget {
       // 2: '',
       3: S.of(context).Approved,
       4: S.of(context).Reject,
+      5: S.of(context).Canceled,
     };
     List<String> categoriesList = [
       S.of(context).colse,
@@ -144,6 +148,7 @@ class ProductItem extends StatelessWidget {
               height: 10,
             ),
             ProductItemInfo(
+              distance: distance,
               fromhome: fromhome,
               paymentStatusId: paymentStatusId,
               contactDetails: contactDetails,

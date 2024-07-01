@@ -9,13 +9,16 @@ class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit(this.repo) : super(NotificationInitial());
 
   final HomeRepo repo;
+  NotificationModel model = NotificationModel();
 
   Future<void> getNotification() async {
+    model.data = [];
     emit(NotificationLoading());
     final result = await repo.getNotifications();
     result.fold(
       (l) => emit(NotificationError(msg: l.msq.toString())),
       (r) {
+        model = r;
         emit(NotificationSucc(model: r));
       },
     );

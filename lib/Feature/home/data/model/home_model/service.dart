@@ -32,6 +32,7 @@ class Service {
   List<EventDay>? eventDays;
   List<Feature>? features;
   List<Gallery>? gallery;
+  String? distance;
 
   Service(
       {this.id,
@@ -61,6 +62,7 @@ class Service {
       this.features,
       this.gallery,
       this.rangeDays,
+      this.distance,
       this.regularPrice});
 
   factory Service.fromJson(Map<String, dynamic> json) => Service(
@@ -86,6 +88,7 @@ class Service {
         image: json['image'] as String?,
         isFavorited: json['is_favorited'] as int?,
         bookingCount: json['booking_count'] as int?,
+        distance: json['distance'] as String?,
         createdAt: json['created_at'] == null
             ? null
             : DateTime.parse(json['created_at'] as String),
@@ -111,6 +114,7 @@ class Service {
         'floor': floor,
         'bed': bed,
         'bath': bath,
+        'distance': distance,
         'price': price,
         'regular_price': regularPrice,
         'range_days': rangeDays,

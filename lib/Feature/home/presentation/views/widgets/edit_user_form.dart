@@ -30,10 +30,15 @@ class _EditUserFormState extends State<EditUserForm> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController currentPasswordController = TextEditingController();
+  bool obscureTextCurrentpass = true;
+  bool ChangePassword = false;
   String code = '+20';
   String eroorMsq = '';
   String country = 'Saudi Arabia';
   bool obscureTextconpass = true;
+  bool isDelete = false;
+
   bool obscureTextpass = true;
   var formkey = GlobalKey<FormState>();
   TextEditingController confirmpasswordController = TextEditingController();
@@ -209,6 +214,7 @@ class _EditUserFormState extends State<EditUserForm> {
                   const SizedBox(
                     height: 15,
                   ),
+
                   customTextFormedFiled(
                       controller: nameController,
                       hintText: S.of(context).FullName,
@@ -307,80 +313,169 @@ class _EditUserFormState extends State<EditUserForm> {
                   //   },
                   // ),
 
+                  if (!ChangePassword)
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  if (!ChangePassword)
+                    defaultButton(
+                        fun: () {
+                          setState(() {
+                            ChangePassword = true;
+                          });
+
+                          // if (formkey.currentState!.validate()) {
+                          // if (phoneController.text != '') {
+                          //   // if (passwordController.text ==
+                          //   //     confirmpasswordController.text) {
+                          //   BlocProvider.of<ProfileCubit>(context).updateProfile(
+                          //     name: nameController.text,
+                          //     phone: phoneController.text,
+                          //     password: passwordController.text,
+                          //     confirmPassword: confirmpasswordController.text,
+                          //     image: file,
+                          //   );
+                          //   // }
+                          //   // else {
+                          //   //   setState(() {
+                          //   //     eroorMsq = S.of(context).passwordErorr;
+                          //   //   });
+                          //   // }
+                          // } else {
+                          //   setState(() {
+                          //     eroorMsq = S.of(context).PhoneError;
+                          //   });
+                          //   // }
+                          // }
+                        },
+                        textWidget: Text(
+                          S.of(context).ChangePassword,
+                          style: StylesData.font13,
+                        ),
+                        height: 54,
+                        c: ConstColor.kMainColor),
                   const SizedBox(
                     height: 20,
                   ),
-                  customTextFormedFiled(
-                      controller: passwordController,
-                      hintText: S.of(context).password,
-                      obscureText: obscureTextpass,
-                      sufficon: InkWell(
-                          onTap: () {
-                            setState(() {
-                              obscureTextpass = !obscureTextpass;
-                            });
-                          },
-                          child: obscureTextpass
-                              ? const Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.grey,
-                                  size: 22,
-                                )
-                              : const Padding(
-                                  padding: EdgeInsets.all(12.0),
-                                  child: ImageIcon(
-                                    AssetImage(AssetsData.eye),
+                  if (ChangePassword)
+                    customTextFormedFiled(
+                        controller: currentPasswordController,
+                        hintText: S.of(context).Currentpassword,
+                        obscureText: obscureTextCurrentpass,
+                        sufficon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                obscureTextCurrentpass =
+                                    !obscureTextCurrentpass;
+                              });
+                            },
+                            child: !obscureTextCurrentpass
+                                ? const Icon(
+                                    Icons.remove_red_eye,
                                     color: Colors.grey,
-                                    size: 6,
-                                  ),
-                                )),
-                      preicon: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ImageIcon(
-                          const AssetImage(
-                            AssetsData.lock,
+                                    size: 22,
+                                  )
+                                : const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: ImageIcon(
+                                      AssetImage(AssetsData.eye),
+                                      color: Colors.grey,
+                                      size: 6,
+                                    ),
+                                  )),
+                        preicon: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ImageIcon(
+                            const AssetImage(
+                              AssetsData.lock,
+                            ),
+                            size: 12,
+                            color: ConstColor.kMainColor,
                           ),
-                          size: 12,
-                          color: ConstColor.kMainColor,
-                        ),
-                      )),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  customTextFormedFiled(
-                      controller: confirmpasswordController,
-                      hintText: S.of(context).confirmPassword,
-                      obscureText: obscureTextconpass,
-                      sufficon: InkWell(
-                          onTap: () {
-                            setState(() {
-                              obscureTextconpass = !obscureTextconpass;
-                            });
-                          },
-                          child: obscureTextconpass
-                              ? const Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.grey,
-                                  size: 22,
-                                )
-                              : const Padding(
-                                  padding: EdgeInsets.all(12.0),
-                                  child: ImageIcon(
-                                    AssetImage(AssetsData.eye),
+                        )),
+                  if (ChangePassword)
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                  if (ChangePassword)
+                    customTextFormedFiled(
+                        controller: passwordController,
+                        hintText: S.of(context).password,
+                        obscureText: obscureTextpass,
+                        sufficon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                obscureTextpass = !obscureTextpass;
+                              });
+                            },
+                            child: !obscureTextpass
+                                ? const Icon(
+                                    Icons.remove_red_eye,
                                     color: Colors.grey,
-                                    size: 6,
-                                  ),
-                                )),
-                      preicon: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ImageIcon(
-                          const AssetImage(
-                            AssetsData.lock,
+                                    size: 22,
+                                  )
+                                : const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: ImageIcon(
+                                      AssetImage(AssetsData.eye),
+                                      color: Colors.grey,
+                                      size: 6,
+                                    ),
+                                  )),
+                        preicon: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ImageIcon(
+                            const AssetImage(
+                              AssetsData.lock,
+                            ),
+                            size: 12,
+                            color: ConstColor.kMainColor,
                           ),
-                          size: 12,
-                          color: ConstColor.kMainColor,
-                        ),
-                      )),
+                        )),
+                  if (ChangePassword)
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  if (ChangePassword)
+                    customTextFormedFiled(
+                        controller: confirmpasswordController,
+                        hintText: S.of(context).confirmPassword,
+                        obscureText: obscureTextconpass,
+                        sufficon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                obscureTextconpass = !obscureTextconpass;
+                              });
+                            },
+                            child: !obscureTextconpass
+                                ? const Icon(
+                                    Icons.remove_red_eye,
+                                    color: Colors.grey,
+                                    size: 22,
+                                  )
+                                : const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: ImageIcon(
+                                      AssetImage(AssetsData.eye),
+                                      color: Colors.grey,
+                                      size: 6,
+                                    ),
+                                  )),
+                        preicon: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ImageIcon(
+                            const AssetImage(
+                              AssetsData.lock,
+                            ),
+                            size: 12,
+                            color: ConstColor.kMainColor,
+                          ),
+                        )),
+                  if (ChangePassword)
+                    const SizedBox(
+                      height: 20,
+                    ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -395,7 +490,9 @@ class _EditUserFormState extends State<EditUserForm> {
                       ),
                       InkWell(
                         onTap: () {
-                          ProfileCubit.get(context).deleteAccount();
+                          showAlertDialog(
+                              context: context, fun: Future(() => null));
+                          // ProfileCubit.get(context).deleteAccount();
                         },
                         child: Text(S.of(context).profile5,
                             style: StylesData.font11.copyWith(
@@ -451,28 +548,50 @@ class _EditUserFormState extends State<EditUserForm> {
                     ),
                   defaultButton(
                       fun: () {
-                        if (formkey.currentState!.validate()) {
-                          if (phoneController.text != '') {
-                            if (passwordController.text ==
-                                confirmpasswordController.text) {
-                              BlocProvider.of<ProfileCubit>(context)
-                                  .updateProfile(
-                                name: nameController.text,
-                                phone: phoneController.text,
-                                password: passwordController.text,
-                                confirmPassword: confirmpasswordController.text,
-                                image: file,
-                              );
-                            } else {
-                              setState(() {
-                                eroorMsq = S.of(context).passwordErorr;
-                              });
+                        // if (formkey.currentState!.validate()) {
+                        {
+                          if (ChangePassword) {
+                            if (formkey.currentState!.validate()) {
+                              if (passwordController.text ==
+                                  confirmpasswordController.text) {
+                                BlocProvider.of<ProfileCubit>(context)
+                                    .updateProfile(
+                                  currentPassword:
+                                      currentPasswordController.text,
+                                  name: nameController.text,
+                                  phone: phoneController.text,
+                                  password: passwordController.text,
+                                  confirmPassword:
+                                      confirmpasswordController.text,
+                                  image: file,
+                                );
+                              } else {
+                                setState(() {
+                                  eroorMsq = S.of(context).passwordErorr;
+                                });
+                              }
                             }
+                            // if (passwordController.text ==
+                            //     confirmpasswordController.text) {
+
+                            // }
+                            // else {
+                            //   setState(() {
+                            //     eroorMsq = S.of(context).passwordErorr;
+                            //   });
+                            // }
                           } else {
-                            setState(() {
-                              eroorMsq = S.of(context).PhoneError;
-                            });
+                            BlocProvider.of<ProfileCubit>(context)
+                                .updateProfile(
+                              currentPassword: currentPasswordController.text,
+                              name: nameController.text,
+                              phone: phoneController.text,
+                              password: passwordController.text,
+                              confirmPassword: confirmpasswordController.text,
+                              image: file,
+                            );
                           }
+                          // }
                         }
                       },
                       textWidget: state is UpdateProfileLoading
@@ -496,5 +615,49 @@ class _EditUserFormState extends State<EditUserForm> {
         },
       ),
     );
+  }
+
+  showAlertDialog({required BuildContext context, required Future? fun}) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(S.of(context).Cancel),
+      onPressed: () {
+        setState(() {
+          isDelete = false;
+        });
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child:
+          Text(S.of(context).Delete, style: const TextStyle(color: Colors.red)),
+      onPressed: () {
+        setState(() {
+          isDelete = true;
+        });
+
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(S.of(context).warning),
+      content: Text(S.of(context).DeleteMsg),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    ).then((value) => isDelete == true
+        ? BlocProvider.of<ProfileCubit>(context).deleteAccount()
+        : null);
   }
 }

@@ -47,7 +47,7 @@ class _FloorFIltterState extends State<FloorFIltter> {
                     width: 10,
                   );
                 },
-                itemCount: 3,
+                itemCount: 7,
               ),
             ),
           ],

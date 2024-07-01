@@ -28,6 +28,7 @@ class ProductItemList extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return ProductItem(
+                  distance: state.data.data![index].distance ?? '',
                   model: state.data.data![index],
                   start: '',
                   end: "",

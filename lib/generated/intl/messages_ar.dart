@@ -25,11 +25,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutApartment": MessageLookupByLibrary.simpleMessage("عن الشقة"),
         "Accept": MessageLookupByLibrary.simpleMessage("قبول"),
         "Account": MessageLookupByLibrary.simpleMessage("حسابك!"),
-        "AddEventDay": MessageLookupByLibrary.simpleMessage("اضافه يوم مميز"),
-        "AddEventDays": MessageLookupByLibrary.simpleMessage("اضافه يوم مميز"),
+        "AccountNumber": MessageLookupByLibrary.simpleMessage("رقم الحساب"),
+        "AddEventDay": MessageLookupByLibrary.simpleMessage("اضافه ليلة مميز"),
+        "AddEventDays": MessageLookupByLibrary.simpleMessage("اضافه ليلة مميز"),
         "AddImages": MessageLookupByLibrary.simpleMessage("اضافه صور"),
         "AddRating": MessageLookupByLibrary.simpleMessage("تعيين التقييم "),
+        "Add_wIthdraw": MessageLookupByLibrary.simpleMessage("طلب سحـب"),
         "Addservice": MessageLookupByLibrary.simpleMessage("إضافة خدمة"),
+        "All": MessageLookupByLibrary.simpleMessage("الكل"),
         "AllowAccess": MessageLookupByLibrary.simpleMessage("السماح بالوصول"),
         "AlreadyAccept": MessageLookupByLibrary.simpleMessage("تم الموافقة "),
         "AlreadyReject": MessageLookupByLibrary.simpleMessage("تم الرفض"),
@@ -41,12 +44,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "Area": MessageLookupByLibrary.simpleMessage("المنطقـه"),
         "Areyouready": MessageLookupByLibrary.simpleMessage(
             "هل انت مستعد لتجهيز حساب جديد؟ "),
-        "AvailableDays": MessageLookupByLibrary.simpleMessage("الايام المتاحة"),
+        "AvailableDays":
+            MessageLookupByLibrary.simpleMessage("الليالي  المتاحة"),
         "Booking": MessageLookupByLibrary.simpleMessage("الحجز"),
+        "BookingDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الحجز"),
+        "BookingNow": MessageLookupByLibrary.simpleMessage("احجز الآن"),
         "Bookings": MessageLookupByLibrary.simpleMessage("الحجوزات"),
         "CHECKIN": MessageLookupByLibrary.simpleMessage("الحجز من "),
         "CHECKOUT": MessageLookupByLibrary.simpleMessage("الـي"),
+        "Cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
+        "Canceled": MessageLookupByLibrary.simpleMessage("ملغيه"),
         "Category": MessageLookupByLibrary.simpleMessage("الفئة"),
+        "ChangePassword":
+            MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
         "ChooseYourPhoto": MessageLookupByLibrary.simpleMessage("اختر صورتك"),
         "Choose_The_Payment_Method":
             MessageLookupByLibrary.simpleMessage("اختيار وسيلة الدفع"),
@@ -54,11 +64,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "ClockOut": MessageLookupByLibrary.simpleMessage("وقت الخروج "),
         "Confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "Createnew": MessageLookupByLibrary.simpleMessage("انشاء حساب جديد"),
-        "Daily": MessageLookupByLibrary.simpleMessage("يومي"),
+        "Currentpassword":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
+        "Daily": MessageLookupByLibrary.simpleMessage("ليلي "),
         "Decline": MessageLookupByLibrary.simpleMessage("رفض"),
+        "Delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "DeleteMsg": MessageLookupByLibrary.simpleMessage(
+            "هل انت متأكد من رغبتك في حذف الحساب؟"),
         "Description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "Description_Arabic":
             MessageLookupByLibrary.simpleMessage("الوصف باللغة العربية"),
+        "Dont_worry_take_iteasy":
+            MessageLookupByLibrary.simpleMessage("لا تقلق ، قم بالتواصل معنا"),
         "Donthaveanaccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟ "),
         "Drop_your_files_here_or":
@@ -66,29 +83,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "Earnings": MessageLookupByLibrary.simpleMessage("الأرباح"),
         "EditService": MessageLookupByLibrary.simpleMessage("تعديل الخدمة"),
         "EnableLocation": MessageLookupByLibrary.simpleMessage("تفعيل الموقع"),
+        "Enter_The_Code_Sent_To_You_At": MessageLookupByLibrary.simpleMessage(
+            "أدخل الرمز الخاص بك بالشكل التالي"),
         "ForYou": MessageLookupByLibrary.simpleMessage("من اجلك"),
         "ForgotYourPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "FullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
         "Gallary": MessageLookupByLibrary.simpleMessage("المعرض"),
+        "GoToThisLocation":
+            MessageLookupByLibrary.simpleMessage("الذهاب الي هذا الموقع"),
         "Home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "IHaventrecevedacode":
+            MessageLookupByLibrary.simpleMessage("لم تستقبل الرمز؟"),
         "Iacceptallthe":
             MessageLookupByLibrary.simpleMessage("اوافق على جميع "),
+        "InvalidDays": MessageLookupByLibrary.simpleMessage("ليالي غير متاحه "),
         "Language": MessageLookupByLibrary.simpleMessage("اللــغه"),
         "Languages": MessageLookupByLibrary.simpleMessage("اللـغات"),
         "LestingAgent": MessageLookupByLibrary.simpleMessage("وكيل المستعمل"),
         "Loading": MessageLookupByLibrary.simpleMessage("جاري التحميل ..."),
+        "Location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "Login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "LoginToYour":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول الي "),
         "MakeAllRead":
             MessageLookupByLibrary.simpleMessage("تحديد الكل كمقروء"),
+        "MaxArea": MessageLookupByLibrary.simpleMessage("المساحة الاقصى"),
         "Menu": MessageLookupByLibrary.simpleMessage("المزيد"),
         "Monthly": MessageLookupByLibrary.simpleMessage("شهري"),
         "MyBooking": MessageLookupByLibrary.simpleMessage("الحجوزات الخاصه بي"),
         "MyServecs": MessageLookupByLibrary.simpleMessage("الخدمات الخاصة بي"),
         "NoData": MessageLookupByLibrary.simpleMessage("لا توجد بيانات "),
         "Notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
+        "OTP_eroor": MessageLookupByLibrary.simpleMessage("خطأ في OTP"),
         "Owner": MessageLookupByLibrary.simpleMessage("المالك"),
         "Payment": MessageLookupByLibrary.simpleMessage("الدفـع"),
         "PhoneError":
@@ -115,17 +142,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "Rejected": MessageLookupByLibrary.simpleMessage("مرفوض"),
         "Rememberme": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "RentalHistory": MessageLookupByLibrary.simpleMessage("تاريخ التأجير"),
+        "Request": MessageLookupByLibrary.simpleMessage("الطلب"),
+        "Resetpassword":
+            MessageLookupByLibrary.simpleMessage("اعادة تعيين كلمه المرور"),
         "Reviews": MessageLookupByLibrary.simpleMessage("المراجعات"),
         "SAR": MessageLookupByLibrary.simpleMessage("جنيـه"),
         "Search": MessageLookupByLibrary.simpleMessage("البحث"),
         "SelectEventDays":
-            MessageLookupByLibrary.simpleMessage("اختيار يوم مميز"),
+            MessageLookupByLibrary.simpleMessage("اختيار ليلة مميز"),
+        "SendOTP": MessageLookupByLibrary.simpleMessage("ارسال OTP"),
         "Servecs": MessageLookupByLibrary.simpleMessage("الخدمات"),
         "SetCurrentLocation":
             MessageLookupByLibrary.simpleMessage("تعيين الموقع الحالي"),
         "SetLocation": MessageLookupByLibrary.simpleMessage("تعيين الموقع"),
         "SetLocationManually":
             MessageLookupByLibrary.simpleMessage("تحديد الموقع يدويا"),
+        "SetNewPassword":
+            MessageLookupByLibrary.simpleMessage("تعيين كلمة مرور جديدة"),
         "ShowRequests": MessageLookupByLibrary.simpleMessage(" عرض الطلبات "),
         "SignUp": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "SignuPHere": MessageLookupByLibrary.simpleMessage("سجل الان"),
@@ -137,23 +170,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "TandC2": MessageLookupByLibrary.simpleMessage(
             "هذا النص مستخرج من شركة تقنية وهي مولد نص وهو مثال لنص افتراضي غير حقيقي يمكن استبداله في نفس المساحة. لقد تم توليد هذا النص من مولد نصوص تقنية، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى بالإضافة إلى زيادة عدد الحروف التي يولدها التطبيق."),
         "Total": MessageLookupByLibrary.simpleMessage("مجموع"),
+        "TotalAfterCopon":
+            MessageLookupByLibrary.simpleMessage("المجموع بعد الكوبون"),
         "TotalReview": MessageLookupByLibrary.simpleMessage("مراجعة كلية"),
         "Type": MessageLookupByLibrary.simpleMessage("النوع"),
         "UpcomingBooking": MessageLookupByLibrary.simpleMessage("حجوزات مؤجله"),
         "Update": MessageLookupByLibrary.simpleMessage("تحديث"),
         "Upload_your_payment_screen_here":
             MessageLookupByLibrary.simpleMessage("رفع صورة الدفع هنا"),
+        "WriteyourOTPcode":
+            MessageLookupByLibrary.simpleMessage("اكتب رمز التحقق الخاص بك"),
         "Yearly": MessageLookupByLibrary.simpleMessage("سنوي"),
+        "YourBalance": MessageLookupByLibrary.simpleMessage("رصيدك"),
+        "action": MessageLookupByLibrary.simpleMessage("الإجراء"),
         "addFeature": MessageLookupByLibrary.simpleMessage("اضافه خاصية"),
         "add_your_service_now":
             MessageLookupByLibrary.simpleMessage("أضف خدمتك الآن!"),
+        "adminname": MessageLookupByLibrary.simpleMessage("اسم المشرف"),
         "allProperties": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
+        "amount": MessageLookupByLibrary.simpleMessage("الكميه"),
         "aroundyou": MessageLookupByLibrary.simpleMessage("قريب منك"),
         "bathRooms": MessageLookupByLibrary.simpleMessage("الحمامات"),
         "bedRooms": MessageLookupByLibrary.simpleMessage("غرف النوم "),
         "browse": MessageLookupByLibrary.simpleMessage("تصفح"),
         "callus": MessageLookupByLibrary.simpleMessage("اتصل بنـا"),
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
+        "changeImage": MessageLookupByLibrary.simpleMessage("تغير صوره الدفع"),
         "changeLocation": MessageLookupByLibrary.simpleMessage("تغير الموقع"),
         "changelocation": MessageLookupByLibrary.simpleMessage("تغيير الموقع"),
         "chooseLocation": MessageLookupByLibrary.simpleMessage(
@@ -162,17 +204,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "colse": MessageLookupByLibrary.simpleMessage(" مرفوضه"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
-        "day": MessageLookupByLibrary.simpleMessage("يوم"),
+        "coupon": MessageLookupByLibrary.simpleMessage("كوبون"),
+        "day": MessageLookupByLibrary.simpleMessage("ليلة"),
         "edit_service": MessageLookupByLibrary.simpleMessage("تعديل الخدمة"),
         "emailus": MessageLookupByLibrary.simpleMessage(
             "راسلـنا عبر البريد الالكتروني "),
         "enteryourmessage":
             MessageLookupByLibrary.simpleMessage("ادخـل رسالتــلك"),
+        "eroor500": MessageLookupByLibrary.simpleMessage(
+            "يرجى تحديد طريقة الدفع ورفع صورة الدفع"),
         "eroor507": MessageLookupByLibrary.simpleMessage(
             "كلمه المرور يجب ان يكون علي الاقل 8  حروف"),
         "error_Msq_add_service":
             MessageLookupByLibrary.simpleMessage("يرجى ملء جميع الحقول"),
-        "eventdays": MessageLookupByLibrary.simpleMessage("الايام المميزه"),
+        "eventdays": MessageLookupByLibrary.simpleMessage("الليالي  المميزه"),
         "favorites": MessageLookupByLibrary.simpleMessage("المفضلات"),
         "filter": MessageLookupByLibrary.simpleMessage("فلتر"),
         "floor": MessageLookupByLibrary.simpleMessage("الطابق"),
@@ -183,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "max": MessageLookupByLibrary.simpleMessage("اكثر"),
         "min": MessageLookupByLibrary.simpleMessage("اقل"),
+        "normaldays": MessageLookupByLibrary.simpleMessage("اليالي العادية"),
         "open": MessageLookupByLibrary.simpleMessage("مقبولة"),
         "oppsMessage": MessageLookupByLibrary.simpleMessage("حدث خطاء ما"),
         "paid": MessageLookupByLibrary.simpleMessage("مدفوع"),
@@ -204,18 +250,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile4":
             MessageLookupByLibrary.simpleMessage("اذا كنت تريد حذف حسابك "),
         "profile5": MessageLookupByLibrary.simpleMessage(" اضغط هنـا "),
+        "provider": MessageLookupByLibrary.simpleMessage("مزود الخدمة"),
         "rateText": MessageLookupByLibrary.simpleMessage(
             "اضغط على نجمة لتعيين تقييمك. أضف المزيد من الوصف هنا إذا كنت تريد."),
         "ratehint":
             MessageLookupByLibrary.simpleMessage("قم بتعيين التعليق الخاص بك"),
+        "request": MessageLookupByLibrary.simpleMessage("الطلب"),
+        "requestDay": MessageLookupByLibrary.simpleMessage("تاريخ الطلب"),
+        "requestTime": MessageLookupByLibrary.simpleMessage("وقت الطلب"),
         "requests": MessageLookupByLibrary.simpleMessage("الطلبات"),
         "schedule": MessageLookupByLibrary.simpleMessage("جدول الحجز"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "seeAll": MessageLookupByLibrary.simpleMessage("رؤيه الكل"),
         "selectsubject": MessageLookupByLibrary.simpleMessage("العنوان "),
+        "sendto": MessageLookupByLibrary.simpleMessage("ارسال علي رقم : "),
         "services": MessageLookupByLibrary.simpleMessage("الخدمات"),
         "setlocation": MessageLookupByLibrary.simpleMessage("تحديد الموقع"),
         "signInhere": MessageLookupByLibrary.simpleMessage("تسجيل الدخول هنا"),
+        "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "submit": MessageLookupByLibrary.simpleMessage("ارسال"),
         "support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "supportSubTitle": MessageLookupByLibrary.simpleMessage(
@@ -224,6 +276,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الشروط والاحكام"),
         "unpaid": MessageLookupByLibrary.simpleMessage("غير مدفوع"),
         "viewPofile": MessageLookupByLibrary.simpleMessage("رؤيه الملف الشخصي"),
+        "wIthdraw": MessageLookupByLibrary.simpleMessage("السحـب"),
+        "warning": MessageLookupByLibrary.simpleMessage("تحذيـر !"),
         "weekly": MessageLookupByLibrary.simpleMessage("اسبوعي"),
         "writeus": MessageLookupByLibrary.simpleMessage("أكتب لنـا ")
       };

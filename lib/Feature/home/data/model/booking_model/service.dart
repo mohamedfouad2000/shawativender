@@ -27,9 +27,11 @@ class Service {
   String? days;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? distance;
 
   Service({
     this.id,
+    this.distance,
     this.userId,
     this.categoryId,
     this.image,
@@ -61,6 +63,7 @@ class Service {
 
   factory Service.fromJson(Map<String, dynamic> json) => Service(
         id: json['id'] as int?,
+        distance: json['distance'] as String?,
         userId: json['user_id'] as int?,
         categoryId: json['category_id'] as int?,
         image: json['image'] as String?,
@@ -96,6 +99,7 @@ class Service {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'distance': distance,
         'user_id': userId,
         'category_id': categoryId,
         'image': image,

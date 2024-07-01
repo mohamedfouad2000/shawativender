@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 typedef OnSearchChanged = Future<List<String>> Function(String);
 
@@ -7,6 +10,7 @@ class SearchWithSuggestionDelegate extends SearchDelegate<String> {
   ///should process [query] then return an [List<String>] as suggestions.
   ///Since its returns a [Future] you get suggestions from server too.
   final OnSearchChanged onSearchChanged;
+  bool isload = false;
 
   ///This [_oldFilters] used to store the previous suggestions. While waiting
   ///for [onSearchChanged] to completed, [_oldFilters] are displayed.
@@ -52,16 +56,44 @@ class SearchWithSuggestionDelegate extends SearchDelegate<String> {
       future: onSearchChanged != null ? onSearchChanged(query) : null,
       builder: (context, snapshot) {
         if (snapshot.hasData) _oldFilters = snapshot.data!;
-        return ListView.builder(
-          itemCount: _oldFilters.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: const Icon(Icons.restore),
-              title: Text(_oldFilters[index]),
-              onTap: () => close(context, _oldFilters[index]),
-            );
-          },
-        );
+        return isload
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : StatefulBuilder(
+                builder: (context, setState) => ListView.builder(
+                  itemCount: _oldFilters.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: const Icon(Icons.restore),
+                      title: Text(_oldFilters[index]),
+                      trailing: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () async {
+                          _oldFilters.removeAt(index);
+                          print(_oldFilters);
+                          print("object");
+                          final pref = await SharedPreferences.getInstance();
+                          pref.getStringList("recentSearches");
+
+                          pref.setStringList(
+                              "recentSearches", _oldFilters.toList());
+
+                          //Use `Set` to avoid duplication of recentSearches
+                          Set<String> allSearches =
+                              pref.getStringList("recentSearches")?.toSet() ??
+                                  {};
+                          setState(() {
+                            _oldFilters = allSearches.toList();
+                          });
+                        },
+                        icon: const Icon(Icons.close),
+                      ),
+                      onTap: () => close(context, _oldFilters[index]),
+                    );
+                  },
+                ),
+              );
       },
     );
   }

@@ -33,6 +33,7 @@ class _TypeRequestState extends State<TypeRequest> {
       // S.of(context).inprogress,
       S.of(context).Approved,
       S.of(context).Reject,
+      S.of(context).Canceled,
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

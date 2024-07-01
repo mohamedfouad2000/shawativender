@@ -12,21 +12,32 @@ import 'package:shawativender/Feature/home/data/model/home_model/home_model.dart
 import 'package:shawativender/Feature/home/data/model/home_model/service.dart';
 import 'package:shawativender/Feature/home/data/model/min_max_model/min_max_model.dart';
 import 'package:shawativender/Feature/home/data/model/notification_model/notification_model.dart';
+import 'package:shawativender/Feature/home/data/model/payment_model/payment_model.dart';
 import 'package:shawativender/Feature/home/data/model/profile_model/profile_model.dart';
 import 'package:shawativender/Feature/home/data/model/provider_serves_model/provider_serves_model.dart';
 import 'package:shawativender/Feature/home/data/model/requstes_model/requstes_model.dart';
+import 'package:shawativender/Feature/home/data/model/with_drawil/with_drawil.dart';
 import 'package:shawativender/Feature/home/data/model/review_mdoel/review_mdoel.dart';
 import 'package:shawativender/Feature/home/data/model/search_model/search_model.dart';
+import 'package:shawativender/Feature/home/data/model/serves_price_details_model/serves_price_details_model.dart';
 import 'package:shawativender/Feature/home/data/model/seves_information/seves_information.dart';
 import 'package:shawativender/Feature/home/data/model/terms_and_privacy_model/terms_and_privacy_model.dart';
 
 abstract class HomeRepo {
+  Future<Either<Failure, ServesPriceDetailsModel>> getPricesDetails(
+      {required int serid,
+      required String startAt,
+      required String coupon,
+      required int bookingId,
+      required String endAt});
   Future<Either<Failure, String>> deleteAccount();
   Future<Either<Failure, FeatureModel>> getfeatures();
+  Future<Either<Failure, PaymentModel>> getPaymentMethod();
   Future<Either<Failure, ServesInfo>> getserviceProductinfo(
       {required int servesId});
   Future<Either<Failure, String>> editFeatures(
       {required int serviceIdd, required int featureIds});
+
   Future<Either<Failure, String>> deleteFeatures(
       {required int serviceIdd, required int featureIds});
   Future<Either<Failure, String>> editEventDays(
@@ -104,6 +115,21 @@ abstract class HomeRepo {
     required String place,
     File? image,
   });
+  Future<Either<Failure, bool>> checkPhone({required String phone});
+  Future<Either<Failure, int>> getblance();
+
+  Future<Either<Failure, String>> setPassword(
+      {required String newpassord,
+      required String confirmnewpassord,
+      required String phone});
+  Future<Either<Failure, WithDrawilModel>> getwithdrawlRequests(
+      {required int catId});
+  Future<Either<Failure, String>> addwithdraw({
+    required String amount,
+    required String password,
+    required String account_number,
+    required String payment_method_id,
+  });
 
   Future<Either<Failure, HomeModel>> getHomeData({required int cateId});
   Future<Either<Failure, ProfileModel>> getProfile();
@@ -111,8 +137,13 @@ abstract class HomeRepo {
     required String name,
     required String phone,
     File? image,
+    required String currentPassword,
     required String password,
     required String confpassword,
+  });
+
+  Future<Either<Failure, String>> updateImageProfile({
+    required File image,
   });
 
   // Future<Either<Failure, BookingModel>> getBooking();

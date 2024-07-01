@@ -15,9 +15,15 @@ class BookingDetailsScreen extends StatelessWidget {
     super.key,
     required this.model,
     required this.paymentStatusId,
+    required this.bookingid,
+    required this.startTime,
+    required this.endTime,
   });
   final DatumRequests model;
   final int paymentStatusId;
+  final int bookingid;
+  final String startTime;
+  final String endTime;
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +33,21 @@ class BookingDetailsScreen extends StatelessWidget {
       3: S.of(context).paid,
     };
     return Scaffold(
-      appBar: customAppBar(context,
-          title: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: ConstColor.kMainColor)),
-            child: Text(
-              '${paymentStatus[paymentStatusId]}',
-              style: StylesData.font20.copyWith(fontSize: 18),
-            ),
-          )),
-      body: BookingDetailsScreenBody(
-        model: model,
-      ),
-    );
+        appBar: customAppBar(context,
+            title: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: ConstColor.kMainColor)),
+              child: Text(
+                '${paymentStatus[paymentStatusId]}',
+                style: StylesData.font20.copyWith(fontSize: 18),
+              ),
+            )),
+        body: BookingDetailsScreenBody(
+            model: model,
+            bookingid: bookingid,
+            startTime: startTime,
+            endTime: endTime));
   }
 }

@@ -24,6 +24,9 @@ class RequestItem extends StatelessWidget {
     required this.textAr,
     required this.payment,
     required this.paymentStatusId,
+    required this.bookingid,
+    required this.startTime,
+    required this.endTime,
   });
   final String text;
   final String name;
@@ -34,6 +37,9 @@ class RequestItem extends StatelessWidget {
   final String proImage;
   final DatumRequests model;
   final int paymentStatusId;
+  final int bookingid;
+  final String startTime;
+  final String endTime;
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +53,11 @@ class RequestItem extends StatelessWidget {
         NavegatorPush(
             context,
             BookingDetailsScreen(
-              model: model,
-              paymentStatusId: paymentStatusId,
-
-              // fromData: true,
-            ));
+                model: model,
+                paymentStatusId: paymentStatusId,
+                bookingid: bookingid,
+                startTime: startTime,
+                endTime: endTime));
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

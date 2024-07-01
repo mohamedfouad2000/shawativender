@@ -30,12 +30,14 @@ class ProfileCubit extends Cubit<ProfileState> {
     required String password,
     File? image,
     required String confirmPassword,
+    required String currentPassword,
   }) async {
     emit(UpdateProfileLoading());
     final result = await repo.updateProfile(
         name: name,
         phone: phone,
         image: image,
+        currentPassword: currentPassword,
         password: password,
         confpassword: confirmPassword);
     result.fold(
@@ -50,6 +52,19 @@ class ProfileCubit extends Cubit<ProfileState> {
     result.fold(
       (l) => emit(DeleteAccountError(msg: l.msq.toString())),
       (r) => emit(DeleteAccountSucc(msq: r)),
+    );
+  }
+
+  Future<void> updateProfileImage({
+    required File image,
+  }) async {
+    emit(UpdateProfileImageLoading());
+    final result = await repo.updateImageProfile(
+      image: image,
+    );
+    result.fold(
+      (l) => emit(UpdateProfileImageError(msg: l.msq.toString())),
+      (r) => emit(UpdateProfileImageSucc(msq: r)),
     );
   }
 }
